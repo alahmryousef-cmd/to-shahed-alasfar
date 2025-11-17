@@ -3,9 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shahed Alasfar</title>
+    <title>Shahed Alasfar - Professional Artist Portfolio</title>
+    <meta name="description" content="Shahed Alasfar - Jordanian artist specializing in portrait art. Explore her collection of emotional and timeless artwork.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <canvas class="background-canvas" id="bgCanvas"></canvas>
+
+    <!-- Header with improved navigation -->
+    <header id="header">
+        <div class="logo" onclick="scrollToTop()">Shahed Alasfar</div>
+        
+        <div class="nav-container">
+            <nav class="nav-links">
+                <a href="#landing">Home</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#store">Store</a>
+            </nav>
+            
+            <div class="social-header">
+                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/962590864551" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">Shahed Alasfar</div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="mobile-nav-links">
+            <a href="#landing" onclick="closeMobileMenu()">Home</a>
+            <a href="#about" onclick="closeMobileMenu()">About</a>
+            <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+            <a href="#store" onclick="closeMobileMenu()">Store</a>
+        </nav>
+        
+        <div class="mobile-social">
+            <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/962590864551" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Landing Section -->
+    <section id="landing">
+        <h1 class="landing-title floating">Shahed Alasfar</h1>
+        <p class="landing-subtitle fade-in">Professional Artist & Portrait Specialist</p>
+        
+        <div class="cta-buttons">
+            <a href="#gallery" class="btn btn-primary">
+                <i class="fas fa-palette"></i> View Gallery
+            </a>
+            <a href="#store" class="btn btn-secondary">
+                <i class="fas fa-shopping-bag"></i> Visit Store
+            </a>
+        </div>
+        
+        <div class="social-cards">
+            <div class="social-card fade-in">
+                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
+                    <div class="social-icon instagram-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-name">Instagram</div>
+                </a>
+            </div>
+            
+            <div class="social-card fade-in">
+                <a href="https://wa.me/962590864551" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
+                    <div class="social-icon whatsapp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="social-name">WhatsApp</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About the Artist</h2>
+        
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <p>
+                    Shahed Alasfar is a visionary <b>Jordanian artist</b> whose brush transforms emotions into timeless art.
+                    Her work is more than color and form — it's <b>a language of soul, silence, and beauty</b>.
+                    Every stroke she paints tells a story, capturing the delicate balance between realism and emotion.
+                </p>
+                <p>
+                    With a golden palette and a heart full of imagination, Shahed creates portraits that breathe life —
+                    each piece glowing with depth, sensitivity, and quiet power.
+                    Her art is not meant to be seen only with the eyes, but <b>felt with the heart</b>.
+                </p>
+                <p>
+                    Shahed's creations stand as a bridge between reality and dreams,
+                    reflecting the warmth of her Jordanian roots and the elegance of modern fine art.
+                    She doesn't just paint — <b>she evokes, she speaks, she moves</b> through every detail she creates.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <h2 class="section-title">Art Gallery</h2>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(0)">
+                <img src="img/art1.png" class="gallery-img" alt="Artwork 1">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(1)">
+                <img src="img/art2.png" class="gallery-img" alt="Artwork 2">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(2)">
+                <img src="img/art3.png" class="gallery-img" alt="Artwork 3">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(3)">
+                <img src="img/art4.png" class="gallery-img" alt="Artwork 4">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(4)">
+                <img src="img/art5.png" class="gallery-img" alt="Artwork 5">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(5)">
+                <img src="img/art6.png" class="gallery-img" alt="Artwork 6">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(6)">
+                <img src="img/art7.png" class="gallery-img" alt="Artwork 7">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(7)">
+                <img src="img/art8.png" class="gallery-img" alt="Artwork 8">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(8)">
+                <img src="img/art9.png" class="gallery-img" alt="Artwork 9">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(9)">
+                <img src="img/art10.png" class="gallery-img" alt="Artwork 10">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(10)">
+                <img src="img/art11.png" class="gallery-img" alt="Artwork 11">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(11)">
+                <img src="img/art12.png" class="gallery-img" alt="Artwork 12">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(12)">
+                <img src="img/art13.png" class="gallery-img" alt="Artwork 13">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">shahed</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Store -->
+    <section id="store">
+        <h2 class="section-title">Art Store</h2>
+        
+        <div class="store-notice fade-in">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Order via Instagram DM</h3>
+            <p>To purchase any artwork, please send a direct message on Instagram with the product name and your contact details.</p>
+            <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">
+                Message on Instagram
+            </a>
+        </div>
+
+        <div class="store-grid">
+            <div class="store-item fade-in" onclick="openFullscreenStore(0)">
+                <div class="store-images">
+                    <img src="img/store1.jpg" class="store-img" alt="Art Product 1 - مرآة الفنانين">
+                    <div class="store-overlay">
+                        <p>Click to view details</p>
+                    </div>
+                </div>
+                <div class="store-info">
+                    <h3 class="store-title">مرآة الفنانين</h3>
+                    <p class="store-price">2500 ﷼</p>
+                    <p>100 × 60</p>
+                    <p>عمل فني على مراية يجمع ملامح وجوه فنية خالدة بالابيض والاسود</p>
+                </div>
+            </div>
+
+            <div class="store-item fade-in" onclick="openFullscreenStore(1)">
+                <div class="store-images">
+                    <img src="img/store2.jpg" class="store-img" alt="Art Product 2 - لا أرى ، لا اسمع ، لا اتكلم">
+                    <div class="store-overlay">
+                        <p>Click to view details</p>
+                    </div>
+                </div>
+                <div class="store-info">
+                    <h3 class="store-title">لا أرى ، لا اسمع ، لا اتكلم </h3>
+                    <p class="store-price">650 ﷼</p>
+                    <p>100 × 70 </p>
+                    <p>عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة</p>
+                </div>
+            </div>
+
+            <div class="store-item fade-in" onclick="openFullscreenStore(2)">
+                <div class="store-images">
+                    <img src="img/store3.jpg" class="store-img" alt="Art Product 3 - الايدي والخيوط الحمراء">
+                    <div class="store-overlay">
+                        <p>Click to view details</p>
+                    </div>
+                </div>
+                <div class="store-info">
+                    <h3 class="store-title">الايدي والخيوط الحمراء</h3>
+                    <p class="store-price">1500 ﷼</p>
+                    <p>اربع قطع اللوحة الواحدة 40 × 40 </p>
+                    <p>عمل فني من اربع لوحات تتشابك بينها الخيوط الحمراء</p>
+                </div>
+            </div>
+
+            <div class="store-item fade-in" onclick="openFullscreenStore(3)">
+                <div class="store-images">
+                    <img src="img/store4.jpg" class="store-img" alt="Art Product 4 - فيودور دوستويفسكي">
+                    <div class="store-overlay">
+                        <p>Click to view details</p>
+                    </div>
+                </div>
+                <div class="store-info">
+                    <h3 class="store-title"> فيودور دوستويفسكي</h3>
+                    <p class="store-price">450 ﷼</p>
+                    <p>60 x 40</p>
+                    <p>بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen -->
+    <div class="fullscreen-gallery" id="fullscreenGallery">
+        <button class="gallery-close" id="galleryClose">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <button class="gallery-nav gallery-prev" id="galleryPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <button class="gallery-nav gallery-next" id="galleryNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <img class="gallery-main-image" id="galleryMainImage" src="" alt="">
+        
+        <div class="gallery-thumbnails" id="galleryThumbnails">
+        </div>
+        
+        <div class="gallery-info" id="galleryInfo">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Shahed Alasfar</div>
+            
+            <div class="footer-links">
+                <a href="#landing">Home</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#store">Store</a>
+                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+                <a href="https://wa.me/962590864551" target="_blank">WhatsApp</a>
+            </div>
+            
+            <div class="developer-credit">
+                Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank">Yousef Alahmr</a>
+            </div>
+
+            <div class="footer-version">
+                Version v1.2.0
+            </div>
+            
+            <div class="copyright">
+                © 2025 Shahed Alasfar. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
     <style>
         :root {
             --gold: #b89446;
@@ -13,12 +362,17 @@
             --deep-yellow: #d4af37;
             --matte-black: #1a1a1a;
             --off-white: #f5f5f5;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -40,18 +394,24 @@
             opacity: 0.15;
         }
 
-        /* Navigation */
-        nav {
+        /* Header with improved navigation */
+        header {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 2rem;
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(10px);
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 0.8rem 2rem;
         }
 
         .logo {
@@ -59,6 +419,18 @@
             font-size: 2.2rem;
             color: var(--gold);
             text-shadow: 0 0 10px rgba(184, 148, 70, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links {
@@ -72,6 +444,7 @@
             font-weight: 500;
             position: relative;
             transition: color 0.3s ease;
+            font-size: 1.05rem;
         }
 
         .nav-links a:after {
@@ -93,10 +466,46 @@
             width: 100%;
         }
 
+        .social-header {
+            display: flex;
+            gap: 1rem;
+            margin-left: 1.5rem;
+        }
+
+        .social-header a {
+            color: var(--off-white);
+            font-size: 1.3rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .social-header a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+            background: rgba(184, 148, 70, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--off-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(184, 148, 70, 0.1);
+        }
+
         /* Sections */
         section {
             min-height: 100vh;
-            padding: 6rem 2rem 2rem;
+            padding: 8rem 2rem 4rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -107,21 +516,70 @@
         #landing {
             text-align: center;
             position: relative;
+            padding-top: 10rem;
         }
 
         .landing-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
             color: var(--gold);
             text-shadow: 0 0 15px rgba(184, 148, 70, 0.4);
+            line-height: 1.1;
         }
 
         .landing-subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             margin-bottom: 3rem;
-            max-width: 600px;
-            opacity: 0.8;
+            max-width: 700px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--matte-black);
+            border-color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(184, 148, 70, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--off-white);
+            border-color: var(--off-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--off-white);
+            color: var(--matte-black);
+            transform: translateY(-5px);
         }
 
         .social-cards {
@@ -129,6 +587,7 @@
             gap: 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            margin-top: 3rem;
         }
 
         .social-card {
@@ -137,12 +596,7 @@
             background: linear-gradient(135deg, rgba(184, 148, 70, 0.1), rgba(26, 26, 26, 0.8));
             border: 1px solid rgba(184, 148, 70, 0.3);
             border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
@@ -171,7 +625,7 @@
         .social-icon {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .instagram-icon {
@@ -183,10 +637,6 @@
 
         .whatsapp-icon {
             color: #25D366;
-        }
-
-        .email-icon {
-            color: #D44638;
         }
 
         .social-card:hover .social-icon {
@@ -208,7 +658,7 @@
 
         .section-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
             color: var(--gold);
             margin-bottom: 3rem;
             text-align: center;
@@ -236,26 +686,11 @@
             flex: 1;
             font-size: 1.1rem;
             line-height: 1.8;
-            text-align: justify;
+            text-align: center;
         }
 
-        .about-image {
-            flex: 1;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(184, 148, 70, 0.1), rgba(26, 26, 26, 0.8));
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(184, 148, 70, 0.3);
-        }
-
-        .brush-stroke {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="rgba(184,148,70,0.05)"/></svg>');
-            background-size: cover;
-            opacity: 0.5;
+        .about-text p {
+            margin-bottom: 1.5rem;
         }
 
         /* Gallery Section */
@@ -274,11 +709,12 @@
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 5px;
+            border-radius: 10px;
             height: 300px;
             background-color: rgba(26, 26, 26, 0.7);
             border: 1px solid rgba(184, 148, 70, 0.2);
-            transition: all 0.4s ease;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
         .gallery-item:hover {
@@ -319,17 +755,313 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Store Section */
+        #store {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .store-notice {
+            background: rgba(184, 148, 70, 0.1);
+            border: 1px solid rgba(184, 148, 70, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .store-notice i {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .store-notice h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .store-item {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(184, 148, 70, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .store-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-images {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .store-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .store-item:hover .store-img {
+            transform: scale(1.05);
+        }
+
+        .store-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .store-item:hover .store-overlay {
+            transform: translateY(0);
+        }
+
+        .store-info {
+            padding: 1.5rem;
+        }
+
+        .store-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .store-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .store-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--gold);
+            color: var(--matte-black);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .store-btn:hover {
+            background: var(--dark-gold);
+            transform: translateY(-3px);
+        }
+
+        /* Fullscreen Gallery */
+        .fullscreen-gallery {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .fullscreen-gallery.active {
+            display: flex;
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--off-white);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .gallery-close:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-main-image {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 90%;
+        }
+
+        .gallery-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .gallery-thumbnail:hover, .gallery-thumbnail.active {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: var(--off-white);
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-nav:hover {
+            background: var(--gold);
+            color: var(--matte-black);
+        }
+
+        .gallery-prev {
+            left: 2rem;
+        }
+
+        .gallery-next {
+            right: 2rem;
+        }
+
+        .gallery-info {
+            margin-top: 1.5rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .gallery-product-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-product-price {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-product-description {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             border-top: 1px solid rgba(184, 148, 70, 0.2);
             margin-top: 4rem;
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .developer-credit {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        .developer-credit a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .developer-credit a:hover {
+            text-decoration: underline;
         }
 
         .copyright {
             font-size: 0.9rem;
             opacity: 0.7;
+            margin-top: 1rem;
         }
 
         /* Animations */
@@ -354,20 +1086,36 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .landing-title {
-                font-size: 3rem;
-            }
-            
+        @media (max-width: 1024px) {
             .about-content {
                 flex-direction: column;
             }
             
-            .about-image {
-                width: 100%;
+            .gallery-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
             
-            .gallery-grid {
+            .gallery-prev {
+                left: 1rem;
+            }
+            
+            .gallery-next {
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .social-header {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .gallery-grid, .store-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
@@ -383,6 +1131,28 @@
             .social-icon {
                 font-size: 2.8rem;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .gallery-thumbnails {
+                gap: 0.5rem;
+            }
+            
+            .gallery-thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+
+            section {
+                padding: 6rem 1rem 2rem;
+            }
+
+            header {
+                padding: 1rem 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -394,179 +1164,144 @@
             .social-card {
                 width: 200px;
             }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .gallery-prev {
+                left: 0.5rem;
+            }
+            
+            .gallery-next {
+                right: 0.5rem;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1001;
+            padding: 2rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--off-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(184, 148, 70, 0.1);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(184, 148, 70, 0.2);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .mobile-social a {
+            color: var(--off-white);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .mobile-social a:hover {
+            color: var(--gold);
+            background: rgba(184, 148, 70, 0.1);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .footer-version {
+            font-size: 0.85rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 0.5rem;
         }
     </style>
-</head>
-<body>
-    <!-- Animated Background -->
-    <canvas class="background-canvas" id="bgCanvas"></canvas>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Shahed Alasfar</div>
-        <div class="nav-links">
-            <a href="#landing">Home</a>
-            <a href="#about">About</a>
-            <a href="#gallery">Gallery</a>
-        </div>
-    </nav>
-
-    <!-- Landing Section -->
-    <section id="landing">
-        <h1 class="landing-title floating">Shahed Alasfar</h1>
-        <p class="landing-subtitle fade-in">perfect Artist & Portrait Specialist</p>
-        
-        <div class="social-cards">
-            <div class="social-card fade-in" onclick="window.open('https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', '_blank')">
-                <div class="social-icon instagram-icon">
-                    <i class="fab fa-instagram"></i>
-                </div>
-                <div class="social-name">Instagram</div>
-            </div>
-            
-            <div class="social-card fade-in" onclick="window.location.href='https://wa.me/0590864551'">
-                <div class="social-icon whatsapp-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
-                <div class="social-name">WhatsApp</div>
-            </div>
-            
-            <div class="social-card fade-in" onclick="window.location.href='mailto:shahedalasfar2007@gmail.com'">
-                <div class="social-icon email-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="social-name">Email</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">About the Artist</h2>
-        
-        <div class="about-content">
-            <div class="about-text fade-in">
-        <p>
-            Shahed Alasfar is a visionary <b>Jordanian artist</b> whose brush transforms emotions into timeless art.<br>
-            Her work is more than color and form — it’s <b>a language of soul, silence, and beauty</b>.<br>
-            Every stroke she paints tells a story, capturing the delicate balance between realism and emotion.<br><br>
-
-            With a golden palette and a heart full of imagination, Shahad creates portraits that breathe life —<br>
-            each piece glowing with depth, sensitivity, and quiet power.<br>
-            Her art is not meant to be seen only with the eyes, but <b>felt with the heart</b>.<br><br>
-
-            Shahad’s creations stand as a bridge between reality and dreams,<br>
-            reflecting the warmth of her Jordanian roots and the elegance of modern fine art.<br>
-            She doesn’t just paint — <b>she evokes, she speaks, she moves</b> through every detail she creates.
-        </p>
-
-            </div>
-            
-            
-    </section>
-
-    <!-- Gallery Section -->
-<!-- Gallery Section -->
-<section id="gallery">
-  <h2 class="section-title">Art Gallery</h2>
-
-  <div class="gallery-grid">
-    <div class="gallery-item fade-in">
-      <img src="img/art1.png" class="gallery-img" alt="Artwork 1">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art2.png" class="gallery-img" alt="Artwork 2">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art3.png" class="gallery-img" alt="Artwork 3">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art4.png" class="gallery-img" alt="Artwork 4">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art5.png" class="gallery-img" alt="Artwork 5">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art6.png" class="gallery-img" alt="Artwork 6">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art7.png" class="gallery-img" alt="Artwork 7">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art8.png" class="gallery-img" alt="Artwork 8">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art9.png" class="gallery-img" alt="Artwork 9">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art10.png" class="gallery-img" alt="Artwork 10">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art11.png" class="gallery-img" alt="Artwork 11">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-
-    <div class="gallery-item fade-in">
-      <img src="img/art12.png" class="gallery-img" alt="Artwork 12">
-      <div class="gallery-overlay">
-        <h3 class="gallery-title">shahed</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p class="copyright">© Shahad Alasfar. All rights reserved.</p>
-    </footer>
 
     <script>
-        // Canvas background animation
+        // إزالة جميع مشاكل البريد الإلكتروني نهائياً
+
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         
@@ -578,7 +1313,6 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        // Create brush stroke particles
         const particles = [];
         const particleCount = 30;
         
@@ -611,7 +1345,6 @@
                 ctx.rotate(this.angle);
                 ctx.fillStyle = this.color;
                 
-                // Draw brush stroke shape
                 ctx.beginPath();
                 ctx.moveTo(0, -this.size/2);
                 ctx.bezierCurveTo(
@@ -651,7 +1384,6 @@
         initParticles();
         animateParticles();
         
-        // Fade in animation on scroll
         const fadeElements = document.querySelectorAll('.fade-in');
         
         const fadeInOnScroll = () => {
@@ -666,43 +1398,38 @@
         };
         
         window.addEventListener('scroll', fadeInOnScroll);
-        // Initial check
         fadeInOnScroll();
         
-        // Generate gallery items
-        const galleryGrid = document.querySelector('.gallery-grid');
-        const imageCount = 9; // Number of sample images
+        const header = document.getElementById('header');
         
-        for (let i = 1; i <= imageCount; i++) {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item fade-in';
-            
-            const img = document.createElement('div');
-            img.className = 'gallery-img';
-            // In a real implementation, this would be an actual image
-            // For demo purposes, we're using a placeholder with a gradient
-            img.style.background = `linear-gradient(135deg, 
-                rgba(${Math.floor(Math.random() * 50 + 150)}, 
-                     ${Math.floor(Math.random() * 50 + 100)}, 
-                     ${Math.floor(Math.random() * 50 + 50)}, 0.7), 
-                rgba(26, 26, 26, 0.9))`;
-            
-            const overlay = document.createElement('div');
-            overlay.className = 'gallery-overlay';
-            
-            const title = document.createElement('h3');
-            title.className = 'gallery-title';
-            title.textContent = `Artwork ${i}`;
-            
-            const description = document.createElement('p');
-            description.textContent = 'Portrait • Oil on Canvas';
-            
-            overlay.appendChild(title);
-            overlay.appendChild(description);
-            galleryItem.appendChild(img);
-            galleryItem.appendChild(overlay);
-            galleryGrid.appendChild(galleryItem);
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const overlay = document.getElementById('overlay');
+        
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        overlay.addEventListener('click', closeMobileMenu);
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -719,6 +1446,214 @@
                     });
                 }
             });
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        const fullscreenGallery = document.getElementById('fullscreenGallery');
+        const galleryClose = document.getElementById('galleryClose');
+        const galleryPrev = document.getElementById('galleryPrev');
+        const galleryNext = document.getElementById('galleryNext');
+        const galleryMainImage = document.getElementById('galleryMainImage');
+        const galleryThumbnails = document.getElementById('galleryThumbnails');
+        const galleryInfo = document.getElementById('galleryInfo');
+        
+        const storeProducts = [
+            {
+                title: "مرآة الفنانين",
+                price: "2500 ﷼",
+                description: "100 × 60 - عمل فني على مراية يجمع ملامح وجوه فنية خالدة بالابيض والاسود",
+                images: ["img/store1.jpg"]
+            },
+            {
+                title: "لا أرى ، لا اسمع ، لا اتكلم",
+                price: "650 ﷼",
+                description: "100 × 70 - عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة",
+                images: ["img/store2.jpg"]
+            },
+            {
+                title: "الايدي والخيوط الحمراء", 
+                price: "1500 ﷼",
+                description: "اربع قطع اللوحة الواحدة 40 × 40 - عمل فني من اربع لوحات تتشابك بينها الخيوط الحمراء",
+                images: ["img/store3.jpg", "img/store3-1.jpg"]
+            },
+            {
+                title: "فيودور دوستويفسكي",
+                price: "450 ﷼",
+                description: "60 x 40 - بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي",
+                images: ["img/store4.jpg", "img/store4-1.jpg"]
+            },
+        ];
+        
+        const galleryItems = [
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art1.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art2.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art3.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art4.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art5.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art6.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art7.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art8.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art9.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art10.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art11.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art12.png"]
+            },
+            {
+                title: "shahed",
+                description: "shahed",
+                images: ["img/art13.png"]
+            }
+        ];
+        
+        let currentGalleryIndex = 0;
+        let currentImages = [];
+        let isStoreGallery = false;
+        
+        function openFullscreenStore(index) {
+            isStoreGallery = true;
+            currentGalleryIndex = index;
+            currentImages = storeProducts[index].images;
+            updateFullscreenGallery();
+            fullscreenGallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function openFullscreenGallery(index) {
+            isStoreGallery = false;
+            currentGalleryIndex = index;
+            currentImages = galleryItems[index].images;
+            updateFullscreenGallery();
+            fullscreenGallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function updateFullscreenGallery() {
+            galleryMainImage.src = currentImages[0];
+            
+            galleryThumbnails.innerHTML = '';
+
+            if (currentImages.length <= 1) {
+                galleryThumbnails.style.display = 'none';
+            } else {
+                galleryThumbnails.style.display = 'flex';
+            }
+            
+            currentImages.forEach((image, index) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = image;
+                thumbnail.className = 'gallery-thumbnail' + (index === 0 ? ' active' : '');
+                thumbnail.addEventListener('click', () => {
+                    galleryMainImage.src = image;
+                    document.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
+                        thumb.classList.remove('active');
+                    });
+                    thumbnail.classList.add('active');
+                });
+                galleryThumbnails.appendChild(thumbnail);
+            });
+            
+            if (isStoreGallery) {
+                const product = storeProducts[currentGalleryIndex];
+                galleryInfo.innerHTML = `
+                    <h3 class="gallery-product-title">${product.title}</h3>
+                    <p class="gallery-product-price">${product.price}</p>
+                    <p class="gallery-product-description">${product.description}</p>
+                    <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="store-btn">
+                        Order via Instagram
+                    </a>
+                `;
+            } else {
+                const item = galleryItems[currentGalleryIndex];
+                galleryInfo.innerHTML = `
+                    <h3 class="gallery-product-title">${item.title}</h3>
+                    <p class="gallery-product-description">${item.description}</p>
+                `;
+            }
+        }
+        
+        function closeFullscreenGallery() {
+            fullscreenGallery.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function navigateGallery(direction) {
+            if (isStoreGallery) {
+                currentGalleryIndex = (currentGalleryIndex + direction + storeProducts.length) % storeProducts.length;
+                currentImages = storeProducts[currentGalleryIndex].images;
+            } else {
+                currentGalleryIndex = (currentGalleryIndex + direction + galleryItems.length) % galleryItems.length;
+                currentImages = galleryItems[currentGalleryIndex].images;
+            }
+            updateFullscreenGallery();
+        }
+        
+        galleryClose.addEventListener('click', closeFullscreenGallery);
+        galleryPrev.addEventListener('click', () => navigateGallery(-1));
+        galleryNext.addEventListener('click', () => navigateGallery(1));
+        
+        document.addEventListener('keydown', (e) => {
+            if (fullscreenGallery.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeFullscreenGallery();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateGallery(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateGallery(1);
+                }
+            }
         });
     </script>
 </body>
