@@ -17,7 +17,7 @@
             <div class="intro-signature" id="introSignature">
                 <img src="img/sign.png" alt="Artist Signature" id="introSignImg">
             </div>
-            <div class="intro-tagline" id="introTagline">  Portrait Artist · Shahed 🩶 </div>
+            <div class="intro-tagline" id="introTagline">ortrait Artist · Shahed 🩶 </div>
         </div>
     </div>
 
@@ -116,7 +116,7 @@
     </section>
 
     <!-- 
-         GALLERY — each image is a framed painting
+         GALLERY 
     -->
     <section id="gallery">
         <h2 class="section-title">Art Gallery</h2>
@@ -287,6 +287,16 @@
                 </div>
                 <div class="painting-label">shahed</div>
 
+                <div class="gallery-item fade-in" onclick="openFullscreenGallery(14)">
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art16.jpg" class="gallery-img" alt="Artwork 16">
+                        </div>
+                    </div>
+                </div>
+                <div class="painting-label">shahed</div>
+
         </div>
     </section>
 
@@ -320,12 +330,6 @@
                 <div class="store-images">
                     <img src="img/store2.jpg" class="store-img" alt="لا أرى ، لا اسمع ، لا اتكلم">
                     <div class="store-overlay"><p>Click to view details</p></div>
-                </div>
-                <div class="store-info">
-                    <h3 class="store-title">لا أرى ، لا اسمع ، لا اتكلم</h3>
-                    <p class="store-price">550 ﷼</p>
-                    <p>100 × 70</p>
-                    <p>عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة</p>
                 </div>
             </div>
             <div class="store-item fade-in" onclick="openFullscreenStore(2)">
@@ -1155,6 +1159,8 @@
         .gallery-grid .gallery-item:nth-child(13) { transition-delay: 0.20s; }
         .gallery-grid .gallery-item:nth-child(14) { transition-delay: 0.20s; }
         .gallery-grid .gallery-item:nth-child(15) { transition-delay: 0.20s; }
+        .gallery-grid .gallery-item:nth-child(16) { transition-delay: 0.20s; }
+
 
 
 
@@ -1410,7 +1416,7 @@
     ];
 
     // Gallery
-    const galleryItems = Array.from({ length: 15 }, (_, i) => ({
+    const galleryItems = Array.from({ length: 16 }, (_, i) => ({
         title: "shahed",
         description: "shahed",
         images: [`img/art${i + 1}.png`]
