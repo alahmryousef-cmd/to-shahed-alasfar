@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shahed Alasfar - Professional Artist Portfolio</title>
+    <title>Shahed Alasfar</title>
     <meta name="description" content="Shahed Alasfar - Jordanian artist specializing in portrait art. Explore her collection of emotional and timeless artwork.">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Animated Background -->
+
+    <!-- INTRO  -->
+    <div id="introScreen">
+        <div class="intro-inner">
+            <div class="intro-name" id="introName">Shahed Alasfar</div>
+            <div class="intro-signature" id="introSignature">
+                <img src="img/sign.png" alt="Artist Signature" id="introSignImg">
+            </div>
+            <div class="intro-tagline" id="introTagline">🩶 Portrait Artist · Shahed 🩶 </div>
+        </div>
+    </div>
+
     <canvas class="background-canvas" id="bgCanvas"></canvas>
 
-    <!-- Header with improved navigation -->
     <header id="header">
         <div class="logo" onclick="scrollToTop()">Shahed Alasfar</div>
-        
         <div class="nav-container">
             <nav class="nav-links">
                 <a href="#landing">Home</a>
@@ -23,16 +32,11 @@
                 <a href="#gallery">Gallery</a>
                 <a href="#store">Store</a>
             </nav>
-            
             <div class="social-header">
                 <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://wa.me/962590864551" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
             </div>
-            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -48,30 +52,26 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        
         <nav class="mobile-nav-links">
             <a href="#landing" onclick="closeMobileMenu()">Home</a>
             <a href="#about" onclick="closeMobileMenu()">About</a>
             <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
             <a href="#store" onclick="closeMobileMenu()">Store</a>
         </nav>
-        
         <div class="mobile-social">
             <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://wa.me/962590864551" target="_blank">
-                <i class="fab fa-whatsapp"></i>
-            </a>
         </div>
     </div>
 
-    <!-- Landing Section -->
+
+
+    <!--LANDING -->
     <section id="landing">
         <h1 class="landing-title floating">Shahed Alasfar</h1>
         <p class="landing-subtitle fade-in">Professional Artist & Portrait Specialist</p>
-        
-        <div class="cta-buttons">
+        <div class="cta-buttons fade-in">
             <a href="#gallery" class="btn btn-primary">
                 <i class="fas fa-palette"></i> View Gallery
             </a>
@@ -79,223 +79,274 @@
                 <i class="fas fa-shopping-bag"></i> Visit Store
             </a>
         </div>
-        
         <div class="social-cards">
             <div class="social-card fade-in">
-                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
-                    <div class="social-icon instagram-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
+                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;width:100%;height:100%;justify-content:center;">
+                    <div class="social-icon instagram-icon"><i class="fab fa-instagram"></i></div>
                     <div class="social-name">Instagram</div>
                 </a>
             </div>
-            
-            <div class="social-card fade-in">
-                <a href="https://wa.me/962590864551" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
-                    <div class="social-icon whatsapp-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="social-name">WhatsApp</div>
-                </a>
-            </div>
         </div>
-    </section>
+     </div>
+</section>
 
-    <!-- About Section -->
+    <!-- 
+         ABOUT 
+     -->
     <section id="about">
-        <h2 class="section-title">About the Artist</h2>
-        
+     
+        <div class="about-signature-wrap fade-in">
+            <img src="img/sign.png" alt="Artist Signature" class="about-signature-img">
+            <div class="about-signature-divider"></div>
+        </div>
+
         <div class="about-content">
             <div class="about-text fade-in">
-                <p>
-                    Shahed Alasfar is a visionary <b>Jordanian artist</b> whose brush transforms emotions into timeless art.
-                    Her work is more than color and form — it's <b>a language of soul, silence, and beauty</b>.
-                    Every stroke she paints tells a story, capturing the delicate balance between realism and emotion.
-                </p>
-                <p>
-                    With a golden palette and a heart full of imagination, Shahed creates portraits that breathe life —
-                    each piece glowing with depth, sensitivity, and quiet power.
-                    Her art is not meant to be seen only with the eyes, but <b>felt with the heart</b>.
-                </p>
-                <p>
-                    Shahed's creations stand as a bridge between reality and dreams,
-                    reflecting the warmth of her Jordanian roots and the elegance of modern fine art.
-                    She doesn't just paint — <b>she evokes, she speaks, she moves</b> through every detail she creates.
-                </p>
+                <p>Shahed Alasfar is a visionary <b>Jordanian artist</b> whose brush transforms emotions into timeless art.
+                Her work is more than color and form — it's <b>a language of soul, silence, and beauty</b>.
+                Every stroke she paints tells a story, capturing the delicate balance between realism and emotion.</p>
+                <p>With a golden palette and a heart full of imagination, Shahed creates portraits that breathe life —
+                each piece glowing with depth, sensitivity, and quiet power.
+                Her art is not meant to be seen only with the eyes, but <b>felt with the heart</b>.</p>
+                <p>Shahed's creations stand as a bridge between reality and dreams,
+                reflecting the warmth of her Jordanian roots and the elegance of modern fine art.
+                She doesn't just paint — <b>she evokes, she speaks, she moves</b> through every detail she creates.</p>
             </div>
         </div>
     </section>
 
-
-
-    <!-- Gallery -->
+    <!-- 
+         GALLERY — each image is a framed painting
+    -->
     <section id="gallery">
         <h2 class="section-title">Art Gallery</h2>
-
         <div class="gallery-grid">
+
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(0)">
-                <img src="img/art1.png" class="gallery-img" alt="Artwork 1">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art1.png" class="gallery-img" alt="Artwork 1">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(1)">
-                <img src="img/art2.png" class="gallery-img" alt="Artwork 2">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art2.png" class="gallery-img" alt="Artwork 2">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(2)">
-                <img src="img/art3.png" class="gallery-img" alt="Artwork 3">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art3.png" class="gallery-img" alt="Artwork 3">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(3)">
-                <img src="img/art4.png" class="gallery-img" alt="Artwork 4">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art4.png" class="gallery-img" alt="Artwork 4">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(4)">
-                <img src="img/art5.png" class="gallery-img" alt="Artwork 5">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art5.png" class="gallery-img" alt="Artwork 5">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(5)">
-                <img src="img/art6.png" class="gallery-img" alt="Artwork 6">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art6.png" class="gallery-img" alt="Artwork 6">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(6)">
-                <img src="img/art7.png" class="gallery-img" alt="Artwork 7">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art7.png" class="gallery-img" alt="Artwork 7">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(7)">
-                <img src="img/art8.png" class="gallery-img" alt="Artwork 8">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art8.png" class="gallery-img" alt="Artwork 8">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(8)">
-                <img src="img/art9.png" class="gallery-img" alt="Artwork 9">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art9.png" class="gallery-img" alt="Artwork 9">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(9)">
-                <img src="img/art10.png" class="gallery-img" alt="Artwork 10">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art10.png" class="gallery-img" alt="Artwork 10">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(10)">
-                <img src="img/art11.png" class="gallery-img" alt="Artwork 11">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art11.png" class="gallery-img" alt="Artwork 11">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(11)">
-                <img src="img/art12.png" class="gallery-img" alt="Artwork 12">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art12.png" class="gallery-img" alt="Artwork 12">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
 
             <div class="gallery-item fade-in" onclick="openFullscreenGallery(12)">
-                <img src="img/art13.png" class="gallery-img" alt="Artwork 13">
-                <div class="gallery-overlay">
-                    <h3 class="gallery-title">shahed</h3>
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art13.png" class="gallery-img" alt="Artwork 13">
+                        </div>
+                    </div>
                 </div>
+                <div class="painting-label">shahed</div>
             </div>
+
+
+            <div class="gallery-item fade-in" onclick="openFullscreenGallery(13)">
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art14.png" class="gallery-img" alt="Artwork 14">
+                        </div>
+                    </div>
+                </div>
+                <div class="painting-label">shahed</div>
+
+
+                        <div class="gallery-item fade-in" onclick="openFullscreenGallery(14)">
+                <div class="painting-frame">
+                    <div class="frame-outer">
+                        <div class="frame-mat">
+                            <img src="img/art15.png" class="gallery-img" alt="Artwork 15">
+                        </div>
+                    </div>
+                </div>
+                <div class="painting-label">shahed</div>
+
         </div>
     </section>
 
-
-
-    <!-- Store -->
+    <!-- 
+         STORE
+    -->
     <section id="store">
         <h2 class="section-title">Art Store</h2>
-        
         <div class="store-notice fade-in">
             <i class="fas fa-shopping-cart"></i>
             <h3>Order via Instagram DM</h3>
             <p>To purchase any artwork, please send a direct message on Instagram with the product name and your contact details.</p>
-            <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">
+            <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn btn-primary" style="margin-top:1rem;">
                 Message on Instagram
             </a>
         </div>
-
         <div class="store-grid">
             <div class="store-item fade-in" onclick="openFullscreenStore(0)">
                 <div class="store-images">
-                    <img src="img/store1.jpg" class="store-img" alt="Art Product 1 - مرآة الفنانين">
-                    <div class="store-overlay">
-                        <p>Click to view details</p>
-                    </div>
+                    <img src="img/store1.jpg" class="store-img" alt="مرآة الفنانين">
+                    <div class="store-overlay"><p>Click to view details</p></div>
                 </div>
                 <div class="store-info">
                     <h3 class="store-title">مرآة الفنانين</h3>
-                    <p class="store-price">2500 ﷼</p>
+                    <p class="store-price">1300 ﷼</p>
                     <p>100 × 60</p>
                     <p>عمل فني على مراية يجمع ملامح وجوه فنية خالدة بالابيض والاسود</p>
                 </div>
             </div>
-
             <div class="store-item fade-in" onclick="openFullscreenStore(1)">
                 <div class="store-images">
-                    <img src="img/store2.jpg" class="store-img" alt="Art Product 2 - لا أرى ، لا اسمع ، لا اتكلم">
-                    <div class="store-overlay">
-                        <p>Click to view details</p>
-                    </div>
+                    <img src="img/store2.jpg" class="store-img" alt="لا أرى ، لا اسمع ، لا اتكلم">
+                    <div class="store-overlay"><p>Click to view details</p></div>
                 </div>
                 <div class="store-info">
-                    <h3 class="store-title">لا أرى ، لا اسمع ، لا اتكلم </h3>
-                    <p class="store-price">650 ﷼</p>
-                    <p>100 × 70 </p>
+                    <h3 class="store-title">لا أرى ، لا اسمع ، لا اتكلم</h3>
+                    <p class="store-price">550 ﷼</p>
+                    <p>100 × 70</p>
                     <p>عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة</p>
                 </div>
             </div>
-
             <div class="store-item fade-in" onclick="openFullscreenStore(2)">
                 <div class="store-images">
-                    <img src="img/store3.jpg" class="store-img" alt="Art Product 3 - الايدي والخيوط الحمراء">
-                    <div class="store-overlay">
-                        <p>Click to view details</p>
-                    </div>
+                    <img src="img/store3.jpg" class="store-img" alt="الايدي والخيوط الحمراء">
+                    <div class="store-overlay"><p>Click to view details</p></div>
                 </div>
                 <div class="store-info">
                     <h3 class="store-title">الايدي والخيوط الحمراء</h3>
-                    <p class="store-price">1500 ﷼</p>
-                    <p>اربع قطع اللوحة الواحدة 40 × 40 </p>
+                    <p class="store-price">770 ﷼</p>
+                    <p>اربع قطع اللوحة الواحدة 40 × 40</p>
                     <p>عمل فني من اربع لوحات تتشابك بينها الخيوط الحمراء</p>
                 </div>
             </div>
-
             <div class="store-item fade-in" onclick="openFullscreenStore(3)">
                 <div class="store-images">
-                    <img src="img/store4.jpg" class="store-img" alt="Art Product 4 - فيودور دوستويفسكي">
-                    <div class="store-overlay">
-                        <p>Click to view details</p>
-                    </div>
+                    <img src="img/store4.jpg" class="store-img" alt="فيودور دوستويفسكي">
+                    <div class="store-overlay"><p>Click to view details</p></div>
                 </div>
                 <div class="store-info">
-                    <h3 class="store-title"> فيودور دوستويفسكي</h3>
+                    <h3 class="store-title">فيودور دوستويفسكي</h3>
                     <p class="store-price">450 ﷼</p>
                     <p>60 x 40</p>
                     <p>بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي</p>
@@ -304,128 +355,185 @@
         </div>
     </section>
 
-    <!-- Fullscreen -->
+    <!-- ============================================================
+         FULLSCREEN GALLERY LIGHTBOX
+    ============================================================ -->
     <div class="fullscreen-gallery" id="fullscreenGallery">
-        <button class="gallery-close" id="galleryClose">
-            <i class="fas fa-times"></i>
-        </button>
-        
-        <button class="gallery-nav gallery-prev" id="galleryPrev">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        
-        <button class="gallery-nav gallery-next" id="galleryNext">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-        
+        <button class="gallery-close" id="galleryClose"><i class="fas fa-times"></i></button>
+        <button class="gallery-nav gallery-prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery-nav gallery-next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
         <img class="gallery-main-image" id="galleryMainImage" src="" alt="">
-        
-        <div class="gallery-thumbnails" id="galleryThumbnails">
-        </div>
-        
-        <div class="gallery-info" id="galleryInfo">
-        </div>
+        <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+        <div class="gallery-info" id="galleryInfo"></div>
     </div>
 
-    <!-- Footer -->
+    <!-- 
+         FOOTER
+     -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Shahed Alasfar</div>
-            
             <div class="footer-links">
                 <a href="#landing">Home</a>
                 <a href="#about">About</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#store">Store</a>
                 <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
-                <a href="https://wa.me/962590864551" target="_blank">WhatsApp</a>
             </div>
-            
             <div class="developer-credit">
                 Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank">Yousef Alahmr</a>
             </div>
-
-            <div class="footer-version">
-                Version v1.2.0
-            </div>
-            
-            <div class="copyright">
-                © 2025 Shahed Alasfar. All rights reserved.
-            </div>
+            <div class="footer-version">Version v1.3.0</div>
+            <div class="copyright">© 2026 Shahed Alasfar. All rights reserved.</div>
         </div>
     </footer>
 
+    
+
+
     <style>
         :root {
-            --gold: #b89446;
-            --dark-gold: #8a6d2f;
+            --gold:        #b89446;
+            --dark-gold:   #8a6d2f;
             --deep-yellow: #d4af37;
             --matte-black: #1a1a1a;
-            --off-white: #f5f5f5;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --off-white:   #f5f5f5;
+            --wall-color:  #1e1c19;   /* dark gallery wall */
+            --transition:  all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            /* Frame */
+            --frame-outer:  #3d2b1f;   
+            --frame-mid:    #5c4033;   
+            --frame-inner:  #2a1e14;   
+            --mat-color:    #f0ead8;   
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Playfair Display', serif;
-            background-color: var(--matte-black);
+            background-color: var(--wall-color);
             color: var(--off-white);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Animated background */
+        /* Background */
         .background-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.15;
+            opacity: 0.12;
         }
 
-        /* Header with improved navigation */
+        /* 
+           INTRO SCREEN
+        */
+        #introScreen {
+            position: fixed;
+            inset: 0;
+            background: #110f0c;         
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 1.2s ease;
+        }
+
+        #introScreen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.8rem;
+            text-align: center;
+        }
+
+        .intro-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 9vw, 6rem);
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(184,148,70,0.35);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 1.4s ease, transform 1.4s ease;
+        }
+
+        .intro-name.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Signature */
+        .intro-signature {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        .intro-signature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #introSignImg {
+            max-height: 90px;
+            max-width: 260px;
+            object-fit: contain;
+            filter: brightness(0.9) sepia(0.3);
+        }
+
+        .intro-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: rgba(245,245,245,0.6);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        .intro-tagline.visible {
+            opacity: 1;
+        }
+
+        /* 
+         Header
+         */
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(26,26,26,0.95);
             backdrop-filter: blur(15px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             transition: var(--transition);
         }
 
-        header.scrolled {
-            padding: 0.8rem 2rem;
-        }
+        header.scrolled { padding: 0.8rem 2rem; }
 
         .logo {
             font-family: 'Great Vibes', cursive;
             font-size: 2.2rem;
             color: var(--gold);
-            text-shadow: 0 0 10px rgba(184, 148, 70, 0.3);
+            text-shadow: 0 0 10px rgba(184,148,70,0.3);
             cursor: pointer;
             transition: var(--transition);
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+        .logo:hover { transform: scale(1.05); }
 
         .nav-container {
             display: flex;
@@ -433,10 +541,7 @@
             gap: 2rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+        .nav-links { display: flex; gap: 2rem; }
 
         .nav-links a {
             color: var(--off-white);
@@ -450,21 +555,14 @@
         .nav-links a:after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
+            width: 0; height: 2px;
+            bottom: -5px; left: 0;
             background-color: var(--gold);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover:after { width: 100%; }
 
         .social-header {
             display: flex;
@@ -483,13 +581,12 @@
         .social-header a:hover {
             color: var(--gold);
             transform: translateY(-3px);
-            background: rgba(184, 148, 70, 0.1);
+            background: rgba(184,148,70,0.1);
         }
 
         .mobile-menu-btn {
             display: none;
-            background: none;
-            border: none;
+            background: none; border: none;
             color: var(--off-white);
             font-size: 1.5rem;
             cursor: pointer;
@@ -498,11 +595,8 @@
             transition: var(--transition);
         }
 
-        .mobile-menu-btn:hover {
-            background: rgba(184, 148, 70, 0.1);
-        }
+        .mobile-menu-btn:hover { background: rgba(184,148,70,0.1); }
 
-        /* Sections */
         section {
             min-height: 100vh;
             padding: 8rem 2rem 4rem;
@@ -512,10 +606,11 @@
             align-items: center;
         }
 
-        /* Landing Section */
+        /* 
+        Landing
+        */
         #landing {
             text-align: center;
-            position: relative;
             padding-top: 10rem;
         }
 
@@ -524,7 +619,7 @@
             font-size: clamp(3rem, 8vw, 5rem);
             margin-bottom: 1.5rem;
             color: var(--gold);
-            text-shadow: 0 0 15px rgba(184, 148, 70, 0.4);
+            text-shadow: 0 0 15px rgba(184,148,70,0.4);
             line-height: 1.1;
         }
 
@@ -567,7 +662,7 @@
             background: transparent;
             color: var(--gold);
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(184, 148, 70, 0.3);
+            box-shadow: 0 10px 20px rgba(184,148,70,0.3);
         }
 
         .btn-secondary {
@@ -591,10 +686,9 @@
         }
 
         .social-card {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(184, 148, 70, 0.1), rgba(26, 26, 26, 0.8));
-            border: 1px solid rgba(184, 148, 70, 0.3);
+            width: 180px; height: 180px;
+            background: linear-gradient(135deg, rgba(184,148,70,0.1), rgba(26,26,26,0.8));
+            border: 1px solid rgba(184,148,70,0.3);
             border-radius: 10px;
             transition: var(--transition);
             position: relative;
@@ -604,21 +698,17 @@
         .social-card:before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             transition: 0.5s;
         }
 
-        .social-card:hover:before {
-            left: 100%;
-        }
+        .social-card:hover:before { left: 100%; }
 
         .social-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(184, 148, 70, 0.3);
+            box-shadow: 0 10px 25px rgba(184,148,70,0.3);
             border-color: var(--gold);
         }
 
@@ -635,25 +725,54 @@
             background-clip: text;
         }
 
-        .whatsapp-icon {
-            color: #25D366;
-        }
-
         .social-card:hover .social-icon {
             transform: scale(1.2);
-            filter: drop-shadow(0 0 8px rgba(184, 148, 70, 0.5));
+            filter: drop-shadow(0 0 8px rgba(184,148,70,0.5));
         }
 
-        .social-name {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
+        .social-name { font-size: 1.1rem; font-weight: 500; }
 
-        /* About Section */
+        /* 
+        About
+        */
         #about {
-            position: relative;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
+            min-height: auto;
+            padding-top: 6rem;
+            padding-bottom: 5rem;
+        }
+
+        .about-signature-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.8rem;
+        }
+
+        .about-signature-img {
+            max-height: 110px;
+            max-width: 300px;
+            object-fit: contain;
+            filter: brightness(0.92) sepia(0.25) contrast(1.05);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+
+        .about-signature-img:hover {
+            filter: brightness(1.0) sepia(0.1) contrast(1.08);
+            transform: scale(1.03);
+        }
+
+        .about-signature-divider {
+            margin-top: 1.6rem;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--gold) 30%,
+                var(--gold) 70%,
+                transparent 100%);
+            opacity: 0.7;
         }
 
         .section-title {
@@ -668,102 +787,127 @@
         .section-title:after {
             content: '';
             position: absolute;
-            width: 100px;
-            height: 2px;
+            width: 100px; height: 2px;
             background: var(--gold);
-            bottom: -10px;
-            left: 50%;
+            bottom: -10px; left: 50%;
             transform: translateX(-50%);
         }
 
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-        }
+        .about-content { display: flex; align-items: center; width: 100%; }
 
         .about-text {
             flex: 1;
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.9;
             text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: rgba(245,245,245,0.88);
         }
 
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
+        .about-text p { margin-bottom: 1.6rem; }
+        .about-text p:last-child { margin-bottom: 0; }
 
-        /* Gallery Section */
-        #gallery {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        /* 
+           GALLERY 
+        */
+        #gallery { max-width: 1400px; margin: 0 auto; }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 3.5rem 3rem;    
             width: 100%;
+            padding: 1rem 0 2rem;
         }
 
         .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            height: 300px;
-            background-color: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(184, 148, 70, 0.2);
-            transition: var(--transition);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        .painting-frame {
+            position: relative;
+            filter: drop-shadow(0 18px 36px rgba(0,0,0,0.75))
+                    drop-shadow(0  6px 12px rgba(0,0,0,0.50));
+            transition: filter 0.5s ease, transform 0.5s ease;
         }
+
+        .gallery-item:hover .painting-frame {
+            transform: translateY(-6px) scale(1.015);
+            filter: drop-shadow(0 28px 48px rgba(0,0,0,0.80))
+                    drop-shadow(0 10px 20px rgba(0,0,0,0.55));
+        }
+
+
+        .frame-outer {
+            padding: 14px;
+            background:
+                linear-gradient(135deg,
+                    rgba(212,175,55,0.45) 0%,
+                    rgba(184,148,70,0.15) 20%,
+                    rgba(42,30,20,0.0)   50%,
+                    rgba(0,0,0,0.35)     100%),
+                linear-gradient(180deg, var(--frame-mid) 0%, var(--frame-outer) 100%);
+            box-shadow:
+                inset 0  2px  4px rgba(255,220,120,0.18),   /* top highlight */
+                inset  2px 0  4px rgba(255,220,120,0.10),   /* left highlight */
+                inset  0 -2px 4px rgba(0,0,0,0.45),         /* bottom shadow  */
+                inset -2px 0  4px rgba(0,0,0,0.30);         /* right shadow   */
+        }
+
+
+        .frame-mat {
+            padding: 10px;
+            background: var(--mat-color);
+
+            box-shadow:
+                inset 0 0 6px rgba(0,0,0,0.18),
+                inset 0 0 2px rgba(0,0,0,0.10);
+        }
+
 
         .gallery-img {
+            display: block;
             width: 100%;
-            height: 100%;
+            height: 260px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease, filter 0.4s ease;
+            filter: brightness(0.97) contrast(1.02);
         }
+
 
         .gallery-item:hover .gallery-img {
-            transform: scale(1.05);
+            transform: scale(1.03);
+            filter: brightness(1.04) contrast(1.04) saturate(1.05);
         }
 
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent);
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+
+        .painting-label {
+            margin-top: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: rgba(245,245,245,0.55);
+            letter-spacing: 0.08em;
+            text-align: center;
+            transition: color 0.3s ease;
         }
 
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        .gallery-title {
-            font-size: 1.2rem;
+        .gallery-item:hover .painting-label {
             color: var(--gold);
-            margin-bottom: 0.5rem;
         }
 
-        /* Store Section */
-        #store {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        /* 
+         Store 
+        */
+        #store { max-width: 1400px; margin: 0 auto; }
 
         .store-notice {
-            background: rgba(184, 148, 70, 0.1);
-            border: 1px solid rgba(184, 148, 70, 0.3);
+            background: rgba(184,148,70,0.1);
+            border: 1px solid rgba(184,148,70,0.3);
             border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 3rem;
@@ -778,10 +922,7 @@
             margin-bottom: 1rem;
         }
 
-        .store-notice h3 {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
+        .store-notice h3 { color: var(--gold); margin-bottom: 0.5rem; }
 
         .store-grid {
             display: grid;
@@ -791,10 +932,10 @@
         }
 
         .store-item {
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(26,26,26,0.7);
             border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(184, 148, 70, 0.2);
+            border: 1px solid rgba(184,148,70,0.2);
             transition: var(--transition);
             cursor: pointer;
         }
@@ -802,70 +943,43 @@
         .store-item:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        .store-images {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-        }
+        .store-images { position: relative; height: 250px; overflow: hidden; }
 
         .store-img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .store-item:hover .store-img {
-            transform: scale(1.05);
-        }
+        .store-item:hover .store-img { transform: scale(1.05); }
 
         .store-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent);
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(26,26,26,0.9), transparent);
             padding: 1rem;
             transform: translateY(100%);
             transition: transform 0.3s ease;
         }
 
-        .store-item:hover .store-overlay {
-            transform: translateY(0);
-        }
+        .store-item:hover .store-overlay { transform: translateY(0); }
 
-        .store-info {
-            padding: 1.5rem;
-        }
+        .store-info { padding: 1.5rem; }
 
-        .store-title {
-            font-size: 1.3rem;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .store-price {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
+        .store-title { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .store-price { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
 
         .store-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem;
+            display: block; width: 100%; padding: 0.8rem;
             background: var(--gold);
             color: var(--matte-black);
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
+            border: none; border-radius: 5px;
+            font-weight: 600; cursor: pointer;
             transition: var(--transition);
-            text-align: center;
-            text-decoration: none;
+            text-align: center; text-decoration: none;
         }
 
         .store-btn:hover {
@@ -873,14 +987,10 @@
             transform: translateY(-3px);
         }
 
-        /* Fullscreen Gallery */
         .fullscreen-gallery {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            inset: 0;
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             display: none;
             flex-direction: column;
@@ -889,37 +999,30 @@
             padding: 2rem;
         }
 
-        .fullscreen-gallery.active {
-            display: flex;
-        }
+        .fullscreen-gallery.active { display: flex; }
 
         .gallery-close {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
+            top: 2rem; right: 2rem;
+            background: none; border: none;
             color: var(--off-white);
-            font-size: 2rem;
-            cursor: pointer;
+            font-size: 2rem; cursor: pointer;
             z-index: 2001;
             transition: var(--transition);
-            padding: 0.5rem;
-            border-radius: 50%;
+            padding: 0.5rem; border-radius: 50%;
         }
 
         .gallery-close:hover {
             color: var(--gold);
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
         }
 
         .gallery-main-image {
-            max-width: 90%;
-            max-height: 80vh;
+            max-width: 90%; max-height: 80vh;
             object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .gallery-thumbnails {
@@ -932,8 +1035,7 @@
         }
 
         .gallery-thumbnail {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             object-fit: cover;
             border-radius: 5px;
             cursor: pointer;
@@ -941,41 +1043,25 @@
             border: 2px solid transparent;
         }
 
-        .gallery-thumbnail:hover, .gallery-thumbnail.active {
-            border-color: var(--gold);
-            transform: scale(1.05);
-        }
+        .gallery-thumbnail:hover,
+        .gallery-thumbnail.active { border-color: var(--gold); transform: scale(1.05); }
 
         .gallery-nav {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: var(--off-white);
+            top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: none; color: var(--off-white);
             font-size: 2rem;
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        .gallery-nav:hover {
-            background: var(--gold);
-            color: var(--matte-black);
-        }
-
-        .gallery-prev {
-            left: 2rem;
-        }
-
-        .gallery-next {
-            right: 2rem;
-        }
+        .gallery-nav:hover { background: var(--gold); color: var(--matte-black); }
+        .gallery-prev { left: 2rem; }
+        .gallery-next { right: 2rem; }
 
         .gallery-info {
             margin-top: 1.5rem;
@@ -983,38 +1069,25 @@
             max-width: 600px;
         }
 
-        .gallery-product-title {
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
+        .gallery-product-title { font-size: 1.8rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .gallery-product-price { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; }
+        .gallery-product-description { margin-bottom: 1.5rem; opacity: 0.9; }
 
-        .gallery-product-price {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .gallery-product-description {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        /* Footer */
+        /* 
+        Footer
+        */
         footer {
             text-align: center;
             padding: 3rem 2rem;
-            border-top: 1px solid rgba(184, 148, 70, 0.2);
+            border-top: 1px solid rgba(184,148,70,0.2);
             margin-top: 4rem;
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(20,20,20,0.9);
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            display: flex; flex-direction: column; gap: 2rem;
         }
 
         .footer-logo {
@@ -1027,8 +1100,7 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+            gap: 2rem; flex-wrap: wrap;
             margin-bottom: 1.5rem;
         }
 
@@ -1038,46 +1110,28 @@
             transition: var(--transition);
         }
 
-        .footer-links a:hover {
-            color: var(--gold);
-        }
+        .footer-links a:hover { color: var(--gold); }
 
-        .developer-credit {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 1rem;
-        }
+        .developer-credit { font-size: 0.9rem; opacity: 0.7; margin-top: 1rem; }
+        .developer-credit a { color: var(--gold); text-decoration: none; transition: var(--transition); }
+        .developer-credit a:hover { text-decoration: underline; }
+        .copyright { font-size: 0.9rem; opacity: 0.7; margin-top: 1rem; }
+        .footer-version { font-size: 0.85rem; color: #aaa; text-align: center; margin-top: 0.5rem; }
 
-        .developer-credit a {
-            color: var(--gold);
-            text-decoration: none;
-            transition: var(--transition);
-        }
 
-        .developer-credit a:hover {
-            text-decoration: underline;
-        }
 
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 1rem;
-        }
-
-        /* Animations */
+    
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50%       { transform: translateY(-10px); }
         }
 
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
+        .floating { animation: float 6s ease-in-out infinite; }
 
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(28px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
         }
 
         .fade-in.visible {
@@ -1085,133 +1139,39 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .gallery-nav {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-            
-            .gallery-prev {
-                left: 1rem;
-            }
-            
-            .gallery-next {
-                right: 1rem;
-            }
-        }
+        /* Stagger gallery items so they appear one-by-one */
+        .gallery-grid .gallery-item:nth-child(1)  { transition-delay: 0.05s; }
+        .gallery-grid .gallery-item:nth-child(2)  { transition-delay: 0.10s; }
+        .gallery-grid .gallery-item:nth-child(3)  { transition-delay: 0.15s; }
+        .gallery-grid .gallery-item:nth-child(4)  { transition-delay: 0.20s; }
+        .gallery-grid .gallery-item:nth-child(5)  { transition-delay: 0.25s; }
+        .gallery-grid .gallery-item:nth-child(6)  { transition-delay: 0.30s; }
+        .gallery-grid .gallery-item:nth-child(7)  { transition-delay: 0.10s; }
+        .gallery-grid .gallery-item:nth-child(8)  { transition-delay: 0.15s; }
+        .gallery-grid .gallery-item:nth-child(9)  { transition-delay: 0.20s; }
+        .gallery-grid .gallery-item:nth-child(10) { transition-delay: 0.25s; }
+        .gallery-grid .gallery-item:nth-child(11) { transition-delay: 0.30s; }
+        .gallery-grid .gallery-item:nth-child(12) { transition-delay: 0.15s; }
+        .gallery-grid .gallery-item:nth-child(13) { transition-delay: 0.20s; }
+        .gallery-grid .gallery-item:nth-child(14) { transition-delay: 0.20s; }
+        .gallery-grid .gallery-item:nth-child(15) { transition-delay: 0.20s; }
 
-        @media (max-width: 768px) {
-            .nav-links, .social-header {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .gallery-grid, .store-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .social-cards {
-                gap: 1rem;
-            }
-            
-            .social-card {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .social-icon {
-                font-size: 2.8rem;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .gallery-thumbnails {
-                gap: 0.5rem;
-            }
-            
-            .gallery-thumbnail {
-                width: 60px;
-                height: 60px;
-            }
 
-            section {
-                padding: 6rem 1rem 2rem;
-            }
 
-            header {
-                padding: 1rem 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .social-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .social-card {
-                width: 200px;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 250px;
-                justify-content: center;
-            }
-            
-            .gallery-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            
-            .gallery-prev {
-                left: 0.5rem;
-            }
-            
-            .gallery-next {
-                right: 0.5rem;
-            }
-        }
 
-        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100vh;
-            background: rgba(26, 26, 26, 0.98);
+            top: 0; right: -100%;
+            width: 80%; max-width: 300px; height: 100vh;
+            background: rgba(26,26,26,0.98);
             backdrop-filter: blur(15px);
             z-index: 1001;
             padding: 2rem;
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            display: flex; flex-direction: column; gap: 2rem;
         }
 
-        .mobile-menu.active {
-            right: 0;
-        }
+        .mobile-menu.active { right: 0; }
 
         .mobile-menu-header {
             display: flex;
@@ -1221,24 +1181,17 @@
         }
 
         .mobile-menu-close {
-            background: none;
-            border: none;
+            background: none; border: none;
             color: var(--off-white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
+            font-size: 1.5rem; cursor: pointer;
+            padding: 0.5rem; border-radius: 5px;
             transition: var(--transition);
         }
 
-        .mobile-menu-close:hover {
-            background: rgba(184, 148, 70, 0.1);
-        }
+        .mobile-menu-close:hover { background: rgba(184,148,70,0.1); }
 
         .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            display: flex; flex-direction: column; gap: 1.5rem;
         }
 
         .mobile-nav-links a {
@@ -1247,414 +1200,301 @@
             font-size: 1.2rem;
             transition: var(--transition);
             padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(184, 148, 70, 0.2);
+            border-bottom: 1px solid rgba(184,148,70,0.2);
         }
 
-        .mobile-nav-links a:hover {
-            color: var(--gold);
-        }
+        .mobile-nav-links a:hover { color: var(--gold); }
 
         .mobile-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
+            display: flex; gap: 1rem; margin-top: auto;
         }
 
         .mobile-social a {
             color: var(--off-white);
             font-size: 1.5rem;
             transition: var(--transition);
-            padding: 0.5rem;
-            border-radius: 50%;
+            padding: 0.5rem; border-radius: 50%;
         }
 
-        .mobile-social a:hover {
-            color: var(--gold);
-            background: rgba(184, 148, 70, 0.1);
-        }
+        .mobile-social a:hover { color: var(--gold); background: rgba(184,148,70,0.1); }
 
         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.7);
             z-index: 999;
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transition: var(--transition);
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .overlay.active { opacity: 1; visibility: visible; }
+
+
+
+        @media (max-width: 1024px) {
+            .about-content { flex-direction: column; }
+            .gallery-nav { width: 50px; height: 50px; font-size: 1.5rem; }
+            .gallery-prev { left: 1rem; }
+            .gallery-next { right: 1rem; }
         }
 
-        .footer-version {
-            font-size: 0.85rem;
-            color: #aaa;
-            text-align: center;
-            margin-top: 0.5rem;
+        @media (max-width: 768px) {
+            .nav-links, .social-header { display: none; }
+            .mobile-menu-btn { display: block; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2.5rem 1.5rem; }
+            .store-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+            .social-cards { gap: 1rem; }
+            .social-card { width: 150px; height: 150px; }
+            .social-icon { font-size: 2.8rem; }
+            .footer-links { flex-direction: column; gap: 1rem; }
+            .gallery-thumbnails { gap: 0.5rem; }
+            .gallery-thumbnail { width: 60px; height: 60px; }
+            section { padding: 6rem 1rem 2rem; }
+            header { padding: 1rem 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .social-cards { flex-direction: column; align-items: center; }
+            .social-card { width: 200px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 250px; justify-content: center; }
+            .gallery-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .gallery-prev { left: 0.5rem; }
+            .gallery-next { right: 0.5rem; }
+            .gallery-img { height: 200px; }
         }
     </style>
 
+   
     <script>
-        // إزالة جميع مشاكل البريد الإلكتروني نهائياً
+    
+    (function runIntro() {
+        const screen   = document.getElementById('introScreen');
+        const name     = document.getElementById('introName');
+        const sig      = document.getElementById('introSignature');
+        const tagline  = document.getElementById('introTagline');
 
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        const particles = [];
-        const particleCount = 30;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 100 + 50;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = `rgba(${184}, ${148}, ${70}, ${Math.random() * 0.05 + 0.02})`;
-                this.angle = Math.random() * Math.PI * 2;
-                this.spin = Math.random() * 0.02 - 0.01;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.angle += this.spin;
-                
-                if (this.x < -this.size) this.x = canvas.width + this.size;
-                if (this.x > canvas.width + this.size) this.x = -this.size;
-                if (this.y < -this.size) this.y = canvas.height + this.size;
-                if (this.y > canvas.height + this.size) this.y = -this.size;
-            }
-            
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                ctx.fillStyle = this.color;
-                
-                ctx.beginPath();
-                ctx.moveTo(0, -this.size/2);
-                ctx.bezierCurveTo(
-                    this.size/3, -this.size/2,
-                    this.size/2, this.size/4,
-                    0, this.size/2
-                );
-                ctx.bezierCurveTo(
-                    -this.size/2, this.size/4,
-                    -this.size/3, -this.size/2,
-                    0, -this.size/2
-                );
-                ctx.closePath();
-                ctx.fill();
-                
-                ctx.restore();
-            }
-        }
-        
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        initParticles();
-        animateParticles();
-        
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = () => {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', fadeInOnScroll);
-        fadeInOnScroll();
-        
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-        const overlay = document.getElementById('overlay');
-        
-        function openMobileMenu() {
-            mobileMenu.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
-        overlay.addEventListener('click', closeMobileMenu);
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
-        const fullscreenGallery = document.getElementById('fullscreenGallery');
-        const galleryClose = document.getElementById('galleryClose');
-        const galleryPrev = document.getElementById('galleryPrev');
-        const galleryNext = document.getElementById('galleryNext');
-        const galleryMainImage = document.getElementById('galleryMainImage');
-        const galleryThumbnails = document.getElementById('galleryThumbnails');
-        const galleryInfo = document.getElementById('galleryInfo');
-        
-        const storeProducts = [
-            {
-                title: "مرآة الفنانين",
-                price: "2500 ﷼",
-                description: "100 × 60 - عمل فني على مراية يجمع ملامح وجوه فنية خالدة بالابيض والاسود",
-                images: ["img/store1.jpg"]
-            },
-            {
-                title: "لا أرى ، لا اسمع ، لا اتكلم",
-                price: "650 ﷼",
-                description: "100 × 70 - عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة",
-                images: ["img/store2.jpg"]
-            },
-            {
-                title: "الايدي والخيوط الحمراء", 
-                price: "1500 ﷼",
-                description: "اربع قطع اللوحة الواحدة 40 × 40 - عمل فني من اربع لوحات تتشابك بينها الخيوط الحمراء",
-                images: ["img/store3.jpg", "img/store3-1.jpg"]
-            },
-            {
-                title: "فيودور دوستويفسكي",
-                price: "450 ﷼",
-                description: "60 x 40 - بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي",
-                images: ["img/store4.jpg", "img/store4-1.jpg"]
-            },
-        ];
-        
-        const galleryItems = [
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art1.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art2.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art3.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art4.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art5.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art6.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art7.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art8.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art9.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art10.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art11.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art12.png"]
-            },
-            {
-                title: "shahed",
-                description: "shahed",
-                images: ["img/art13.png"]
-            }
-        ];
-        
-        let currentGalleryIndex = 0;
-        let currentImages = [];
-        let isStoreGallery = false;
-        
-        function openFullscreenStore(index) {
-            isStoreGallery = true;
-            currentGalleryIndex = index;
-            currentImages = storeProducts[index].images;
-            updateFullscreenGallery();
-            fullscreenGallery.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function openFullscreenGallery(index) {
-            isStoreGallery = false;
-            currentGalleryIndex = index;
-            currentImages = galleryItems[index].images;
-            updateFullscreenGallery();
-            fullscreenGallery.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function updateFullscreenGallery() {
-            galleryMainImage.src = currentImages[0];
-            
-            galleryThumbnails.innerHTML = '';
+        //name
+        setTimeout(() => name.classList.add('visible'), 200);
 
-            if (currentImages.length <= 1) {
-                galleryThumbnails.style.display = 'none';
-            } else {
-                galleryThumbnails.style.display = 'flex';
-            }
-            
-            currentImages.forEach((image, index) => {
-                const thumbnail = document.createElement('img');
-                thumbnail.src = image;
-                thumbnail.className = 'gallery-thumbnail' + (index === 0 ? ' active' : '');
-                thumbnail.addEventListener('click', () => {
-                    galleryMainImage.src = image;
-                    document.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
-                        thumb.classList.remove('active');
-                    });
-                    thumbnail.classList.add('active');
-                });
-                galleryThumbnails.appendChild(thumbnail);
-            });
-            
-            if (isStoreGallery) {
-                const product = storeProducts[currentGalleryIndex];
-                galleryInfo.innerHTML = `
-                    <h3 class="gallery-product-title">${product.title}</h3>
-                    <p class="gallery-product-price">${product.price}</p>
-                    <p class="gallery-product-description">${product.description}</p>
-                    <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="store-btn">
-                        Order via Instagram
-                    </a>
-                `;
-            } else {
-                const item = galleryItems[currentGalleryIndex];
-                galleryInfo.innerHTML = `
-                    <h3 class="gallery-product-title">${item.title}</h3>
-                    <p class="gallery-product-description">${item.description}</p>
-                `;
-            }
+        //signature
+        setTimeout(() => sig.classList.add('visible'), 1900);
+
+        //tagline
+        setTimeout(() => tagline.classList.add('visible'), 3300);
+
+        setTimeout(() => screen.classList.add('fade-out'), 5000);
+
+        setTimeout(() => screen.style.display = 'none', 6300);
+    })();
+
+    
+    const canvas = document.getElementById('bgCanvas');
+    const ctx    = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const PARTICLE_COUNT = 30;
+
+    class Particle {
+        constructor() { this.reset(); }
+
+        reset() {
+            this.x      = Math.random() * canvas.width;
+            this.y      = Math.random() * canvas.height;
+            this.size   = Math.random() * 100 + 50;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.color  = `rgba(184,148,70,${(Math.random() * 0.05 + 0.02).toFixed(3)})`;
+            this.angle  = Math.random() * Math.PI * 2;
+            this.spin   = Math.random() * 0.02 - 0.01;
         }
-        
-        function closeFullscreenGallery() {
-            fullscreenGallery.classList.remove('active');
-            document.body.style.overflow = 'auto';
+
+        update() {
+            this.x     += this.speedX;
+            this.y     += this.speedY;
+            this.angle += this.spin;
+
+            if (this.x < -this.size)                    this.x = canvas.width  + this.size;
+            if (this.x > canvas.width  + this.size)     this.x = -this.size;
+            if (this.y < -this.size)                    this.y = canvas.height + this.size;
+            if (this.y > canvas.height + this.size)     this.y = -this.size;
         }
-        
-        function navigateGallery(direction) {
-            if (isStoreGallery) {
-                currentGalleryIndex = (currentGalleryIndex + direction + storeProducts.length) % storeProducts.length;
-                currentImages = storeProducts[currentGalleryIndex].images;
-            } else {
-                currentGalleryIndex = (currentGalleryIndex + direction + galleryItems.length) % galleryItems.length;
-                currentImages = galleryItems[currentGalleryIndex].images;
-            }
-            updateFullscreenGallery();
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.moveTo(0, -this.size / 2);
+            ctx.bezierCurveTo( this.size / 3, -this.size / 2,  this.size / 2, this.size / 4,  0, this.size / 2);
+            ctx.bezierCurveTo(-this.size / 2,  this.size / 4, -this.size / 3, -this.size / 2, 0, -this.size / 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
         }
-        
-        galleryClose.addEventListener('click', closeFullscreenGallery);
-        galleryPrev.addEventListener('click', () => navigateGallery(-1));
-        galleryNext.addEventListener('click', () => navigateGallery(1));
-        
-        document.addEventListener('keydown', (e) => {
-            if (fullscreenGallery.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    closeFullscreenGallery();
-                } else if (e.key === 'ArrowLeft') {
-                    navigateGallery(-1);
-                } else if (e.key === 'ArrowRight') {
-                    navigateGallery(1);
-                }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    (function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animateParticles);
+    })();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+
+    const mobileMenuBtn   = document.getElementById('mobileMenuBtn');
+    const mobileMenu      = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const overlayEl       = document.getElementById('overlay');
+
+    function openMobileMenu()  { mobileMenu.classList.add('active');    overlayEl.classList.add('active');    document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { mobileMenu.classList.remove('active'); overlayEl.classList.remove('active'); document.body.style.overflow = 'auto';   }
+
+    mobileMenuBtn.addEventListener('click',   openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    overlayEl.addEventListener('click',       closeMobileMenu);
+
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const id = this.getAttribute('href');
+            if (id === '#') return;
+            const target = document.querySelector(id);
+            if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        });
+    });
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+   
+    const fullscreenGallery = document.getElementById('fullscreenGallery');
+    const galleryClose      = document.getElementById('galleryClose');
+    const galleryPrev       = document.getElementById('galleryPrev');
+    const galleryNext       = document.getElementById('galleryNext');
+    const galleryMainImage  = document.getElementById('galleryMainImage');
+    const galleryThumbnails = document.getElementById('galleryThumbnails');
+    const galleryInfo       = document.getElementById('galleryInfo');
+
+    const storeProducts = [
+        { title: "مرآة الفنانين",              price: "2500 ﷼", description: "100 × 60 — عمل فني على مراية يجمع ملامح وجوه فنية خالدة بالابيض والاسود",                images: ["img/store1.jpg"] },
+        { title: "لا أرى ، لا اسمع ، لا اتكلم", price: "650 ﷼",  description: "100 × 70 — عمل فني رمزي يجسد الصمت الجمعي امام الحقيقة",                                  images: ["img/store2.jpg"] },
+        { title: "الايدي والخيوط الحمراء",       price: "1500 ﷼", description: "اربع قطع اللوحة الواحدة 40 × 40 — عمل فني من اربع لوحات تتشابك بينها الخيوط الحمراء",   images: ["img/store3.jpg", "img/store3-1.jpg"] },
+        { title: "فيودور دوستويفسكي",             price: "450 ﷼",  description: "60 x 40 — بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي",                               images: ["img/store4.jpg", "img/store4-1.jpg"] },
+    ];
+
+    // Gallery
+    const galleryItems = Array.from({ length: 15 }, (_, i) => ({
+        title: "shahed",
+        description: "shahed",
+        images: [`img/art${i + 1}.png`]
+    }));
+
+    let currentGalleryIndex = 0;
+    let currentImages       = [];
+    let isStoreGallery      = false;
+
+    function openFullscreenStore(index) {
+        isStoreGallery      = true;
+        currentGalleryIndex = index;
+        currentImages       = storeProducts[index].images;
+        updateFullscreenGallery();
+        fullscreenGallery.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function openFullscreenGallery(index) {
+        isStoreGallery      = false;
+        currentGalleryIndex = index;
+        currentImages       = galleryItems[index].images;
+        updateFullscreenGallery();
+        fullscreenGallery.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateFullscreenGallery() {
+        galleryMainImage.src = currentImages[0];
+
+        galleryThumbnails.innerHTML = '';
+        galleryThumbnails.style.display = currentImages.length <= 1 ? 'none' : 'flex';
+
+        currentImages.forEach((image, i) => {
+            const thumb = document.createElement('img');
+            thumb.src       = image;
+            thumb.className = 'gallery-thumbnail' + (i === 0 ? ' active' : '');
+            thumb.addEventListener('click', () => {
+                galleryMainImage.src = image;
+                document.querySelectorAll('.gallery-thumbnail').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+            });
+            galleryThumbnails.appendChild(thumb);
+        });
+
+        if (isStoreGallery) {
+            const p = storeProducts[currentGalleryIndex];
+            galleryInfo.innerHTML = `
+                <h3 class="gallery-product-title">${p.title}</h3>
+                <p class="gallery-product-price">${p.price}</p>
+                <p class="gallery-product-description">${p.description}</p>
+                <a href="https://www.instagram.com/s.hahed_alasfar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="store-btn">Order via Instagram</a>
+            `;
+        } else {
+            const item = galleryItems[currentGalleryIndex];
+            galleryInfo.innerHTML = `
+                <h3 class="gallery-product-title">${item.title}</h3>
+                <p class="gallery-product-description">${item.description}</p>
+            `;
+        }
+    }
+
+    function closeFullscreenGallery() {
+        fullscreenGallery.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function navigateGallery(direction) {
+        const arr = isStoreGallery ? storeProducts : galleryItems;
+        currentGalleryIndex = (currentGalleryIndex + direction + arr.length) % arr.length;
+        currentImages = arr[currentGalleryIndex].images;
+        updateFullscreenGallery();
+    }
+
+    galleryClose.addEventListener('click', closeFullscreenGallery);
+    galleryPrev.addEventListener('click',  () => navigateGallery(-1));
+    galleryNext.addEventListener('click',  () => navigateGallery(1));
+
+    document.addEventListener('keydown', (e) => {
+        if (!fullscreenGallery.classList.contains('active')) return;
+        if (e.key === 'Escape')      closeFullscreenGallery();
+        if (e.key === 'ArrowLeft')   navigateGallery(-1);
+        if (e.key === 'ArrowRight')  navigateGallery(1);
+    });
     </script>
 </body>
 </html>
