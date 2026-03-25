@@ -275,7 +275,7 @@
                     </div>
                 </div>
                 <div class="painting-label">shahed</div>
-
+            </div>
 
                         <div class="gallery-item fade-in" onclick="openFullscreenGallery(14)">
                 <div class="painting-frame">
@@ -286,8 +286,9 @@
                     </div>
                 </div>
                 <div class="painting-label">shahed</div>
+            </div>
 
-                <div class="gallery-item fade-in" onclick="openFullscreenGallery(14)">
+                <div class="gallery-item fade-in" onclick="openFullscreenGallery(15)">
                 <div class="painting-frame">
                     <div class="frame-outer">
                         <div class="frame-mat">
@@ -296,7 +297,7 @@
                     </div>
                 </div>
                 <div class="painting-label">shahed</div>
-
+                </div>
         </div>
     </section>
 
@@ -1410,11 +1411,17 @@
     ];
 
     // Gallery
-    const galleryItems = Array.from({ length: 16 }, (_, i) => ({
+   const galleryItems = Array.from({ length: 16 }, (_, i) => {
+    const description = (i === 15) 
+        ? "Art16: عمل فني رسمي يجسد الصمت الجمعي أمام الحقيقة" 
+        : "shahed";
+
+    return {
         title: "shahed",
-        description: "",
+        description: description,
         images: [`img/art${i + 1}.png`]
-    }));
+    };
+});
 
     let currentGalleryIndex = 0;
     let currentImages       = [];
