@@ -1,13 +1,9 @@
-/* ============================================================
-   CANVAS — light, adaptive, pauseable
-   ============================================================ */
 (function () {
     'use strict';
 
     const canvas = document.getElementById('bgCanvas');
     if (!canvas) return;
 
-    // Respect reduced motion
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) { canvas.style.display = 'none'; return; }
 
@@ -20,11 +16,9 @@
     const TARGET_FPS = 30;
     const FRAME_MS   = 1000 / TARGET_FPS;
 
-    // Adaptive particle count
     function computeParticles() {
         const area = window.innerWidth * window.innerHeight;
-        const base = Math.min(28, Math.max(10, Math.round(area / 55000)));
-        return base;
+        return Math.min(28, Math.max(10, Math.round(area / 55000)));
     }
 
     let PARTICLE_COUNT = computeParticles();
@@ -39,7 +33,6 @@
         canvas.style.height = H + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         PARTICLE_COUNT = computeParticles();
-        // rebuild particles if too few/many
         while (particles.length < PARTICLE_COUNT) particles.push(new Particle());
         particles.length = PARTICLE_COUNT;
     }
@@ -55,7 +48,7 @@
             this.alpha  = 0.02 + Math.random() * 0.05;
             this.angle  = Math.random() * Math.PI * 2;
             this.spin   = (Math.random() - 0.5) * 0.012;
-            this.hue    = 40 + Math.random() * 15; // warm gold tones
+            this.hue    = 40 + Math.random() * 15;
         }
         update(dt) {
             const k = dt / FRAME_MS;
@@ -91,7 +84,7 @@
         raf = requestAnimationFrame(loop);
         if (paused) return;
         const dt = now - last;
-        if (dt < FRAME_MS) return;   // throttle
+        if (dt < FRAME_MS) return;
         last = now;
         ctx.clearRect(0, 0, W, H);
         for (let i = 0; i < particles.length; i++) {
@@ -103,13 +96,11 @@
     function start() { if (raf === null) { last = performance.now(); raf = requestAnimationFrame(loop); } }
     function stop()  { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
 
-    // Pause when tab hidden or off-screen
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) { paused = true; stop(); }
         else { paused = false; start(); }
     });
 
-    // Debounced resize
     let rt;
     window.addEventListener('resize', () => {
         clearTimeout(rt);
