@@ -2,21 +2,45 @@
 <html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#1e1c19">
+    <meta name="color-scheme" content="dark">
+
     <title>Shahed Alasfar — Portrait Artist</title>
     <meta name="description" content="Shahed Alasfar — Jordanian portrait artist. A collection of emotional and timeless artwork.">
+    <meta name="author" content="Shahed Alasfar">
 
+    <!-- Open Graph -->
     <meta property="og:title" content="Shahed Alasfar — Portrait Artist">
     <meta property="og:description" content="A collection of emotional and timeless artwork.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="img/sign.png">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shahed Alasfar — Portrait Artist">
+    <meta name="twitter:description" content="A collection of emotional and timeless artwork.">
+
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome — jsDelivr (works on Edge, Safari, Chrome) -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon (optional — adds icon in browser tab) -->
+    <link rel="icon" type="image/png" href="img/sign.png">
 </head>
 <body>
 
@@ -31,8 +55,10 @@
         </div>
     </div>
 
+    <!-- BACKGROUND -->
     <canvas class="background-canvas" id="bgCanvas" aria-hidden="true"></canvas>
 
+    <!-- HEADER -->
     <header id="header">
         <div class="logo" onclick="scrollToTop()">Shahed Alasfar</div>
         <div class="nav-container">
@@ -45,21 +71,22 @@
             </nav>
             <div class="social-header">
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
                 </a>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
-                <i class="fas fa-bars"></i>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" type="button">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
 
+    <!-- MOBILE MENU -->
     <div class="overlay" id="overlay"></div>
     <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-header">
             <div class="logo">Shahed Alasfar</div>
-            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
-                <i class="fas fa-times"></i>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" type="button">
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -71,7 +98,7 @@
         </nav>
         <div class="mobile-social">
             <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
+                <i class="fab fa-instagram" aria-hidden="true"></i>
             </a>
         </div>
     </aside>
@@ -81,14 +108,22 @@
         <h1 class="landing-title floating">Shahed Alasfar</h1>
         <p class="landing-subtitle fade-in">Professional Artist &amp; Portrait Specialist</p>
         <div class="cta-buttons fade-in">
-            <a href="#gallery" class="btn btn-primary"><i class="fas fa-palette"></i> View Gallery</a>
-            <a href="#special" class="btn btn-secondary"><i class="fas fa-star"></i> Special Collection</a>
-            <a href="#store" class="btn btn-secondary"><i class="fas fa-shopping-bag"></i> Visit Store</a>
+            <a href="#gallery" class="btn btn-primary">
+                <i class="fas fa-palette" aria-hidden="true"></i> View Gallery
+            </a>
+            <a href="#special" class="btn btn-secondary">
+                <i class="fas fa-star" aria-hidden="true"></i> Special Collection
+            </a>
+            <a href="#store" class="btn btn-secondary">
+                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Visit Store
+            </a>
         </div>
         <div class="social-cards">
             <div class="social-card fade-in">
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="social-card-link">
-                    <div class="social-icon instagram-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="social-icon instagram-icon">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </div>
                     <div class="social-name">Instagram</div>
                 </a>
             </div>
@@ -98,7 +133,7 @@
     <!-- ABOUT -->
     <section id="about">
         <div class="about-signature-wrap fade-in">
-            <img src="img/sign.png" alt="Artist Signature" class="about-signature-img" loading="lazy">
+            <img src="img/sign.png" alt="Artist Signature" class="about-signature-img" loading="lazy" decoding="async">
             <div class="about-signature-divider"></div>
         </div>
         <div class="about-content">
@@ -129,19 +164,27 @@
     <section id="store">
         <h2 class="section-title">Art Store</h2>
         <div class="store-notice fade-in">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
             <h3>Order via Instagram DM</h3>
             <p>To purchase any artwork, please send a direct message on Instagram with the product name and your contact details.</p>
-            <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="btn btn-primary">Message on Instagram</a>
+            <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="btn btn-primary">
+                Message on Instagram
+            </a>
         </div>
         <div class="store-grid" id="storeGrid"></div>
     </section>
 
     <!-- LIGHTBOX -->
     <div class="fullscreen-gallery" id="fullscreenGallery" role="dialog" aria-modal="true" aria-hidden="true">
-        <button class="gallery-close" id="galleryClose" aria-label="Close"><i class="fas fa-times"></i></button>
-        <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
-        <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <button class="gallery-close" id="galleryClose" aria-label="Close" type="button">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous" type="button">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next" type="button">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
         <img class="gallery-main-image" id="galleryMainImage" src="" alt="">
         <div class="gallery-thumbnails" id="galleryThumbnails"></div>
         <div class="gallery-info" id="galleryInfo"></div>
@@ -162,11 +205,12 @@
             <div class="developer-credit">
                 Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank" rel="noopener">Yousef Alahmr</a>
             </div>
-            <div class="footer-version">Version v2.3.1</div>
+            <div class="footer-version">Version v2.3.2</div>
             <div class="copyright">© 2026 Shahed Alasfar. All rights reserved.</div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="js/canvas.js" defer></script>
     <script src="js/tilt.js" defer></script>
     <script src="js/main.js" defer></script>
