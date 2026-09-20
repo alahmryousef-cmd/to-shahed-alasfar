@@ -1,7 +1,3 @@
-/* ============================================================
-   SHAHED ALASFAR — STYLE v2.1 (Interactive 3D Frames)
-   ============================================================ */
-
 :root {
     --gold:        #b89446;
     --dark-gold:   #8a6d2f;
@@ -10,7 +6,6 @@
     --off-white:   #f5f5f5;
     --wall-color:  #1e1c19;
 
-    /* Frame wood palette — richer, more layers */
     --wood-dark:   #2b1d13;
     --wood-mid:    #4a3322;
     --wood-light:  #6b4a30;
@@ -26,10 +21,7 @@
     --header-height: 72px;
 }
 
-*,
-*::before,
-*::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
@@ -42,7 +34,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
-
 body.no-scroll { overflow: hidden; }
 img { max-width: 100%; display: block; }
 button { font: inherit; cursor: pointer; }
@@ -59,8 +50,7 @@ button { font: inherit; cursor: pointer; }
 .background-canvas {
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     z-index: -1;
     opacity: 0.14;
     pointer-events: none;
@@ -83,7 +73,6 @@ button { font: inherit; cursor: pointer; }
     transition: opacity 1s ease;
     will-change: opacity;
 }
-
 #introScreen.fade-out { opacity: 0; pointer-events: none; }
 #introScreen.hidden   { display: none; }
 
@@ -95,7 +84,6 @@ button { font: inherit; cursor: pointer; }
     text-align: center;
     padding: 1rem;
 }
-
 .intro-name {
     font-family: 'Great Vibes', cursive;
     font-size: clamp(3rem, 9vw, 6rem);
@@ -120,7 +108,6 @@ button { font: inherit; cursor: pointer; }
     object-fit: contain;
     filter: brightness(0.9) sepia(0.3);
 }
-
 .intro-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -401,7 +388,7 @@ section {
 .about-text p:last-child { margin-bottom: 0; }
 
 /* ============================================================
-   GALLERY — ULTRA-INTERACTIVE 3D FRAMES
+   GALLERY — 3D FRAMES
    ============================================================ */
 #gallery { max-width: 1400px; margin: 0 auto; width: 100%; }
 
@@ -422,25 +409,9 @@ section {
     transform-style: preserve-3d;
 }
 
-/* ============================================================
-   THE 3D PAINTING FRAME
-   Layers:
-     1. .painting-frame       — outer wrapper (tilt + magnet + glow)
-     2. .frame-shadow         — soft drop shadow beneath
-     3. .frame-outer          — wooden outer
-        - .frame-edge (top/right/bottom/left)  — 3D wooden bevels
-        - .frame-inner-mat    — inner gold line
-        - .frame-mat          — cream mat
-          - .frame-mat-line   — subtle inner line
-          - <img>             — the artwork (parallax)
-     4. .frame-glow           — hover glow under the frame
-     5. .frame-shine          — light sweep that follows mouse
-   ============================================================ */
-
 .painting-frame {
     position: relative;
     width: 100%;
-    /* CSS vars set by JS: --rx, --ry, --mx, --my, --tx, --ty, --scale */
     transform:
         perspective(1100px)
         rotateX(var(--rx, 0deg))
@@ -450,14 +421,12 @@ section {
     transform-style: preserve-3d;
     transition: transform 0.18s ease-out, filter 0.35s ease;
     will-change: transform;
-    /* Multi-layer realistic shadow */
     filter:
         drop-shadow(0 25px 45px rgba(0,0,0,0.75))
         drop-shadow(0 8px 18px rgba(0,0,0,0.55));
     isolation: isolate;
 }
 
-/* Hover / active state — lift & stronger shadow */
 .gallery-item:hover .painting-frame,
 .painting-frame.is-active {
     filter:
@@ -466,18 +435,15 @@ section {
         drop-shadow(0 0 40px rgba(184,148,70,0.25));
 }
 
-/* ---------- Wooden outer frame ---------- */
 .frame-outer {
     position: relative;
     padding: 15px;
     background:
-        /* highlight reflection across the wood */
         linear-gradient(135deg,
             rgba(201,160,88,0.55) 0%,
             rgba(143,104,66,0.35) 22%,
             rgba(43,29,19,0)     50%,
             rgba(0,0,0,0.4)      100%),
-        /* vertical wood grain */
         linear-gradient(180deg,
             var(--wood-light) 0%,
             var(--wood-mid)   35%,
@@ -492,7 +458,6 @@ section {
     border-radius: 3px;
 }
 
-/* ---- Wooden beveled edges (each side as 3D surface) ---- */
 .frame-edge {
     position: absolute;
     background: linear-gradient(90deg, var(--wood-light), var(--wood-dark));
@@ -538,13 +503,11 @@ section {
     border-radius: 0 3px 3px 0;
 }
 
-/* Edges respond to tilt direction — brighter on side facing light */
 .gallery-item:hover .frame-edge--top    { box-shadow: inset 0 3px 5px rgba(255,220,140,0.6), inset 0 -2px 4px rgba(0,0,0,0.5); }
 .gallery-item:hover .frame-edge--left   { box-shadow: inset 3px 0 5px rgba(255,220,140,0.55), inset -2px 0 4px rgba(0,0,0,0.4); }
 .gallery-item:hover .frame-edge--right  { box-shadow: inset -3px 0 5px rgba(255,220,140,0.55), inset 2px 0 4px rgba(0,0,0,0.4); }
 .gallery-item:hover .frame-edge--bottom { box-shadow: inset 0 -3px 5px rgba(0,0,0,0.8), inset 0 2px 3px rgba(0,0,0,0.3); }
 
-/* ---- Inner gold line (decorative divider between wood and mat) ---- */
 .frame-inner-mat {
     position: absolute;
     inset: 15px;
@@ -556,7 +519,6 @@ section {
     border-radius: 1px;
 }
 
-/* ---- Cream mat (inner bevel) ---- */
 .frame-mat {
     position: relative;
     padding: 10px;
@@ -579,7 +541,6 @@ section {
     border-radius: 1px;
 }
 
-/* ---- The artwork image ---- */
 .gallery-img {
     display: block;
     width: 100%;
@@ -587,7 +548,6 @@ section {
     object-fit: cover;
     transition: filter 0.5s ease;
     filter: brightness(0.96) contrast(1.03);
-    /* 3D parallax: image shifts slightly opposite to tilt */
     transform: translate3d(
         calc(var(--ry, 0deg) * -0.5),
         calc(var(--rx, 0deg) *  0.5),
@@ -595,12 +555,10 @@ section {
     ) scale(1.08);
     will-change: transform;
 }
-
 .gallery-item:hover .gallery-img {
     filter: brightness(1.05) contrast(1.06) saturate(1.08);
 }
 
-/* ---- Glow under frame on hover ---- */
 .frame-glow {
     position: absolute;
     inset: -20px;
@@ -620,7 +578,6 @@ section {
 .gallery-item:hover .frame-glow,
 .painting-frame.is-active .frame-glow { opacity: 1; }
 
-/* ---- Light shine following cursor ---- */
 .frame-shine {
     position: absolute;
     inset: 0;
@@ -640,7 +597,6 @@ section {
 .gallery-item:hover .frame-shine,
 .painting-frame.is-active .frame-shine { opacity: 1; }
 
-/* ---- Corner sparkle (subtle) ---- */
 .frame-sparkle {
     position: absolute;
     width: 6px;
@@ -660,7 +616,6 @@ section {
 .gallery-item:hover .frame-sparkle,
 .painting-frame.is-active .frame-sparkle { opacity: 0.9; }
 
-/* ---- Label ---- */
 .painting-label {
     margin-top: 1.2rem;
     font-family: 'Cormorant Garamond', serif;
@@ -677,7 +632,288 @@ section {
 }
 
 /* ============================================================
-   STORE
+   SPECIAL COLLECTION
+   ============================================================ */
+#special { max-width: 1400px; margin: 0 auto; width: 100%; }
+
+.special-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: rgba(245,245,245,0.7);
+    text-align: center;
+    max-width: 620px;
+    margin: -1.5rem auto 3.5rem;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+}
+
+.special-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 4rem 2.5rem;
+    width: 100%;
+    padding: 1rem 0 2rem;
+    perspective: 1400px;
+}
+
+.special-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.special-frame {
+    position: relative;
+    width: 100%;
+    transform:
+        perspective(1100px)
+        rotateX(var(--rx, 0deg))
+        rotateY(var(--ry, 0deg))
+        translate3d(var(--tx, 0px), var(--ty, 0px), 0)
+        scale(var(--scale, 1));
+    transform-style: preserve-3d;
+    transition: transform 0.18s ease-out, filter 0.35s ease;
+    will-change: transform;
+    filter:
+        drop-shadow(0 25px 45px rgba(0,0,0,0.75))
+        drop-shadow(0 8px 18px rgba(0,0,0,0.55))
+        drop-shadow(0 0 25px rgba(184,148,70,0.15));
+    isolation: isolate;
+}
+.special-item:hover .special-frame,
+.special-frame.is-active {
+    filter:
+        drop-shadow(0 40px 70px rgba(0,0,0,0.85))
+        drop-shadow(0 15px 28px rgba(0,0,0,0.6))
+        drop-shadow(0 0 60px rgba(212,175,55,0.5));
+}
+
+.special-outer {
+    position: relative;
+    padding: 16px;
+    background:
+        linear-gradient(135deg,
+            rgba(255,230,160,0.85) 0%,
+            rgba(212,175,55,0.6)   18%,
+            rgba(138,109,47,0.4)   40%,
+            rgba(60,40,10,0.5)     65%,
+            rgba(184,148,70,0.5)   85%,
+            rgba(255,230,160,0.7)  100%),
+        linear-gradient(180deg,
+            #d4af37 0%,
+            #b89446 30%,
+            #8a6d2f 60%,
+            #b89446 100%);
+    box-shadow:
+        inset 0  3px  6px rgba(255,240,180,0.55),
+        inset  3px 0  6px rgba(255,240,180,0.35),
+        inset  0 -3px  6px rgba(0,0,0,0.55),
+        inset -3px 0  6px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,235,180,0.4);
+    transform-style: preserve-3d;
+    border-radius: 4px;
+}
+
+.special-edge {
+    position: absolute;
+    pointer-events: none;
+    transition: box-shadow 0.35s ease;
+    will-change: box-shadow;
+}
+
+.special-edge--top {
+    top: 0; left: 0; right: 0;
+    height: 16px;
+    background: linear-gradient(180deg, #f5d97a 0%, #d4af37 30%, #b89446 70%, #8a6d2f 100%);
+    box-shadow:
+        inset 0  2px 3px rgba(255,250,220,0.9),
+        inset 0 -2px 4px rgba(60,40,10,0.7);
+    border-radius: 4px 4px 0 0;
+}
+.special-edge--bottom {
+    bottom: 0; left: 0; right: 0;
+    height: 16px;
+    background: linear-gradient(0deg, #8a6d2f 0%, #6b5020 50%, #b89446 100%);
+    box-shadow:
+        inset 0 -2px 4px rgba(0,0,0,0.8),
+        inset 0  2px 3px rgba(0,0,0,0.4);
+    border-radius: 0 0 4px 4px;
+}
+.special-edge--left {
+    top: 0; bottom: 0; left: 0;
+    width: 16px;
+    background: linear-gradient(90deg, #f5d97a 0%, #d4af37 25%, #b89446 70%, #8a6d2f 100%);
+    box-shadow:
+        inset  2px 0 3px rgba(255,250,220,0.8),
+        inset -2px 0 4px rgba(60,40,10,0.6);
+    border-radius: 4px 0 0 4px;
+}
+.special-edge--right {
+    top: 0; bottom: 0; right: 0;
+    width: 16px;
+    background: linear-gradient(270deg, #f5d97a 0%, #d4af37 25%, #b89446 70%, #8a6d2f 100%);
+    box-shadow:
+        inset -2px 0 3px rgba(255,250,220,0.8),
+        inset  2px 0 4px rgba(60,40,10,0.6);
+    border-radius: 0 4px 4px 0;
+}
+
+.special-item:hover .special-edge--top    { box-shadow: inset 0  3px 5px rgba(255,250,220,1), inset 0 -2px 4px rgba(60,40,10,0.7); }
+.special-item:hover .special-edge--left   { box-shadow: inset  3px 0 5px rgba(255,250,220,0.95), inset -2px 0 4px rgba(60,40,10,0.6); }
+.special-item:hover .special-edge--right  { box-shadow: inset -3px 0 5px rgba(255,250,220,0.95), inset  2px 0 4px rgba(60,40,10,0.6); }
+.special-item:hover .special-edge--bottom { box-shadow: inset 0 -3px 5px rgba(0,0,0,0.9), inset 0  2px 3px rgba(0,0,0,0.4); }
+
+.special-mat {
+    position: relative;
+    padding: 10px;
+    background:
+        linear-gradient(135deg, #fdf8e8 0%, #f0ead8 40%, #e6dcc0 100%);
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.2),
+        inset 0  2px 3px rgba(255,255,255,0.7),
+        inset 0 -2px 3px rgba(0,0,0,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.special-mat-line {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(184,148,70,0.5);
+    pointer-events: none;
+    border-radius: 1px;
+}
+
+.special-img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: filter 0.5s ease;
+    filter: brightness(0.96) contrast(1.04);
+    transform: translate3d(
+        calc(var(--ry, 0deg) * -0.5),
+        calc(var(--rx, 0deg) *  0.5),
+        0
+    ) scale(1.08);
+    will-change: transform;
+}
+.special-item:hover .special-img {
+    filter: brightness(1.06) contrast(1.08) saturate(1.1);
+}
+
+.special-glow {
+    position: absolute;
+    inset: -25px;
+    border-radius: 24px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(212,175,55,0.45) 0%,
+        rgba(212,175,55,0.15) 40%,
+        transparent 70%
+    );
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(18px);
+}
+.special-item:hover .special-glow,
+.special-frame.is-active .special-glow { opacity: 1; }
+
+.special-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    background: radial-gradient(
+        340px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 245, 200, 0.35),
+        rgba(255, 225, 150, 0.12) 30%,
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: overlay;
+}
+.special-item:hover .special-shine,
+.special-frame.is-active .special-shine { opacity: 1; }
+
+.special-sparkle {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,245,200,1) 0%, rgba(255,220,140,0.6) 40%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 11;
+    box-shadow: 0 0 8px rgba(255,235,180,0.9);
+}
+.special-sparkle--tl { top: 8px; left: 8px; }
+.special-sparkle--tr { top: 8px; right: 8px; }
+.special-sparkle--bl { bottom: 8px; left: 8px; }
+.special-sparkle--br { bottom: 8px; right: 8px; }
+
+.special-item:hover .special-sparkle,
+.special-frame.is-active .special-sparkle { opacity: 1; }
+
+.special-badge {
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    z-index: 15;
+    padding: 0.35rem 0.85rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #b89446 100%);
+    border-radius: 3px;
+    box-shadow:
+        0 4px 12px rgba(212,175,55,0.55),
+        inset 0 1px 1px rgba(255,250,220,0.8),
+        inset 0 -1px 1px rgba(0,0,0,0.2);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.special-item:hover .special-badge {
+    transform: rotate(-3deg) scale(1.05);
+    box-shadow:
+        0 6px 18px rgba(212,175,55,0.75),
+        inset 0 1px 2px rgba(255,250,220,0.9),
+        inset 0 -1px 1px rgba(0,0,0,0.2);
+}
+.special-badge i {
+    margin-right: 0.3rem;
+    font-size: 0.65rem;
+}
+
+.special-label {
+    margin-top: 1.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(245,245,245,0.6);
+    letter-spacing: 0.1em;
+    text-align: center;
+    transition: color var(--transition-fast), letter-spacing var(--transition-fast);
+}
+.special-item:hover .special-label {
+    color: var(--gold);
+    letter-spacing: 0.2em;
+}
+
+/* ============================================================
+   STORE — v2.3.1 (Cairo font + price direction fix)
    ============================================================ */
 #store { max-width: 1400px; margin: 0 auto; width: 100%; }
 
@@ -702,52 +938,258 @@ section {
 .store-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 2.5rem 2rem;
     width: 100%;
 }
+
 .store-item {
-    background: rgba(26,26,26,0.7);
-    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(30,28,25,0.95), rgba(20,18,15,0.98));
+    border-radius: 14px;
     overflow: hidden;
     border: 1px solid rgba(184,148,70,0.2);
     transition: var(--transition);
     cursor: pointer;
     will-change: transform;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
+
+.store-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(212,175,55,0.12), transparent 40%);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
 .store-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--gold);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,0.5),
+        0 0 30px rgba(184,148,70,0.25);
 }
-.store-images { position: relative; height: 250px; overflow: hidden; }
-.store-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-.store-item:hover .store-img { transform: scale(1.05); }
+
+.store-item:hover::after { opacity: 1; }
+
+.store-images {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #0f0d0b;
+}
+
+.store-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.store-item:hover .store-img { transform: scale(1.08); }
+
+.store-region-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    transition: transform var(--transition);
+}
+
+.store-region-badge i { font-size: 0.7rem; }
+
+.store-region-badge--sa {
+    background: rgba(0, 122, 61, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.store-region-badge--jo {
+    background: rgba(206, 17, 38, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.store-item:hover .store-region-badge { transform: translateY(-2px); }
+
 .store-overlay {
     position: absolute;
     inset: auto 0 0 0;
-    background: linear-gradient(to top, rgba(26,26,26,0.9), transparent);
-    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6) 60%, transparent);
+    padding: 2rem 1rem 1rem;
     transform: translateY(100%);
     transition: transform var(--transition);
+    z-index: 2;
 }
+
 .store-item:hover .store-overlay { transform: translateY(0); }
-.store-info { padding: 1.5rem; }
-.store-title { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
-.store-price { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
+
+.store-overlay p {
+    color: var(--gold);
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0;
+}
+
+.store-info {
+    padding: 1.5rem 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+}
+
+.store-info-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.store-title {
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--off-white);
+    line-height: 1.4;
+    margin: 0;
+    letter-spacing: 0;
+    transition: color var(--transition-fast);
+}
+
+.store-item:hover .store-title { color: var(--gold); }
+
+.store-size-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(245,245,245,0.9);
+    background: rgba(184,148,70,0.15);
+    border: 1px solid rgba(184,148,70,0.4);
+    border-radius: 20px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+.store-price {
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    direction: ltr;
+    unicode-bidi: isolate;
+    letter-spacing: 0.01em;
+}
+
+.store-price i {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    color: var(--gold);
+}
+
+.store-price .price-value {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}
+
+.store-price .price-currency {
+    font-size: 0.95rem;
+    font-weight: 700;
+    opacity: 0.95;
+    margin-left: 0.15rem;
+}
+
+.store-description {
+    font-family: 'Cairo', 'Tajawal', 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(245,245,245,0.78);
+    margin: 0;
+    flex: 1;
+    letter-spacing: 0;
+}
+
+.store-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(184,148,70,0.08);
+    border: 1px solid rgba(184,148,70,0.35);
+    border-radius: 8px;
+    transition: var(--transition);
+    letter-spacing: 0.02em;
+}
+
+.store-item:hover .store-cta {
+    background: var(--gold);
+    color: var(--matte-black);
+    border-color: var(--gold);
+}
+
+.store-cta i { font-size: 1rem; }
+
 .store-btn {
     display: block;
     width: 100%;
-    padding: 0.8rem;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
     background: var(--gold);
     color: var(--matte-black);
     border: none;
-    border-radius: 5px;
-    font-weight: 600;
+    border-radius: 50px;
     transition: var(--transition);
     text-align: center;
     text-decoration: none;
+    letter-spacing: 0.02em;
 }
-.store-btn:hover { background: var(--dark-gold); transform: translateY(-3px); }
+.store-btn:hover {
+    background: var(--dark-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(184,148,70,0.35);
+}
 
 /* ============================================================
    LIGHTBOX
@@ -841,9 +1283,98 @@ section {
     max-width: 600px;
     color: var(--off-white);
 }
-.gallery-product-title { font-size: 1.6rem; color: var(--gold); margin-bottom: 0.5rem; }
-.gallery-product-price { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; }
-.gallery-product-description { margin-bottom: 1.2rem; opacity: 0.9; }
+
+.gallery-product-title {
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0;
+}
+
+.gallery-product-price {
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    direction: ltr;
+    unicode-bidi: isolate;
+    letter-spacing: 0.01em;
+}
+
+.gallery-product-price i {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.gallery-product-price .price-value {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}
+
+.gallery-product-price .price-currency {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 0.15rem;
+}
+
+.gallery-product-description {
+    font-family: 'Cairo', 'Tajawal', 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(245,245,245,0.9);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0;
+}
+
+.gallery-product-meta {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 0.85rem 0 1rem;
+}
+
+.gallery-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    font-family: 'Cairo', 'Tajawal', 'Playfair Display', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-radius: 20px;
+    letter-spacing: 0;
+}
+
+.gallery-meta-badge i { font-size: 0.78rem; }
+
+.gallery-meta-badge--size {
+    background: rgba(184,148,70,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(184,148,70,0.4);
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+.gallery-meta-badge--sa {
+    background: rgba(0, 122, 61, 0.18);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+.gallery-meta-badge--jo {
+    background: rgba(206, 17, 38, 0.18);
+    color: #fb7185;
+    border: 1px solid rgba(251, 113, 133, 0.4);
+}
 
 /* ============================================================
    FOOTER
@@ -972,7 +1503,8 @@ footer {
     .nav-links, .social-header { display: none; }
     .mobile-menu-btn { display: block; }
     .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 3rem 1.5rem; }
-    .store-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+    .store-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .special-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 3rem 1.5rem; }
     section { padding-left: 1rem; padding-right: 1rem; }
     header { padding: 0 1.2rem; }
 }
@@ -991,16 +1523,25 @@ footer {
     .fullscreen-gallery { padding: 1rem; }
     .gallery-main-image { max-height: 62vh; }
 
-    /* Reduce frame padding on small screens */
     .frame-outer { padding: 10px; }
-    .frame-edge { display: none; }        /* hide bevels on small screens for perf */
+    .frame-edge { display: none; }
     .frame-inner-mat { inset: 10px; }
     .frame-mat { padding: 7px; }
+
+    .special-outer { padding: 10px; }
+    .special-edge  { display: none; }
+    .special-mat   { padding: 7px; }
+    .special-img   { height: 190px; }
+    .special-badge { font-size: 0.6rem; padding: 0.25rem 0.6rem; top: -8px; right: -6px; }
+
+    .store-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .store-info { padding: 1.25rem 1.25rem 1.5rem; }
+    .store-title { font-size: 1.15rem; }
+    .store-price { font-size: 1.15rem; }
+    .store-region-badge { font-size: 0.7rem; padding: 0.35rem 0.7rem; top: 10px; left: 10px; }
 }
 
-/* ============================================================
-   ACCESSIBILITY
-   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1011,4 +1552,5 @@ footer {
     .floating { animation: none; }
     .background-canvas { display: none; }
     .painting-frame { transform: none !important; }
+    .special-frame { transform: none !important; }
 }
