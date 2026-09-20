@@ -13,13 +13,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <!-- INTRO -->
     <div id="introScreen" aria-hidden="true">
         <div class="intro-inner">
             <div class="intro-name" id="introName">Shahed Alasfar</div>
@@ -39,6 +40,7 @@
                 <a href="#landing">Home</a>
                 <a href="#about">About</a>
                 <a href="#gallery">Gallery</a>
+                <a href="#special">Special</a>
                 <a href="#store">Store</a>
             </nav>
             <div class="social-header">
@@ -64,6 +66,7 @@
             <a href="#landing">Home</a>
             <a href="#about">About</a>
             <a href="#gallery">Gallery</a>
+            <a href="#special">Special</a>
             <a href="#store">Store</a>
         </nav>
         <div class="mobile-social">
@@ -73,12 +76,13 @@
         </div>
     </aside>
 
+    <!-- LANDING -->
     <section id="landing">
         <h1 class="landing-title floating">Shahed Alasfar</h1>
         <p class="landing-subtitle fade-in">Professional Artist &amp; Portrait Specialist</p>
         <div class="cta-buttons fade-in">
             <a href="#gallery" class="btn btn-primary"><i class="fas fa-palette"></i> View Gallery</a>
-            <a href="#store" class="btn btn-secondary"><i class="fas fa-shopping-bag"></i> Visit Store</a>
+            <a href="#special" class="btn btn-secondary"><i class="fas fa-star"></i> Special Collection</a>
         </div>
         <div class="social-cards">
             <div class="social-card fade-in">
@@ -90,6 +94,7 @@
         </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
         <div class="about-signature-wrap fade-in">
             <img src="img/sign.png" alt="Artist Signature" class="about-signature-img" loading="lazy">
@@ -104,11 +109,22 @@
         </div>
     </section>
 
+    <!-- GALLERY -->
     <section id="gallery">
         <h2 class="section-title">Art Gallery</h2>
         <div class="gallery-grid" id="galleryGrid"></div>
     </section>
 
+    <!-- SPECIAL -->
+    <section id="special">
+        <h2 class="section-title">Special Collection</h2>
+        <p class="special-subtitle fade-in">
+            A curated selection of signature pieces — where emotion meets masterpiece.
+        </p>
+        <div class="special-grid" id="specialGrid"></div>
+    </section>
+
+    <!-- STORE -->
     <section id="store">
         <h2 class="section-title">Art Store</h2>
         <div class="store-notice fade-in">
@@ -120,6 +136,7 @@
         <div class="store-grid" id="storeGrid"></div>
     </section>
 
+    <!-- LIGHTBOX -->
     <div class="fullscreen-gallery" id="fullscreenGallery" role="dialog" aria-modal="true" aria-hidden="true">
         <button class="gallery-close" id="galleryClose" aria-label="Close"><i class="fas fa-times"></i></button>
         <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
@@ -129,6 +146,7 @@
         <div class="gallery-info" id="galleryInfo"></div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Shahed Alasfar</div>
@@ -136,13 +154,14 @@
                 <a href="#landing">Home</a>
                 <a href="#about">About</a>
                 <a href="#gallery">Gallery</a>
+                <a href="#special">Special</a>
                 <a href="#store">Store</a>
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener">Instagram</a>
             </div>
             <div class="developer-credit">
                 Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank" rel="noopener">Yousef Alahmr</a>
             </div>
-            <div class="footer-version">Version v2.2.0</div>
+            <div class="footer-version">Version v2.3.1</div>
             <div class="copyright">© 2026 Shahed Alasfar. All rights reserved.</div>
         </div>
     </footer>
