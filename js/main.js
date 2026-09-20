@@ -75,7 +75,7 @@
             region: 'sa',
             regionLabel: 'متوفر بالسعودية',
             size: '90 × 70',
-            description: 'عمل فني بروح ليلية ساحرة — الفلامنجو في ضوء القمر.',
+            description: '',
             images: ['img/store5.png'],   // ← PNG
         },
         {
@@ -85,7 +85,7 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: 'أشعة النور تتسلل بين الخطوط — عمل فني يعكس الأمل.',
+            description: '',
             images: ['img/store6.png'],   // ← PNG
         },
         {
@@ -95,7 +95,7 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: 'بورتريه يعكس مشاعر الندم — لحظة صمت أبدية.',
+            description: '',
             images: ['img/store7.png'],   // ← PNG
         },
     ];
