@@ -1,26 +1,43 @@
+/* ============================================================
+   MAIN v2.3.3 — متوافق مع مجلد img الفعلي
+   ============================================================ */
 (function () {
     'use strict';
 
-    const ART_COUNT     = 15;
-    const SPECIAL_COUNT = 3;
+    /* ============================================================
+       📸 CONFIG — يتطابق مع الصور الموجودة في مجلدك
+       ============================================================ */
 
-    
-    const galleryItems = Array.from({ length: ART_COUNT }, (_, i) => ({
-        title: 'Shahed',
-        description:
-            i === 15
-                ? 'Art 15 — A portrait of collective silence before truth.'
-                : 'Original hand-painted portrait by Shahed Alasfar.',
-        images: [`img/art${i + 1}.png`],
-    }));
+    // ✅ المعرض الرئيسي — 16 صورة (art1 → art15 + art17)
+    // ملاحظة: art16 مفقود، لذلك نستخدم art17 بدلاً منه
+    const GALLERY_IMAGES = [
+        'art1.png',
+        'art2.png',
+        'art3.png',
+        'art4.png',
+        'art5.png',
+        'art6.png',
+        'art7.png',
+        'art8.png',
+        'art9.png',
+        'art10.png',
+        'art11.png',
+        'art12.png',
+        'art13.png',
+        'art14.png',
+        'art15.png',
+        'art17.png',    // ← لأن art16 مفقود في مجلدك
+    ];
 
-    const specialItems = Array.from({ length: SPECIAL_COUNT }, (_, i) => ({
-        title: 'Shahed',
-        description: 'Original hand-painted portrait by Shahed Alasfar.',
-        images: [`img/special${i + 1}.png`],
-    }));
+    // ✅ Special — 3 صور (لأن special4-6 غير موجودة)
+    const SPECIAL_IMAGES = [
+        'special1.png',
+        'special2.png',
+        'special3.png',
+    ];
 
-    const storeProducts = [
+    // ✅ المتجر — 6 منتجات (store5-7 بصيغة PNG)
+    const STORE_PRODUCTS = [
         {
             title: 'مرآة الفنانين',
             priceValue: '1300',
@@ -59,7 +76,7 @@
             regionLabel: 'متوفر بالسعودية',
             size: '90 × 70',
             description: 'عمل فني بروح ليلية ساحرة — الفلامنجو في ضوء القمر.',
-            images: ['img/store5.jpg'],
+            images: ['img/store5.png'],   // ← PNG
         },
         {
             title: 'Rays of Light',
@@ -69,7 +86,7 @@
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
             description: 'أشعة النور تتسلل بين الخطوط — عمل فني يعكس الأمل.',
-            images: ['img/store6.jpg'],
+            images: ['img/store6.png'],   // ← PNG
         },
         {
             title: 'Regret',
@@ -79,9 +96,26 @@
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
             description: 'بورتريه يعكس مشاعر الندم — لحظة صمت أبدية.',
-            images: ['img/store7.jpg'],
+            images: ['img/store7.png'],   // ← PNG
         },
     ];
+
+    /* ============================================================
+       بناء المصفوفات
+       ============================================================ */
+    const galleryItems = GALLERY_IMAGES.map((filename) => ({
+        title: 'Shahed',
+        description: 'Original hand-painted portrait by Shahed Alasfar.',
+        images: [`img/${filename}`],
+    }));
+
+    const specialItems = SPECIAL_IMAGES.map((filename) => ({
+        title: 'Shahed',
+        description: 'Original hand-painted portrait by Shahed Alasfar.',
+        images: [`img/${filename}`],
+    }));
+
+    const storeProducts = STORE_PRODUCTS;
 
     /* ============================================================
        INTRO
@@ -121,7 +155,7 @@
         );
     }
 
-
+    /* ---------- Fade-in ---------- */
     function initFadeIn() {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -163,7 +197,7 @@
         menu.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', closeFn));
     }
 
-
+    /* ---------- Smooth anchors ---------- */
     function initSmoothAnchors() {
         document.querySelectorAll('a[href^="#"]').forEach((a) => {
             a.addEventListener('click', function (e) {
@@ -443,6 +477,7 @@
         });
     }
 
+    /* ---------- Boot ---------- */
     function boot() {
         runIntro();
         initScrollHeader();
