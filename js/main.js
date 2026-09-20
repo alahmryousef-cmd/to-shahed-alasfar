@@ -1,11 +1,10 @@
-/* ============================================================
-   MAIN v2.1 — Intro, Menu, Gallery, Store, Lightbox
-   ============================================================ */
 (function () {
     'use strict';
 
-    const ART_COUNT = 16;
+    const ART_COUNT     = 15;
+    const SPECIAL_COUNT = 3;
 
+    
     const galleryItems = Array.from({ length: ART_COUNT }, (_, i) => ({
         title: 'Shahed',
         description:
@@ -15,28 +14,78 @@
         images: [`img/art${i + 1}.png`],
     }));
 
+    const specialItems = Array.from({ length: SPECIAL_COUNT }, (_, i) => ({
+        title: 'Shahed',
+        description: 'Original hand-painted portrait by Shahed Alasfar.',
+        images: [`img/special${i + 1}.png`],
+    }));
+
     const storeProducts = [
         {
             title: 'مرآة الفنانين',
-            price: '1300 ﷼',
-            description: '100 × 60 — عمل فني على مرآة يجمع ملامح وجوه فنية خالدة بالأبيض والأسود.',
+            priceValue: '1300',
+            priceCurrency: '﷼',
+            region: 'sa',
+            regionLabel: 'متوفر بالسعودية',
+            size: '100 × 60',
+            description: 'عمل فني على مرآة يجمع ملامح وجوه فنية خالدة بالأبيض والأسود.',
             images: ['img/store1.jpg'],
         },
         {
             title: 'الأيدي والخيوط الحمراء',
-            price: '770 ﷼',
-            description: 'أربع قطع، اللوحة الواحدة 40 × 40 — عمل فني تتشابك بينه الخيوط الحمراء.',
+            priceValue: '770',
+            priceCurrency: '﷼',
+            region: 'sa',
+            regionLabel: 'متوفر بالسعودية',
+            size: '40 × 40 (×4 قطع)',
+            description: 'عمل فني من أربع لوحات تتشابك بينها الخيوط الحمراء.',
             images: ['img/store3.jpg', 'img/store3-1.jpg'],
         },
         {
             title: 'فيودور دوستويفسكي',
-            price: '450 ﷼',
-            description: '60 × 40 — بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي.',
+            priceValue: '450',
+            priceCurrency: '﷼',
+            region: 'sa',
+            regionLabel: 'متوفر بالسعودية',
+            size: '60 × 40',
+            description: 'بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي.',
             images: ['img/store4.jpg', 'img/store4-1.jpg'],
+        },
+        {
+            title: 'Flamingo Night',
+            priceValue: '850',
+            priceCurrency: '﷼',
+            region: 'sa',
+            regionLabel: 'متوفر بالسعودية',
+            size: '90 × 70',
+            description: 'عمل فني بروح ليلية ساحرة — الفلامنجو في ضوء القمر.',
+            images: ['img/store5.jpg'],
+        },
+        {
+            title: 'Rays of Light',
+            priceValue: '75',
+            priceCurrency: 'د.أ',
+            region: 'jo',
+            regionLabel: 'متوفر بالأردن',
+            size: '70 × 50',
+            description: 'أشعة النور تتسلل بين الخطوط — عمل فني يعكس الأمل.',
+            images: ['img/store6.jpg'],
+        },
+        {
+            title: 'Regret',
+            priceValue: '85',
+            priceCurrency: 'د.أ',
+            region: 'jo',
+            regionLabel: 'متوفر بالأردن',
+            size: '70 × 50',
+            description: 'بورتريه يعكس مشاعر الندم — لحظة صمت أبدية.',
+            images: ['img/store7.jpg'],
         },
     ];
 
-    /* ---------- INTRO ---------- */
+    /* ============================================================
+       INTRO
+       ============================================================ */
     function runIntro() {
         const screen  = document.getElementById('introScreen');
         const name    = document.getElementById('introName');
@@ -72,7 +121,7 @@
         );
     }
 
-    /* ---------- Fade-in ---------- */
+
     function initFadeIn() {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -114,7 +163,7 @@
         menu.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', closeFn));
     }
 
-    /* ---------- Smooth anchors ---------- */
+
     function initSmoothAnchors() {
         document.querySelectorAll('a[href^="#"]').forEach((a) => {
             a.addEventListener('click', function (e) {
@@ -177,6 +226,56 @@
         grid.appendChild(frag);
     }
 
+    /* ---------- Build Special ---------- */
+    function buildSpecial() {
+        const grid = document.getElementById('specialGrid');
+        if (!grid) return;
+        const frag = document.createDocumentFragment();
+
+        specialItems.forEach((item, i) => {
+            const el = document.createElement('div');
+            el.className = 'special-item fade-in';
+            el.style.setProperty('--i', i);
+            el.innerHTML = `
+                <div class="special-frame" data-tilt>
+                    <div class="special-glow"></div>
+
+                    <span class="special-badge">
+                        <i class="fas fa-star"></i>Special
+                    </span>
+
+                    <div class="special-outer">
+                        <span class="special-edge special-edge--top"></span>
+                        <span class="special-edge special-edge--right"></span>
+                        <span class="special-edge special-edge--bottom"></span>
+                        <span class="special-edge special-edge--left"></span>
+
+                        <div class="special-mat">
+                            <span class="special-mat-line"></span>
+                            <img src="${item.images[0]}"
+                                 class="special-img"
+                                 alt="${item.title} — Special ${i + 1}"
+                                 loading="lazy"
+                                 decoding="async">
+                        </div>
+                    </div>
+
+                    <span class="special-shine"></span>
+
+                    <span class="special-sparkle special-sparkle--tl"></span>
+                    <span class="special-sparkle special-sparkle--tr"></span>
+                    <span class="special-sparkle special-sparkle--bl"></span>
+                    <span class="special-sparkle special-sparkle--br"></span>
+                </div>
+                <div class="special-label">shahed</div>
+            `;
+            el.addEventListener('click', () => openLightbox('special', i));
+            frag.appendChild(el);
+        });
+
+        grid.appendChild(frag);
+    }
+
     /* ---------- Build Store ---------- */
     function buildStore() {
         const grid = document.getElementById('storeGrid');
@@ -188,12 +287,29 @@
             el.innerHTML = `
                 <div class="store-images">
                     <img src="${p.images[0]}" class="store-img" alt="${p.title}" loading="lazy" decoding="async">
-                    <div class="store-overlay"><p>Click to view details</p></div>
+                    <span class="store-region-badge store-region-badge--${p.region}">
+                        <i class="fas fa-check-circle"></i>
+                        ${p.regionLabel}
+                    </span>
+                    <div class="store-overlay">
+                        <p><i class="fas fa-search-plus"></i> Click to view details</p>
+                    </div>
                 </div>
                 <div class="store-info">
-                    <h3 class="store-title">${p.title}</h3>
-                    <p class="store-price">${p.price}</p>
-                    <p>${p.description}</p>
+                    <div class="store-info-head">
+                        <h3 class="store-title">${p.title}</h3>
+                        <span class="store-size-badge">${p.size}</span>
+                    </div>
+                    <p class="store-price">
+                        <i class="fas fa-tag"></i>
+                        <bdi class="price-value">${p.priceValue}</bdi>
+                        <bdi class="price-currency">${p.priceCurrency}</bdi>
+                    </p>
+                    <p class="store-description">${p.description}</p>
+                    <div class="store-cta">
+                        <i class="fab fa-instagram"></i>
+                        Order via Instagram
+                    </div>
                 </div>
             `;
             el.addEventListener('click', () => openLightbox('store', i));
@@ -219,13 +335,19 @@
         lb.nextBtn  = document.getElementById('galleryNext');
     }
 
+    function getArrForMode(mode) {
+        if (mode === 'store')   return storeProducts;
+        if (mode === 'special') return specialItems;
+        return galleryItems;
+    }
+
     function openLightbox(mode, index) {
         cacheLightbox();
         if (!lb.root) return;
         lb.mode      = mode;
         lb.index     = index;
         lb.lastFocus = document.activeElement;
-        const arr    = mode === 'store' ? storeProducts : galleryItems;
+        const arr    = getArrForMode(mode);
         lb.images    = arr[index].images;
         renderLightbox();
         lb.root.classList.add('active');
@@ -243,7 +365,7 @@
     }
 
     function navigateLightbox(dir) {
-        const arr = lb.mode === 'store' ? storeProducts : galleryItems;
+        const arr = getArrForMode(lb.mode);
         lb.index  = (lb.index + dir + arr.length) % arr.length;
         lb.images = arr[lb.index].images;
         renderLightbox();
@@ -275,9 +397,27 @@
             const p = storeProducts[lb.index];
             lb.info.innerHTML = `
                 <h3 class="gallery-product-title">${p.title}</h3>
-                <p class="gallery-product-price">${p.price}</p>
+                <p class="gallery-product-price">
+                    <i class="fas fa-tag"></i>
+                    <bdi class="price-value">${p.priceValue}</bdi>
+                    <bdi class="price-currency">${p.priceCurrency}</bdi>
+                </p>
+                <div class="gallery-product-meta">
+                    <span class="gallery-meta-badge gallery-meta-badge--size">
+                        <i class="fas fa-ruler-combined"></i> ${p.size}
+                    </span>
+                    <span class="gallery-meta-badge gallery-meta-badge--${p.region}">
+                        <i class="fas fa-check-circle"></i> ${p.regionLabel}
+                    </span>
+                </div>
                 <p class="gallery-product-description">${p.description}</p>
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="store-btn">Order via Instagram</a>
+            `;
+        } else if (lb.mode === 'special') {
+            const g = specialItems[lb.index];
+            lb.info.innerHTML = `
+                <h3 class="gallery-product-title">${g.title}</h3>
+                <p class="gallery-product-description">${g.description}</p>
             `;
         } else {
             const g = galleryItems[lb.index];
@@ -303,13 +443,13 @@
         });
     }
 
-    /* ---------- Boot ---------- */
     function boot() {
         runIntro();
         initScrollHeader();
         initMobileMenu();
         initSmoothAnchors();
         buildGallery();
+        buildSpecial();
         buildStore();
         initFadeIn();
         initLightboxEvents();
