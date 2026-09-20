@@ -9,7 +9,7 @@
         title: 'Shahed',
         description:
             i === 15
-                ? 'Art 16 — A portrait of collective silence before truth.'
+                ? 'Art 15 — A portrait of collective silence before truth.'
                 : 'Original hand-painted portrait by Shahed Alasfar.',
         images: [`img/art${i + 1}.png`],
     }));
