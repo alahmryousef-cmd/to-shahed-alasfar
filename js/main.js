@@ -1,10 +1,17 @@
 /* ============================================================
-   MAIN v3.0 — Lightweight version
+   MAIN v3.2 — شاشة افتتاح دائماً + إطارات حول الصور الطبيعية
    ============================================================ */
 (function () {
     'use strict';
 
-    /* ---------- Config ---------- */
+    /* ---------- Device detection ---------- */
+    const UA = navigator.userAgent;
+    const isMobile  = /iPhone|iPad|iPod|Android/i.test(UA);
+    const isLowEnd  = (navigator.hardwareConcurrency || 8) <= 4;
+
+    /* ============================================================
+       📸 CONFIG
+       ============================================================ */
     const GALLERY_IMAGES = [
         'art1.png', 'art2.png', 'art3.png', 'art4.png',
         'art5.png', 'art6.png', 'art7.png', 'art8.png',
@@ -13,9 +20,7 @@
     ];
 
     const SPECIAL_IMAGES = [
-        'special1.png',
-        'special2.png',
-        'special3.png',
+        'special1.png', 'special2.png', 'special3.png',
     ];
 
     const STORE_PRODUCTS = [
@@ -93,6 +98,49 @@
         images: [`img/${filename}`],
     }));
     const storeProducts = STORE_PRODUCTS;
+
+    /* ============================================================
+       Preload الصور المهمة
+       ============================================================ */
+    function preloadCriticalImages() {
+        const critical = [
+            'img/sign.png',
+            'img/special1.png',
+            'img/special2.png',
+            'img/special3.png',
+            'img/store5.png',
+            'img/store6.png',
+            'img/store7.png',
+            'img/art1.png',
+            'img/art2.png',
+        ];
+        critical.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+
+    /* ============================================================
+       INTRO — تظهر دائماً
+       ============================================================ */
+    function runIntro() {
+        const screen  = document.getElementById('introScreen');
+        const name    = document.getElementById('introName');
+        const sig     = document.getElementById('introSignature');
+        const tagline = document.getElementById('introTagline');
+        if (!screen) return;
+
+        // ✅ على الجوال: 75% من المدة (لكن تظهر دائماً)
+        const speed = isMobile ? 0.75 : 1;
+
+        [
+            [200  * speed, () => name?.classList.add('visible')],
+            [1500 * speed, () => sig?.classList.add('visible')],
+            [2700 * speed, () => tagline?.classList.add('visible')],
+            [4200 * speed, () => screen.classList.add('fade-out')],
+            [5300 * speed, () => screen.classList.add('hidden')],
+        ].forEach(([t, fn]) => setTimeout(fn, t));
+    }
 
     /* ---------- Header scroll ---------- */
     function initScrollHeader() {
@@ -176,17 +224,34 @@
             const el = document.createElement('div');
             el.className = 'gallery-item fade-in';
             el.style.setProperty('--i', i);
-            const eager = i < 4 ? 'eager' : 'lazy';
+
+            const eager    = i < 4 ? 'eager' : 'lazy';
+            const priority = i < 4 ? 'high' : 'low';
+
             el.innerHTML = `
-                <div class="painting-frame">
-                    <div class="frame-mat">
-                        <img src="${item.images[0]}"
-                             class="gallery-img"
-                             alt="Artwork ${i + 1}"
-                             loading="${eager}"
-                             decoding="async"
-                             width="280" height="260">
+                <div class="painting-frame" data-tilt>
+                    <div class="frame-glow"></div>
+                    <div class="frame-outer">
+                        <span class="frame-edge frame-edge--top"></span>
+                        <span class="frame-edge frame-edge--right"></span>
+                        <span class="frame-edge frame-edge--bottom"></span>
+                        <span class="frame-edge frame-edge--left"></span>
+                        <span class="frame-inner-mat"></span>
+                        <div class="frame-mat">
+                            <span class="frame-mat-line"></span>
+                            <img src="${item.images[0]}"
+                                 class="gallery-img"
+                                 alt="Artwork ${i + 1}"
+                                 loading="${eager}"
+                                 fetchpriority="${priority}"
+                                 decoding="async">
+                        </div>
                     </div>
+                    <span class="frame-shine"></span>
+                    <span class="frame-sparkle frame-sparkle--tl"></span>
+                    <span class="frame-sparkle frame-sparkle--tr"></span>
+                    <span class="frame-sparkle frame-sparkle--bl"></span>
+                    <span class="frame-sparkle frame-sparkle--br"></span>
                 </div>
                 <div class="painting-label">shahed</div>
             `;
@@ -206,16 +271,31 @@
             el.className = 'special-item fade-in';
             el.style.setProperty('--i', i);
             el.innerHTML = `
-                <div class="special-frame">
-                    <span class="special-badge"><i class="fas fa-star"></i>Special</span>
-                    <div class="special-mat">
-                        <img src="${item.images[0]}"
-                             class="special-img"
-                             alt="Special ${i + 1}"
-                             loading="lazy"
-                             decoding="async"
-                             width="250" height="240">
+                <div class="special-frame" data-tilt>
+                    <div class="special-glow"></div>
+                    <span class="special-badge">
+                        <i class="fas fa-star"></i>Special
+                    </span>
+                    <div class="special-outer">
+                        <span class="special-edge special-edge--top"></span>
+                        <span class="special-edge special-edge--right"></span>
+                        <span class="special-edge special-edge--bottom"></span>
+                        <span class="special-edge special-edge--left"></span>
+                        <div class="special-mat">
+                            <span class="special-mat-line"></span>
+                            <img src="${item.images[0]}"
+                                 class="special-img"
+                                 alt="Special ${i + 1}"
+                                 loading="eager"
+                                 fetchpriority="high"
+                                 decoding="async">
+                        </div>
                     </div>
+                    <span class="special-shine"></span>
+                    <span class="special-sparkle special-sparkle--tl"></span>
+                    <span class="special-sparkle special-sparkle--tr"></span>
+                    <span class="special-sparkle special-sparkle--bl"></span>
+                    <span class="special-sparkle special-sparkle--br"></span>
                 </div>
                 <div class="special-label">shahed</div>
             `;
@@ -233,14 +313,23 @@
         storeProducts.forEach((p, i) => {
             const el = document.createElement('div');
             el.className = 'store-item fade-in';
+
+            const isNew = i >= 3;
+            const eager = isNew ? 'eager' : 'lazy';
+            const priority = isNew ? 'high' : 'low';
+
             el.innerHTML = `
                 <div class="store-images">
                     <img src="${p.images[0]}" class="store-img" alt="${p.title}"
-                         loading="lazy" decoding="async" width="300" height="225">
+                         loading="${eager}" fetchpriority="${priority}"
+                         decoding="async">
                     <span class="store-region-badge store-region-badge--${p.region}">
                         <i class="fas fa-check-circle"></i>
                         ${p.regionLabel}
                     </span>
+                    <div class="store-overlay">
+                        <p><i class="fas fa-search-plus"></i> Click to view details</p>
+                    </div>
                 </div>
                 <div class="store-info">
                     <div class="store-info-head">
@@ -385,6 +474,8 @@
 
     /* ---------- Boot ---------- */
     function boot() {
+        preloadCriticalImages();
+        runIntro();
         initScrollHeader();
         initMobileMenu();
         initSmoothAnchors();
