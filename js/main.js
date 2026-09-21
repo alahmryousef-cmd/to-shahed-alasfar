@@ -1,42 +1,35 @@
 /* ============================================================
-   MAIN v2.3.3 — متوافق مع مجلد img الفعلي
+   MAIN v2.3.5 — Optimized for performance (mobile-friendly)
    ============================================================ */
 (function () {
     'use strict';
 
     /* ============================================================
-       📸 CONFIG — يتطابق مع الصور الموجودة في مجلدك
+       🔍 Device detection
+       ============================================================ */
+    const UA = navigator.userAgent;
+    const isMobile     = /iPhone|iPad|iPod|Android/i.test(UA);
+    const isLowEnd     = (navigator.hardwareConcurrency || 8) <= 4;
+    const isSafari     = /^((?!chrome|android).)*safari/i.test(UA);
+    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ============================================================
+       📸 CONFIG — يتطابق مع مجلد الصور
        ============================================================ */
 
-    // ✅ المعرض الرئيسي — 16 صورة (art1 → art15 + art17)
-    // ملاحظة: art16 مفقود، لذلك نستخدم art17 بدلاً منه
     const GALLERY_IMAGES = [
-        'art1.png',
-        'art2.png',
-        'art3.png',
-        'art4.png',
-        'art5.png',
-        'art6.png',
-        'art7.png',
-        'art8.png',
-        'art9.png',
-        'art10.png',
-        'art11.png',
-        'art12.png',
-        'art13.png',
-        'art14.png',
-        'art15.png',
-        'art17.png',    // ← لأن art16 مفقود في مجلدك
+        'art1.png', 'art2.png', 'art3.png', 'art4.png',
+        'art5.png', 'art6.png', 'art7.png', 'art8.png',
+        'art9.png', 'art10.png', 'art11.png', 'art12.png',
+        'art13.png', 'art14.png', 'art15.png', 'art17.png',
     ];
 
-    // ✅ Special — 3 صور (لأن special4-6 غير موجودة)
     const SPECIAL_IMAGES = [
         'special1.png',
         'special2.png',
         'special3.png',
     ];
 
-    // ✅ المتجر — 6 منتجات (store5-7 بصيغة PNG)
     const STORE_PRODUCTS = [
         {
             title: 'مرآة الفنانين',
@@ -75,8 +68,8 @@
             region: 'sa',
             regionLabel: 'متوفر بالسعودية',
             size: '90 × 70',
-            description: '',
-            images: ['img/store5.png'],   // ← PNG
+            description: 'عمل فني بروح ليلية ساحرة — الفلامنجو في ضوء القمر.',
+            images: ['img/store5.png'],
         },
         {
             title: 'Rays of Light',
@@ -85,8 +78,8 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: '',
-            images: ['img/store6.png'],   // ← PNG
+            description: 'أشعة النور تتسلل بين الخطوط — عمل فني يعكس الأمل.',
+            images: ['img/store6.png'],
         },
         {
             title: 'Regret',
@@ -95,8 +88,8 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: '',
-            images: ['img/store7.png'],   // ← PNG
+            description: 'بورتريه يعكس مشاعر الندم — لحظة صمت أبدية.',
+            images: ['img/store7.png'],
         },
     ];
 
@@ -118,7 +111,7 @@
     const storeProducts = STORE_PRODUCTS;
 
     /* ============================================================
-       INTRO
+       INTRO — أسرع على الجوال
        ============================================================ */
     function runIntro() {
         const screen  = document.getElementById('introScreen');
@@ -127,12 +120,19 @@
         const tagline = document.getElementById('introTagline');
         if (!screen) return;
 
+        // ✅ الجوال: نصف المدة | reduced motion: تجاوز الشاشة
+        const speed = prefersReduced ? 0 : (isMobile ? 0.5 : 1);
+        if (prefersReduced) {
+            screen.classList.add('hidden');
+            return;
+        }
+
         [
-            [200,  () => name?.classList.add('visible')],
-            [1500, () => sig?.classList.add('visible')],
-            [2700, () => tagline?.classList.add('visible')],
-            [4200, () => screen.classList.add('fade-out')],
-            [5300, () => screen.classList.add('hidden')],
+            [200  * speed, () => name?.classList.add('visible')],
+            [1500 * speed, () => sig?.classList.add('visible')],
+            [2700 * speed, () => tagline?.classList.add('visible')],
+            [4200 * speed, () => screen.classList.add('fade-out')],
+            [5300 * speed, () => screen.classList.add('hidden')],
         ].forEach(([t, fn]) => setTimeout(fn, t));
     }
 
@@ -157,6 +157,10 @@
 
     /* ---------- Fade-in ---------- */
     function initFadeIn() {
+        if (!('IntersectionObserver' in window)) {
+            document.querySelectorAll('.fade-in').forEach((el) => el.classList.add('visible'));
+            return;
+        }
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((e) => {
@@ -213,7 +217,7 @@
         window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ---------- Build Gallery ---------- */
+    /* ---------- Build Gallery (optimized) ---------- */
     function buildGallery() {
         const grid = document.getElementById('galleryGrid');
         if (!grid) return;
@@ -223,30 +227,32 @@
             const el = document.createElement('div');
             el.className = 'gallery-item fade-in';
             el.style.setProperty('--i', i);
+
+            // ✅ أول 4 صور: eager + high priority
+            const eager    = i < 4 ? 'eager' : 'lazy';
+            const priority = i < 4 ? 'high' : 'low';
+
             el.innerHTML = `
                 <div class="painting-frame" data-tilt>
                     <div class="frame-glow"></div>
-
                     <div class="frame-outer">
                         <span class="frame-edge frame-edge--top"></span>
                         <span class="frame-edge frame-edge--right"></span>
                         <span class="frame-edge frame-edge--bottom"></span>
                         <span class="frame-edge frame-edge--left"></span>
-
                         <span class="frame-inner-mat"></span>
-
                         <div class="frame-mat">
                             <span class="frame-mat-line"></span>
                             <img src="${item.images[0]}"
                                  class="gallery-img"
                                  alt="${item.title} — Artwork ${i + 1}"
-                                 loading="lazy"
-                                 decoding="async">
+                                 loading="${eager}"
+                                 fetchpriority="${priority}"
+                                 decoding="async"
+                                 width="280" height="260">
                         </div>
                     </div>
-
                     <span class="frame-shine"></span>
-
                     <span class="frame-sparkle frame-sparkle--tl"></span>
                     <span class="frame-sparkle frame-sparkle--tr"></span>
                     <span class="frame-sparkle frame-sparkle--bl"></span>
@@ -260,7 +266,7 @@
         grid.appendChild(frag);
     }
 
-    /* ---------- Build Special ---------- */
+    /* ---------- Build Special (optimized) ---------- */
     function buildSpecial() {
         const grid = document.getElementById('specialGrid');
         if (!grid) return;
@@ -273,29 +279,25 @@
             el.innerHTML = `
                 <div class="special-frame" data-tilt>
                     <div class="special-glow"></div>
-
                     <span class="special-badge">
                         <i class="fas fa-star"></i>Special
                     </span>
-
                     <div class="special-outer">
                         <span class="special-edge special-edge--top"></span>
                         <span class="special-edge special-edge--right"></span>
                         <span class="special-edge special-edge--bottom"></span>
                         <span class="special-edge special-edge--left"></span>
-
                         <div class="special-mat">
                             <span class="special-mat-line"></span>
                             <img src="${item.images[0]}"
                                  class="special-img"
                                  alt="${item.title} — Special ${i + 1}"
                                  loading="lazy"
-                                 decoding="async">
+                                 decoding="async"
+                                 width="250" height="240">
                         </div>
                     </div>
-
                     <span class="special-shine"></span>
-
                     <span class="special-sparkle special-sparkle--tl"></span>
                     <span class="special-sparkle special-sparkle--tr"></span>
                     <span class="special-sparkle special-sparkle--bl"></span>
@@ -310,7 +312,7 @@
         grid.appendChild(frag);
     }
 
-    /* ---------- Build Store ---------- */
+    /* ---------- Build Store (optimized) ---------- */
     function buildStore() {
         const grid = document.getElementById('storeGrid');
         if (!grid) return;
@@ -320,7 +322,8 @@
             el.className = 'store-item fade-in';
             el.innerHTML = `
                 <div class="store-images">
-                    <img src="${p.images[0]}" class="store-img" alt="${p.title}" loading="lazy" decoding="async">
+                    <img src="${p.images[0]}" class="store-img" alt="${p.title}"
+                         loading="lazy" decoding="async" width="300" height="225">
                     <span class="store-region-badge store-region-badge--${p.region}">
                         <i class="fas fa-check-circle"></i>
                         ${p.regionLabel}
@@ -416,6 +419,7 @@
                 t.src = src;
                 t.className = 'gallery-thumbnail' + (i === 0 ? ' active' : '');
                 t.alt = '';
+                t.loading = 'lazy';
                 t.addEventListener('click', () => {
                     lb.img.src = src;
                     lb.thumbs.querySelectorAll('.gallery-thumbnail').forEach((x) => x.classList.remove('active'));
