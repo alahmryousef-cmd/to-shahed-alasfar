@@ -13,7 +13,7 @@
         'art1.png', 'art2.png', 'art3.png', 'art4.png',
         'art5.png', 'art6.png', 'art7.png', 'art8.png',
         'art9.png', 'art10.png', 'art11.png', 'art12.png',
-        'art13.png', 'art14.png', 'art15.png', 'art17.png',
+        'art13.png', 'art14.png', 'art15.png',
     ];
 
     const SPECIAL_IMAGES = [
