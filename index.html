@@ -11,26 +11,33 @@
     <meta name="description" content="Shahed Alasfar — Jordanian portrait artist. A collection of emotional and timeless artwork.">
     <meta name="author" content="Shahed Alasfar">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Shahed Alasfar — Portrait Artist">
     <meta property="og:description" content="A collection of emotional and timeless artwork.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="img/sign.png">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shahed Alasfar — Portrait Artist">
-    <meta name="twitter:description" content="A collection of emotional and timeless artwork.">
 
-    <!-- Preconnect for performance -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
+    <!-- ✅ Preload الصور المهمة (Special + Store الجديدة) -->
+    <link rel="preload" as="image" href="img/sign.png">
+    <link rel="preload" as="image" href="img/art1.png">
+    <link rel="preload" as="image" href="img/art2.png">
+    <link rel="preload" as="image" href="img/special1.png">
+    <link rel="preload" as="image" href="img/special2.png">
+    <link rel="preload" as="image" href="img/special3.png">
+    <link rel="preload" as="image" href="img/store5.png">
+    <link rel="preload" as="image" href="img/store6.png">
+    <link rel="preload" as="image" href="img/store7.png">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome — jsDelivr (works on Edge, Safari, Chrome) -->
+    <!-- Font Awesome (jsDelivr — يعمل على كل المتصفحات) -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
           crossorigin="anonymous"
@@ -39,7 +46,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Favicon (optional — adds icon in browser tab) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/sign.png">
 </head>
 <body>
@@ -49,7 +56,7 @@
         <div class="intro-inner">
             <div class="intro-name" id="introName">Shahed Alasfar</div>
             <div class="intro-signature" id="introSignature">
-                <img src="img/sign.png" alt="" id="introSignImg" loading="eager">
+                <img src="img/sign.png" alt="" id="introSignImg" loading="eager" fetchpriority="high">
             </div>
             <div class="intro-tagline" id="introTagline">Portrait Artist · Shahed 🩶</div>
         </div>
@@ -205,7 +212,7 @@
             <div class="developer-credit">
                 Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank" rel="noopener">Yousef Alahmr</a>
             </div>
-            <div class="footer-version">Version v2.3.2</div>
+            <div class="footer-version">Version v3.1.0</div>
             <div class="copyright">© 2026 Shahed Alasfar. All rights reserved.</div>
         </div>
     </footer>
