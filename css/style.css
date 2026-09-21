@@ -1,10 +1,12 @@
 /* ============================================================
-   SHAHED ALASFAR — STYLE v3.0 (Lightweight / Fast)
+   SHAHED ALASFAR — STYLE v3.3
+   شبكات منتظمة + إطارات موحّدة + شاشة افتتاح
    ============================================================ */
 
 :root {
     --gold:        #b89446;
     --dark-gold:   #8a6d2f;
+    --deep-yellow: #d4af37;
     --matte-black: #1a1a1a;
     --off-white:   #f5f5f5;
     --wall-color:  #1e1c19;
@@ -12,6 +14,8 @@
     --wood-dark:   #2b1d13;
     --wood-mid:    #4a3322;
     --wood-light:  #6b4a30;
+    --wood-hi:     #8f6842;
+    --wood-gold:   #c9a058;
     --mat-color:   #f0ead8;
     --mat-shadow:  #c9bda0;
 
@@ -44,17 +48,22 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   BACKGROUND — ثابت خفيف (بدل Canvas)
+   BACKGROUND — خلفية ثابتة خفيفة
    ============================================================ */
 .background-canvas {
-    display: none !important;   /* ✅ حذف تام */
+    position: fixed;
+    inset: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0.14;
+    pointer-events: none;
 }
 
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     background:
         radial-gradient(ellipse 60% 50% at 20% 30%, rgba(184,148,70,0.06), transparent 60%),
         radial-gradient(ellipse 50% 60% at 80% 70%, rgba(212,175,55,0.04), transparent 60%),
@@ -63,9 +72,66 @@ body::before {
 }
 
 /* ============================================================
-   INTRO — مخفية (بدون شاشة افتتاح)
+   INTRO SCREEN
    ============================================================ */
-#introScreen { display: none !important; }
+#introScreen {
+    position: fixed;
+    inset: 0;
+    background: #110f0c;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+    will-change: opacity;
+}
+#introScreen.fade-out { opacity: 0; pointer-events: none; }
+#introScreen.hidden   { display: none; }
+
+.intro-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+    text-align: center;
+    padding: 1rem;
+}
+.intro-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 9vw, 6rem);
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(184,148,70,0.35);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.intro-name.visible { opacity: 1; transform: translateY(0); }
+
+.intro-signature {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+.intro-signature.visible { opacity: 1; transform: translateY(0); }
+
+#introSignImg {
+    max-height: 90px;
+    max-width: 260px;
+    object-fit: contain;
+    filter: brightness(0.9) sepia(0.3);
+}
+.intro-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    color: rgba(245,245,245,0.6);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 1s ease;
+    padding-left: 0.35em;
+}
+.intro-tagline.visible { opacity: 1; }
 
 /* ============================================================
    HEADER
@@ -296,16 +362,17 @@ section {
 .about-text p:last-child { margin-bottom: 0; }
 
 /* ============================================================
-   GALLERY — إطارات بسيطة خفيفة
+   GALLERY — شبكة منتظمة (3 أعمدة، صفوف متساوية)
    ============================================================ */
 #gallery { max-width: 1400px; margin: 0 auto; width: 100%; }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 3rem 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
     width: 100%;
     padding: 1rem 0 2rem;
+    align-items: stretch;
 }
 
 .gallery-item {
@@ -313,9 +380,9 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
-/* ✅ إطار بسيط: طبقة خشب + باسبارتو */
 .painting-frame {
     position: relative;
     width: 100%;
@@ -324,6 +391,10 @@ section {
     background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 50%, var(--wood-dark) 100%);
     padding: 12px;
     border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 100%;
 }
 
 .gallery-item:hover .painting-frame {
@@ -335,14 +406,21 @@ section {
     background: var(--mat-color);
     padding: 8px;
     border-radius: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 100%;
+    height: 320px;
+    overflow: hidden;
 }
 
 .gallery-img {
     display: block;
     width: 100%;
-    height: 260px;
-    object-fit: cover;
-    background: #0f0d0b;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
 }
 
 .painting-label {
@@ -357,7 +435,7 @@ section {
 .gallery-item:hover .painting-label { color: var(--gold); }
 
 /* ============================================================
-   SPECIAL — إطار ذهبي بسيط
+   SPECIAL — شبكة منتظمة (3 أعمدة، صفوف متساوية)
    ============================================================ */
 #special { max-width: 1400px; margin: 0 auto; width: 100%; }
 
@@ -374,10 +452,11 @@ section {
 
 .special-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 3rem 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
     width: 100%;
     padding: 1rem 0 2rem;
+    align-items: stretch;
 }
 
 .special-item {
@@ -386,6 +465,7 @@ section {
     flex-direction: column;
     align-items: center;
     position: relative;
+    height: 100%;
 }
 
 .special-frame {
@@ -396,6 +476,10 @@ section {
     background: linear-gradient(135deg, #d4af37 0%, #b89446 50%, #8a6d2f 100%);
     padding: 14px;
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 100%;
 }
 
 .special-item:hover .special-frame {
@@ -407,14 +491,21 @@ section {
     background: var(--mat-color);
     padding: 8px;
     border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 100%;
+    height: 320px;
+    overflow: hidden;
 }
 
 .special-img {
     display: block;
     width: 100%;
-    height: 240px;
-    object-fit: cover;
-    background: #0f0d0b;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
 }
 
 .special-badge {
@@ -447,7 +538,7 @@ section {
 .special-item:hover .special-label { color: var(--gold); }
 
 /* ============================================================
-   STORE
+   STORE — كل الصور بنفس الحجم (aspect-ratio 4:3)
    ============================================================ */
 #store { max-width: 1400px; margin: 0 auto; width: 100%; }
 
@@ -471,9 +562,10 @@ section {
 
 .store-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     width: 100%;
+    align-items: stretch;
 }
 
 .store-item {
@@ -485,6 +577,7 @@ section {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .store-item:hover {
@@ -492,17 +585,20 @@ section {
     border-color: var(--gold);
 }
 
+/* ✅ صورة موحّدة الحجم 4:3 */
 .store-images {
     position: relative;
+    background: #0f0d0b;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #0f0d0b;
+    width: 100%;
 }
 
 .store-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .store-region-badge {
@@ -523,6 +619,26 @@ section {
 .store-region-badge--sa { background: rgba(0, 122, 61, 0.95); }
 .store-region-badge--jo { background: rgba(206, 17, 38, 0.95); }
 .store-region-badge i { font-size: 0.7rem; }
+
+.store-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform var(--transition);
+    z-index: 2;
+}
+.store-item:hover .store-overlay { transform: translateY(0); }
+.store-overlay p {
+    color: var(--gold);
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
 .store-info {
     padding: 1.5rem;
@@ -797,7 +913,7 @@ footer {
 .footer-version { font-size: 0.85rem; color: #aaa; }
 
 /* ============================================================
-   FADE-IN بسيط (خفيف)
+   FADE-IN
    ============================================================ */
 .fade-in {
     opacity: 0;
@@ -876,52 +992,79 @@ footer {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+
+/* ✅ تابلت — عمودان */
 @media (max-width: 900px) {
     .nav-links, .social-header { display: none; }
     .mobile-menu-btn { display: block; }
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2rem 1.2rem; }
-    .store-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-    .special-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2rem 1.2rem; }
+
+    .gallery-grid,
+    .special-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1.5rem;
+    }
+    .frame-mat,
+    .special-mat { height: 260px; }
+
+    .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
     section { padding-left: 1rem; padding-right: 1rem; }
     header { padding: 0 1.2rem; }
 }
 
+/* ✅ جوال — عمودان (Gallery/Special) + عمود واحد (Store) */
 @media (max-width: 600px) {
     .social-cards { flex-direction: column; align-items: center; }
     .social-card { width: 200px; height: 170px; }
     .cta-buttons { flex-direction: column; align-items: center; }
     .btn { width: 100%; max-width: 260px; justify-content: center; }
-    .gallery-nav { width: 44px; height: 44px; font-size: 1.2rem; }
-    .gallery-prev { left: 0.5rem; }
-    .gallery-next { right: 0.5rem; }
-    .gallery-img { height: 200px; }
-    .gallery-thumbnail { width: 56px; height: 56px; }
-    .gallery-close { top: 1rem; right: 1rem; font-size: 1.6rem; }
-    .fullscreen-gallery { padding: 1rem; }
-    .gallery-main-image { max-height: 62vh; }
 
+    .gallery-grid,
+    .special-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 1rem;
+    }
     .painting-frame { padding: 8px; }
-    .frame-mat { padding: 6px; }
+    .frame-mat { padding: 6px; height: 200px; }
     .special-frame { padding: 10px; }
-    .special-mat { padding: 6px; }
-    .special-img { height: 190px; }
+    .special-mat { padding: 6px; height: 200px; }
     .special-badge { font-size: 0.6rem; padding: 0.25rem 0.6rem; top: -8px; right: -6px; }
 
-    .store-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .store-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
     .store-info { padding: 1.25rem; }
     .store-title { font-size: 1.1rem; }
     .store-price { font-size: 1.15rem; }
     .store-region-badge { font-size: 0.7rem; padding: 0.35rem 0.7rem; }
+
+    .gallery-nav { width: 44px; height: 44px; font-size: 1.2rem; }
+    .gallery-prev { left: 0.5rem; }
+    .gallery-next { right: 0.5rem; }
+    .gallery-thumbnail { width: 56px; height: 56px; }
+    .gallery-close { top: 1rem; right: 1rem; font-size: 1.6rem; }
+    .fullscreen-gallery { padding: 1rem; }
+    .gallery-main-image { max-height: 62vh; }
+}
+
+/* ✅ جوال صغير جداً */
+@media (max-width: 380px) {
+    .gallery-grid,
+    .special-grid {
+        gap: 1.2rem 0.8rem;
+    }
+    .frame-mat,
+    .special-mat { height: 170px; }
 }
 
 /* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    .fade-in { opacity: 1 !important; transform: none !important; }
+    .fade-in { transition: none; opacity: 1; transform: none; }
+    .painting-frame, .special-frame, .store-item { transition: none; }
 }
