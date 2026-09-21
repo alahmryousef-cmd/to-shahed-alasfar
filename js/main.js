@@ -1,22 +1,10 @@
 /* ============================================================
-   MAIN v2.3.5 — Optimized for performance (mobile-friendly)
+   MAIN v3.0 — Lightweight version
    ============================================================ */
 (function () {
     'use strict';
 
-    /* ============================================================
-       🔍 Device detection
-       ============================================================ */
-    const UA = navigator.userAgent;
-    const isMobile     = /iPhone|iPad|iPod|Android/i.test(UA);
-    const isLowEnd     = (navigator.hardwareConcurrency || 8) <= 4;
-    const isSafari     = /^((?!chrome|android).)*safari/i.test(UA);
-    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* ============================================================
-       📸 CONFIG — يتطابق مع مجلد الصور
-       ============================================================ */
-
+    /* ---------- Config ---------- */
     const GALLERY_IMAGES = [
         'art1.png', 'art2.png', 'art3.png', 'art4.png',
         'art5.png', 'art6.png', 'art7.png', 'art8.png',
@@ -93,66 +81,32 @@
         },
     ];
 
-    /* ============================================================
-       بناء المصفوفات
-       ============================================================ */
+    /* ---------- Build data ---------- */
     const galleryItems = GALLERY_IMAGES.map((filename) => ({
         title: 'Shahed',
         description: 'Original hand-painted portrait by Shahed Alasfar.',
         images: [`img/${filename}`],
     }));
-
     const specialItems = SPECIAL_IMAGES.map((filename) => ({
         title: 'Shahed',
         description: 'Original hand-painted portrait by Shahed Alasfar.',
         images: [`img/${filename}`],
     }));
-
     const storeProducts = STORE_PRODUCTS;
-
-    /* ============================================================
-       INTRO — أسرع على الجوال
-       ============================================================ */
-    function runIntro() {
-        const screen  = document.getElementById('introScreen');
-        const name    = document.getElementById('introName');
-        const sig     = document.getElementById('introSignature');
-        const tagline = document.getElementById('introTagline');
-        if (!screen) return;
-
-        // ✅ الجوال: نصف المدة | reduced motion: تجاوز الشاشة
-        const speed = prefersReduced ? 0 : (isMobile ? 0.5 : 1);
-        if (prefersReduced) {
-            screen.classList.add('hidden');
-            return;
-        }
-
-        [
-            [200  * speed, () => name?.classList.add('visible')],
-            [1500 * speed, () => sig?.classList.add('visible')],
-            [2700 * speed, () => tagline?.classList.add('visible')],
-            [4200 * speed, () => screen.classList.add('fade-out')],
-            [5300 * speed, () => screen.classList.add('hidden')],
-        ].forEach(([t, fn]) => setTimeout(fn, t));
-    }
 
     /* ---------- Header scroll ---------- */
     function initScrollHeader() {
         const header = document.getElementById('header');
         if (!header) return;
         let ticking = false;
-        window.addEventListener(
-            'scroll',
-            () => {
-                if (ticking) return;
-                ticking = true;
-                requestAnimationFrame(() => {
-                    header.classList.toggle('scrolled', window.scrollY > 50);
-                    ticking = false;
-                });
-            },
-            { passive: true }
-        );
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+                ticking = false;
+            });
+        }, { passive: true });
     }
 
     /* ---------- Fade-in ---------- */
@@ -161,18 +115,15 @@
             document.querySelectorAll('.fade-in').forEach((el) => el.classList.add('visible'));
             return;
         }
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((e) => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('visible');
-                        observer.unobserve(e.target);
-                    }
-                });
-            },
-            { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-        );
-        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        document.querySelectorAll('.fade-in').forEach((el) => obs.observe(el));
     }
 
     /* ---------- Mobile menu ---------- */
@@ -182,7 +133,6 @@
         const close   = document.getElementById('mobileMenuClose');
         const overlay = document.getElementById('overlay');
         if (!btn || !menu || !close || !overlay) return;
-
         const open  = () => {
             menu.classList.add('active');
             overlay.classList.add('active');
@@ -217,46 +167,26 @@
         window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ---------- Build Gallery (optimized) ---------- */
+    /* ---------- Build Gallery ---------- */
     function buildGallery() {
         const grid = document.getElementById('galleryGrid');
         if (!grid) return;
         const frag = document.createDocumentFragment();
-
         galleryItems.forEach((item, i) => {
             const el = document.createElement('div');
             el.className = 'gallery-item fade-in';
             el.style.setProperty('--i', i);
-
-            // ✅ أول 4 صور: eager + high priority
-            const eager    = i < 4 ? 'eager' : 'lazy';
-            const priority = i < 4 ? 'high' : 'low';
-
+            const eager = i < 4 ? 'eager' : 'lazy';
             el.innerHTML = `
-                <div class="painting-frame" data-tilt>
-                    <div class="frame-glow"></div>
-                    <div class="frame-outer">
-                        <span class="frame-edge frame-edge--top"></span>
-                        <span class="frame-edge frame-edge--right"></span>
-                        <span class="frame-edge frame-edge--bottom"></span>
-                        <span class="frame-edge frame-edge--left"></span>
-                        <span class="frame-inner-mat"></span>
-                        <div class="frame-mat">
-                            <span class="frame-mat-line"></span>
-                            <img src="${item.images[0]}"
-                                 class="gallery-img"
-                                 alt="${item.title} — Artwork ${i + 1}"
-                                 loading="${eager}"
-                                 fetchpriority="${priority}"
-                                 decoding="async"
-                                 width="280" height="260">
-                        </div>
+                <div class="painting-frame">
+                    <div class="frame-mat">
+                        <img src="${item.images[0]}"
+                             class="gallery-img"
+                             alt="Artwork ${i + 1}"
+                             loading="${eager}"
+                             decoding="async"
+                             width="280" height="260">
                     </div>
-                    <span class="frame-shine"></span>
-                    <span class="frame-sparkle frame-sparkle--tl"></span>
-                    <span class="frame-sparkle frame-sparkle--tr"></span>
-                    <span class="frame-sparkle frame-sparkle--bl"></span>
-                    <span class="frame-sparkle frame-sparkle--br"></span>
                 </div>
                 <div class="painting-label">shahed</div>
             `;
@@ -266,53 +196,36 @@
         grid.appendChild(frag);
     }
 
-    /* ---------- Build Special (optimized) ---------- */
+    /* ---------- Build Special ---------- */
     function buildSpecial() {
         const grid = document.getElementById('specialGrid');
         if (!grid) return;
         const frag = document.createDocumentFragment();
-
         specialItems.forEach((item, i) => {
             const el = document.createElement('div');
             el.className = 'special-item fade-in';
             el.style.setProperty('--i', i);
             el.innerHTML = `
-                <div class="special-frame" data-tilt>
-                    <div class="special-glow"></div>
-                    <span class="special-badge">
-                        <i class="fas fa-star"></i>Special
-                    </span>
-                    <div class="special-outer">
-                        <span class="special-edge special-edge--top"></span>
-                        <span class="special-edge special-edge--right"></span>
-                        <span class="special-edge special-edge--bottom"></span>
-                        <span class="special-edge special-edge--left"></span>
-                        <div class="special-mat">
-                            <span class="special-mat-line"></span>
-                            <img src="${item.images[0]}"
-                                 class="special-img"
-                                 alt="${item.title} — Special ${i + 1}"
-                                 loading="lazy"
-                                 decoding="async"
-                                 width="250" height="240">
-                        </div>
+                <div class="special-frame">
+                    <span class="special-badge"><i class="fas fa-star"></i>Special</span>
+                    <div class="special-mat">
+                        <img src="${item.images[0]}"
+                             class="special-img"
+                             alt="Special ${i + 1}"
+                             loading="lazy"
+                             decoding="async"
+                             width="250" height="240">
                     </div>
-                    <span class="special-shine"></span>
-                    <span class="special-sparkle special-sparkle--tl"></span>
-                    <span class="special-sparkle special-sparkle--tr"></span>
-                    <span class="special-sparkle special-sparkle--bl"></span>
-                    <span class="special-sparkle special-sparkle--br"></span>
                 </div>
                 <div class="special-label">shahed</div>
             `;
             el.addEventListener('click', () => openLightbox('special', i));
             frag.appendChild(el);
         });
-
         grid.appendChild(frag);
     }
 
-    /* ---------- Build Store (optimized) ---------- */
+    /* ---------- Build Store ---------- */
     function buildStore() {
         const grid = document.getElementById('storeGrid');
         if (!grid) return;
@@ -328,9 +241,6 @@
                         <i class="fas fa-check-circle"></i>
                         ${p.regionLabel}
                     </span>
-                    <div class="store-overlay">
-                        <p><i class="fas fa-search-plus"></i> Click to view details</p>
-                    </div>
                 </div>
                 <div class="store-info">
                     <div class="store-info-head">
@@ -344,8 +254,7 @@
                     </p>
                     <p class="store-description">${p.description}</p>
                     <div class="store-cta">
-                        <i class="fab fa-instagram"></i>
-                        Order via Instagram
+                        <i class="fab fa-instagram"></i> Order via Instagram
                     </div>
                 </div>
             `;
@@ -390,7 +299,6 @@
         lb.root.classList.add('active');
         lb.root.setAttribute('aria-hidden', 'false');
         document.body.classList.add('no-scroll');
-        lb.closeBtn?.focus();
     }
 
     function closeLightbox() {
@@ -451,14 +359,8 @@
                 <p class="gallery-product-description">${p.description}</p>
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="store-btn">Order via Instagram</a>
             `;
-        } else if (lb.mode === 'special') {
-            const g = specialItems[lb.index];
-            lb.info.innerHTML = `
-                <h3 class="gallery-product-title">${g.title}</h3>
-                <p class="gallery-product-description">${g.description}</p>
-            `;
         } else {
-            const g = galleryItems[lb.index];
+            const g = lb.mode === 'special' ? specialItems[lb.index] : galleryItems[lb.index];
             lb.info.innerHTML = `
                 <h3 class="gallery-product-title">${g.title}</h3>
                 <p class="gallery-product-description">${g.description}</p>
@@ -483,7 +385,6 @@
 
     /* ---------- Boot ---------- */
     function boot() {
-        runIntro();
         initScrollHeader();
         initMobileMenu();
         initSmoothAnchors();
