@@ -1,6 +1,5 @@
 /* ============================================================
-   SHAHED ALASFAR — STYLE v3.3
-   شبكات منتظمة + إطارات موحّدة + شاشة افتتاح
+   SHAHED ALASFAR — STYLE v3.5
    ============================================================ */
 
 :root {
@@ -48,7 +47,7 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   BACKGROUND — خلفية ثابتة خفيفة
+   BACKGROUND
    ============================================================ */
 .background-canvas {
     position: fixed;
@@ -362,17 +361,17 @@ section {
 .about-text p:last-child { margin-bottom: 0; }
 
 /* ============================================================
-   GALLERY — شبكة منتظمة (3 أعمدة، صفوف متساوية)
+   GALLERY — عمودان + أحجام طبيعية
    ============================================================ */
-#gallery { max-width: 1400px; margin: 0 auto; width: 100%; }
+#gallery { max-width: 1000px; margin: 0 auto; width: 100%; }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     width: 100%;
     padding: 1rem 0 2rem;
-    align-items: stretch;
+    align-items: start;
 }
 
 .gallery-item {
@@ -380,51 +379,46 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 100%;
 }
 
 .painting-frame {
     position: relative;
     width: 100%;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
     background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 50%, var(--wood-dark) 100%);
-    padding: 12px;
+    padding: 10px;
     border-radius: 3px;
     display: flex;
     flex-direction: column;
-    height: 100%;
     max-width: 100%;
 }
 
 .gallery-item:hover .painting-frame {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.7);
 }
 
 .frame-mat {
     background: var(--mat-color);
-    padding: 8px;
+    padding: 7px;
     border-radius: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
+    display: block;
     max-width: 100%;
-    height: 320px;
     overflow: hidden;
 }
 
 .gallery-img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
     background: transparent;
 }
 
 .painting-label {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 0.95rem;
@@ -435,9 +429,9 @@ section {
 .gallery-item:hover .painting-label { color: var(--gold); }
 
 /* ============================================================
-   SPECIAL — شبكة منتظمة (3 أعمدة، صفوف متساوية)
+   SPECIAL — عمودان + إطار ذهبي + بدون معلومات
    ============================================================ */
-#special { max-width: 1400px; margin: 0 auto; width: 100%; }
+#special { max-width: 1000px; margin: 0 auto; width: 100%; }
 
 .special-subtitle {
     font-family: 'Cormorant Garamond', serif;
@@ -452,11 +446,11 @@ section {
 
 .special-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     width: 100%;
     padding: 1rem 0 2rem;
-    align-items: stretch;
+    align-items: start;
 }
 
 .special-item {
@@ -464,46 +458,41 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     position: relative;
-    height: 100%;
 }
 
 .special-frame {
     position: relative;
     width: 100%;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
     background: linear-gradient(135deg, #d4af37 0%, #b89446 50%, #8a6d2f 100%);
-    padding: 14px;
+    padding: 12px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    height: 100%;
     max-width: 100%;
 }
 
 .special-item:hover .special-frame {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 16px 32px rgba(0,0,0,0.7), 0 0 30px rgba(212,175,55,0.4);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.5);
 }
 
 .special-mat {
     background: var(--mat-color);
     padding: 8px;
     border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
+    display: block;
     max-width: 100%;
-    height: 320px;
     overflow: hidden;
 }
 
 .special-img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
     background: transparent;
 }
@@ -523,11 +512,14 @@ section {
     background: linear-gradient(135deg, #f5d97a 0%, #d4af37 100%);
     border-radius: 3px;
     box-shadow: 0 2px 8px rgba(212,175,55,0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
 }
-.special-badge i { margin-right: 0.3rem; font-size: 0.65rem; }
+.special-badge i { font-size: 0.65rem; }
 
 .special-label {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 0.95rem;
@@ -538,9 +530,9 @@ section {
 .special-item:hover .special-label { color: var(--gold); }
 
 /* ============================================================
-   STORE — كل الصور بنفس الحجم (aspect-ratio 4:3)
+   STORE — عمودان + بطاقات موحّدة
    ============================================================ */
-#store { max-width: 1400px; margin: 0 auto; width: 100%; }
+#store { max-width: 1000px; margin: 0 auto; width: 100%; }
 
 .store-notice {
     background: rgba(184,148,70,0.1);
@@ -562,8 +554,8 @@ section {
 
 .store-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     width: 100%;
     align-items: stretch;
 }
@@ -585,7 +577,6 @@ section {
     border-color: var(--gold);
 }
 
-/* ✅ صورة موحّدة الحجم 4:3 */
 .store-images {
     position: relative;
     background: #0f0d0b;
@@ -611,7 +602,7 @@ section {
     gap: 0.4rem;
     padding: 0.4rem 0.85rem;
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
     border-radius: 20px;
     color: #ffffff;
@@ -620,31 +611,11 @@ section {
 .store-region-badge--jo { background: rgba(206, 17, 38, 0.95); }
 .store-region-badge i { font-size: 0.7rem; }
 
-.store-overlay {
-    position: absolute;
-    inset: auto 0 0 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-    padding: 1.5rem 1rem 1rem;
-    transform: translateY(100%);
-    transition: transform var(--transition);
-    z-index: 2;
-}
-.store-item:hover .store-overlay { transform: translateY(0); }
-.store-overlay p {
-    color: var(--gold);
-    font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .store-info {
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 0.7rem;
     flex: 1;
 }
 
@@ -652,13 +623,13 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
 }
 
 .store-title {
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--off-white);
     line-height: 1.4;
@@ -669,9 +640,9 @@ section {
 .store-size-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.3rem 0.75rem;
+    padding: 0.25rem 0.65rem;
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: rgba(245,245,245,0.9);
     background: rgba(184,148,70,0.15);
@@ -684,23 +655,23 @@ section {
 
 .store-price {
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--gold);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin: 0;
     direction: ltr;
 }
-.store-price i { font-size: 0.95rem; opacity: 0.9; }
+.store-price i { font-size: 0.85rem; opacity: 0.9; }
 .store-price .price-value { font-variant-numeric: tabular-nums; }
-.store-price .price-currency { font-size: 0.95rem; margin-left: 0.15rem; }
+.store-price .price-currency { font-size: 0.85rem; margin-left: 0.15rem; }
 
 .store-description {
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: rgba(245,245,245,0.75);
     margin: 0;
     flex: 1;
@@ -712,9 +683,9 @@ section {
     justify-content: center;
     gap: 0.5rem;
     margin-top: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 1rem;
     font-family: 'Cairo', 'Tajawal', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: var(--gold);
     background: rgba(184,148,70,0.08);
@@ -992,55 +963,52 @@ footer {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-
-/* ✅ تابلت — عمودان */
 @media (max-width: 900px) {
     .nav-links, .social-header { display: none; }
     .mobile-menu-btn { display: block; }
 
-    .gallery-grid,
-    .special-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem 1.5rem;
-    }
-    .frame-mat,
-    .special-mat { height: 260px; }
-
-    .store-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-
     section { padding-left: 1rem; padding-right: 1rem; }
     header { padding: 0 1.2rem; }
+
+    .gallery-grid,
+    .special-grid,
+    .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
 }
 
-/* ✅ جوال — عمودان (Gallery/Special) + عمود واحد (Store) */
 @media (max-width: 600px) {
     .social-cards { flex-direction: column; align-items: center; }
     .social-card { width: 200px; height: 170px; }
     .cta-buttons { flex-direction: column; align-items: center; }
     .btn { width: 100%; max-width: 260px; justify-content: center; }
 
-    .gallery-grid,
-    .special-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem 1rem;
-    }
-    .painting-frame { padding: 8px; }
-    .frame-mat { padding: 6px; height: 200px; }
-    .special-frame { padding: 10px; }
-    .special-mat { padding: 6px; height: 200px; }
-    .special-badge { font-size: 0.6rem; padding: 0.25rem 0.6rem; top: -8px; right: -6px; }
+    #gallery, #special, #store { max-width: 100%; }
 
+    .gallery-grid,
+    .special-grid,
     .store-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
-    .store-info { padding: 1.25rem; }
-    .store-title { font-size: 1.1rem; }
-    .store-price { font-size: 1.15rem; }
-    .store-region-badge { font-size: 0.7rem; padding: 0.35rem 0.7rem; }
+
+    .painting-frame { padding: 7px; }
+    .frame-mat { padding: 5px; }
+    .painting-label { font-size: 0.8rem; margin-top: 0.5rem; }
+
+    .special-frame { padding: 8px; }
+    .special-mat { padding: 5px; }
+    .special-badge { font-size: 0.55rem; padding: 0.25rem 0.6rem; top: -8px; right: -6px; }
+    .special-label { font-size: 0.8rem; margin-top: 0.5rem; }
+
+    .store-info { padding: 0.85rem; }
+    .store-title { font-size: 0.95rem; }
+    .store-price { font-size: 1rem; }
+    .store-description { font-size: 0.78rem; }
+    .store-size-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; }
+    .store-region-badge { font-size: 0.62rem; padding: 0.28rem 0.6rem; top: 8px; left: 8px; }
+    .store-cta { font-size: 0.78rem; padding: 0.55rem 0.75rem; }
 
     .gallery-nav { width: 44px; height: 44px; font-size: 1.2rem; }
     .gallery-prev { left: 0.5rem; }
@@ -1051,19 +1019,18 @@ footer {
     .gallery-main-image { max-height: 62vh; }
 }
 
-/* ✅ جوال صغير جداً */
 @media (max-width: 380px) {
     .gallery-grid,
-    .special-grid {
-        gap: 1.2rem 0.8rem;
+    .special-grid,
+    .store-grid {
+        gap: 0.6rem;
     }
-    .frame-mat,
-    .special-mat { height: 170px; }
+    .painting-frame { padding: 5px; }
+    .frame-mat { padding: 4px; }
+    .special-frame { padding: 6px; }
+    .special-mat { padding: 4px; }
 }
 
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
     .fade-in { transition: none; opacity: 1; transform: none; }
     .painting-frame, .special-frame, .store-item { transition: none; }
