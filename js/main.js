@@ -1,13 +1,10 @@
-/* ============================================================
-   MAIN v3.2 — شاشة افتتاح دائماً + إطارات حول الصور الطبيعية
-   ============================================================ */
+
 (function () {
     'use strict';
 
     /* ---------- Device detection ---------- */
     const UA = navigator.userAgent;
     const isMobile  = /iPhone|iPad|iPod|Android/i.test(UA);
-    const isLowEnd  = (navigator.hardwareConcurrency || 8) <= 4;
 
     /* ============================================================
        📸 CONFIG
@@ -61,7 +58,7 @@
             region: 'sa',
             regionLabel: 'متوفر بالسعودية',
             size: '90 × 70',
-            description: 'عمل فني بروح ليلية ساحرة — الفلامنجو في ضوء القمر.',
+            description: '',
             images: ['img/store5.png'],
         },
         {
@@ -71,7 +68,7 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: 'أشعة النور تتسلل بين الخطوط — عمل فني يعكس الأمل.',
+            description: '',
             images: ['img/store6.png'],
         },
         {
@@ -81,7 +78,7 @@
             region: 'jo',
             regionLabel: 'متوفر بالأردن',
             size: '70 × 50',
-            description: 'بورتريه يعكس مشاعر الندم — لحظة صمت أبدية.',
+            description: '',
             images: ['img/store7.png'],
         },
     ];
@@ -92,11 +89,13 @@
         description: 'Original hand-painted portrait by Shahed Alasfar.',
         images: [`img/${filename}`],
     }));
+
     const specialItems = SPECIAL_IMAGES.map((filename) => ({
-        title: 'Shahed',
-        description: 'Original hand-painted portrait by Shahed Alasfar.',
+        title: '',
+        description: '',
         images: [`img/${filename}`],
     }));
+
     const storeProducts = STORE_PRODUCTS;
 
     /* ============================================================
@@ -121,7 +120,7 @@
     }
 
     /* ============================================================
-       INTRO — تظهر دائماً
+       INTRO
        ============================================================ */
     function runIntro() {
         const screen  = document.getElementById('introScreen');
@@ -130,7 +129,6 @@
         const tagline = document.getElementById('introTagline');
         if (!screen) return;
 
-        // ✅ على الجوال: 75% من المدة (لكن تظهر دائماً)
         const speed = isMobile ? 0.75 : 1;
 
         [
@@ -229,29 +227,15 @@
             const priority = i < 4 ? 'high' : 'low';
 
             el.innerHTML = `
-                <div class="painting-frame" data-tilt>
-                    <div class="frame-glow"></div>
-                    <div class="frame-outer">
-                        <span class="frame-edge frame-edge--top"></span>
-                        <span class="frame-edge frame-edge--right"></span>
-                        <span class="frame-edge frame-edge--bottom"></span>
-                        <span class="frame-edge frame-edge--left"></span>
-                        <span class="frame-inner-mat"></span>
-                        <div class="frame-mat">
-                            <span class="frame-mat-line"></span>
-                            <img src="${item.images[0]}"
-                                 class="gallery-img"
-                                 alt="Artwork ${i + 1}"
-                                 loading="${eager}"
-                                 fetchpriority="${priority}"
-                                 decoding="async">
-                        </div>
+                <div class="painting-frame">
+                    <div class="frame-mat">
+                        <img src="${item.images[0]}"
+                             class="gallery-img"
+                             alt="Artwork ${i + 1}"
+                             loading="${eager}"
+                             fetchpriority="${priority}"
+                             decoding="async">
                     </div>
-                    <span class="frame-shine"></span>
-                    <span class="frame-sparkle frame-sparkle--tl"></span>
-                    <span class="frame-sparkle frame-sparkle--tr"></span>
-                    <span class="frame-sparkle frame-sparkle--bl"></span>
-                    <span class="frame-sparkle frame-sparkle--br"></span>
                 </div>
                 <div class="painting-label">shahed</div>
             `;
@@ -261,7 +245,7 @@
         grid.appendChild(frag);
     }
 
-    /* ---------- Build Special ---------- */
+    /* ---------- Build Special (صور فقط، إطار ذهبي) ---------- */
     function buildSpecial() {
         const grid = document.getElementById('specialGrid');
         if (!grid) return;
@@ -271,31 +255,18 @@
             el.className = 'special-item fade-in';
             el.style.setProperty('--i', i);
             el.innerHTML = `
-                <div class="special-frame" data-tilt>
-                    <div class="special-glow"></div>
+                <div class="special-frame">
                     <span class="special-badge">
                         <i class="fas fa-star"></i>Special
                     </span>
-                    <div class="special-outer">
-                        <span class="special-edge special-edge--top"></span>
-                        <span class="special-edge special-edge--right"></span>
-                        <span class="special-edge special-edge--bottom"></span>
-                        <span class="special-edge special-edge--left"></span>
-                        <div class="special-mat">
-                            <span class="special-mat-line"></span>
-                            <img src="${item.images[0]}"
-                                 class="special-img"
-                                 alt="Special ${i + 1}"
-                                 loading="eager"
-                                 fetchpriority="high"
-                                 decoding="async">
-                        </div>
+                    <div class="special-mat">
+                        <img src="${item.images[0]}"
+                             class="special-img"
+                             alt="Special ${i + 1}"
+                             loading="eager"
+                             fetchpriority="high"
+                             decoding="async">
                     </div>
-                    <span class="special-shine"></span>
-                    <span class="special-sparkle special-sparkle--tl"></span>
-                    <span class="special-sparkle special-sparkle--tr"></span>
-                    <span class="special-sparkle special-sparkle--bl"></span>
-                    <span class="special-sparkle special-sparkle--br"></span>
                 </div>
                 <div class="special-label">shahed</div>
             `;
@@ -327,9 +298,6 @@
                         <i class="fas fa-check-circle"></i>
                         ${p.regionLabel}
                     </span>
-                    <div class="store-overlay">
-                        <p><i class="fas fa-search-plus"></i> Click to view details</p>
-                    </div>
                 </div>
                 <div class="store-info">
                     <div class="store-info-head">
@@ -428,6 +396,7 @@
             lb.thumbs.style.display = 'none';
         }
 
+        // ✅ Special: صورة فقط بدون معلومات
         if (lb.mode === 'store') {
             const p = storeProducts[lb.index];
             lb.info.innerHTML = `
@@ -449,11 +418,7 @@
                 <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="store-btn">Order via Instagram</a>
             `;
         } else {
-            const g = lb.mode === 'special' ? specialItems[lb.index] : galleryItems[lb.index];
-            lb.info.innerHTML = `
-                <h3 class="gallery-product-title">${g.title}</h3>
-                <p class="gallery-product-description">${g.description}</p>
-            `;
+            lb.info.innerHTML = '';
         }
     }
 
