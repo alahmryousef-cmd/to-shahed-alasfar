@@ -1,5 +1,6 @@
 /* ============================================================
-   SHAHED ALASFAR — STYLE v3.5
+   SHAHED ALASFAR — STYLE v3.6
+   بدون باسبارتو أبيض (إطار ملتصق بالصورة)
    ============================================================ */
 
 :root {
@@ -15,8 +16,6 @@
     --wood-light:  #6b4a30;
     --wood-hi:     #8f6842;
     --wood-gold:   #c9a058;
-    --mat-color:   #f0ead8;
-    --mat-shadow:  #c9bda0;
 
     --transition-fast: 0.2s ease;
     --transition:      0.3s ease;
@@ -361,7 +360,7 @@ section {
 .about-text p:last-child { margin-bottom: 0; }
 
 /* ============================================================
-   GALLERY — عمودان + أحجام طبيعية
+   GALLERY — عمودان + بدون باسبارتو أبيض
    ============================================================ */
 #gallery { max-width: 1000px; margin: 0 auto; width: 100%; }
 
@@ -393,6 +392,7 @@ section {
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    overflow: hidden;
 }
 
 .gallery-item:hover .painting-frame {
@@ -400,13 +400,14 @@ section {
     box-shadow: 0 12px 24px rgba(0,0,0,0.7);
 }
 
+/* ✅ بدون باسبارتو أبيض — الصورة ملتصقة بالإطار */
 .frame-mat {
-    background: var(--mat-color);
-    padding: 7px;
-    border-radius: 1px;
+    background: transparent;
+    padding: 0;
     display: block;
     max-width: 100%;
     overflow: hidden;
+    line-height: 0;
 }
 
 .gallery-img {
@@ -429,7 +430,7 @@ section {
 .gallery-item:hover .painting-label { color: var(--gold); }
 
 /* ============================================================
-   SPECIAL — عمودان + إطار ذهبي + بدون معلومات
+   SPECIAL — عمودان + إطار ذهبي + بدون باسبارتو
    ============================================================ */
 #special { max-width: 1000px; margin: 0 auto; width: 100%; }
 
@@ -473,6 +474,7 @@ section {
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    overflow: hidden;
 }
 
 .special-item:hover .special-frame {
@@ -480,13 +482,14 @@ section {
     box-shadow: 0 12px 24px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.5);
 }
 
+/* ✅ بدون باسبارتو أبيض */
 .special-mat {
-    background: var(--mat-color);
-    padding: 8px;
-    border-radius: 2px;
+    background: transparent;
+    padding: 0;
     display: block;
     max-width: 100%;
     overflow: hidden;
+    line-height: 0;
 }
 
 .special-img {
@@ -499,24 +502,24 @@ section {
 
 .special-badge {
     position: absolute;
-    top: -10px;
-    right: -8px;
+    top: 8px;
+    right: 8px;
     z-index: 5;
-    padding: 0.35rem 0.85rem;
+    padding: 0.3rem 0.75rem;
     font-family: 'Playfair Display', serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #1a1a1a;
     background: linear-gradient(135deg, #f5d97a 0%, #d4af37 100%);
     border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(212,175,55,0.5);
+    box-shadow: 0 2px 8px rgba(212,175,55,0.6);
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
 }
-.special-badge i { font-size: 0.65rem; }
+.special-badge i { font-size: 0.6rem; }
 
 .special-label {
     margin-top: 0.75rem;
@@ -993,13 +996,11 @@ footer {
         gap: 0.75rem;
     }
 
-    .painting-frame { padding: 7px; }
-    .frame-mat { padding: 5px; }
+    .painting-frame { padding: 6px; }
     .painting-label { font-size: 0.8rem; margin-top: 0.5rem; }
 
-    .special-frame { padding: 8px; }
-    .special-mat { padding: 5px; }
-    .special-badge { font-size: 0.55rem; padding: 0.25rem 0.6rem; top: -8px; right: -6px; }
+    .special-frame { padding: 7px; }
+    .special-badge { font-size: 0.55rem; padding: 0.22rem 0.55rem; top: 6px; right: 6px; }
     .special-label { font-size: 0.8rem; margin-top: 0.5rem; }
 
     .store-info { padding: 0.85rem; }
@@ -1026,9 +1027,7 @@ footer {
         gap: 0.6rem;
     }
     .painting-frame { padding: 5px; }
-    .frame-mat { padding: 4px; }
     .special-frame { padding: 6px; }
-    .special-mat { padding: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
