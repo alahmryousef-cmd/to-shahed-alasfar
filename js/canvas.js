@@ -1,11 +1,23 @@
+/* ============================================================
+   CANVAS v2.3.5 — Light, adaptive, pauseable
+   ============================================================ */
 (function () {
     'use strict';
 
     const canvas = document.getElementById('bgCanvas');
     if (!canvas) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) { canvas.style.display = 'none'; return; }
+    /* ---------- Device detection ---------- */
+    const UA = navigator.userAgent;
+    const isMobile     = /iPhone|iPad|iPod|Android/i.test(UA);
+    const isLowEnd     = (navigator.hardwareConcurrency || 8) <= 4;
+    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ✅ إخفاء الخلفية تماماً عند تقليل الحركة أو الأجهزة الضعيفة
+    if (prefersReduced || (isMobile && isLowEnd)) {
+        canvas.style.display = 'none';
+        return;
+    }
 
     const ctx = canvas.getContext('2d', { alpha: true });
     let W = 0, H = 0, dpr = 1;
@@ -13,18 +25,21 @@
     let paused = false;
     let last = 0;
 
-    const TARGET_FPS = 30;
+    const TARGET_FPS = isMobile ? 20 : 30;
     const FRAME_MS   = 1000 / TARGET_FPS;
 
     function computeParticles() {
         const area = window.innerWidth * window.innerHeight;
-        return Math.min(28, Math.max(10, Math.round(area / 55000)));
+        if (isMobile && isLowEnd) return 5;
+        if (isMobile)              return 8;
+        if (area < 800000)         return 12;
+        return Math.min(20, Math.max(10, Math.round(area / 70000)));
     }
 
     let PARTICLE_COUNT = computeParticles();
 
     function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
         W = window.innerWidth;
         H = window.innerHeight;
         canvas.width  = W * dpr;
@@ -95,6 +110,12 @@
 
     function start() { if (raf === null) { last = performance.now(); raf = requestAnimationFrame(loop); } }
     function stop()  { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
+
+    // ✅ إيقاف كامل على الجوال (توفير بطارية)
+    if (isMobile) {
+        canvas.style.display = 'none';
+        return;
+    }
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) { paused = true; stop(); }
