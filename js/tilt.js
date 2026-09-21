@@ -1,21 +1,33 @@
+/* ============================================================
+   TILT v2.3.5 — Optimized (mobile-friendly, adaptive)
+   ============================================================ */
 (function () {
     'use strict';
 
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    /* ---------- Device detection ---------- */
+    const UA = navigator.userAgent;
+    const isMobile     = /iPhone|iPad|iPod|Android/i.test(UA);
+    const isLowEnd     = (navigator.hardwareConcurrency || 8) <= 4;
+    const isTouch      = matchMedia('(hover: none)').matches;
+
+    // ✅ إيقاف تام على الأجهزة الضعيفة
+    if (isMobile && isLowEnd) {
+        console.log('[Tilt] Disabled on low-end mobile');
+        return;
+    }
+
+    /* ---------- Config (adaptive) ---------- */
     const CFG = {
-        maxTilt:       12,
-        maxMagnet:     6,
-        maxScale:      1.035,
-        ease:          0.14,
-        easeEdge:      0.18,
-        gyroEnabled:   false,
-        gyroMaxTilt:   6,
-        gyroEase:      0.05,
+        maxTilt:      isMobile ? 6 : 12,
+        maxMagnet:    isMobile ? 3 : 6,
+        maxScale:     isMobile ? 1.02 : 1.035,
+        ease:         0.14,
+        easeEdge:     0.18,
     };
 
-    const isTouch = matchMedia('(hover: none)').matches;
-    const frames  = [];
+    const frames = [];
 
     function attach(frame) {
         if (frame.dataset.tiltInit) return;
@@ -33,8 +45,6 @@
             tS: 1, cS: 1,
             active: false,
             rafId: null,
-            gyroRX: 0, gyroRY: 0,
-            gyroBase: null,
         };
         frames.push(s);
 
@@ -114,8 +124,8 @@
     function loop(s) {
         s.rafId = null;
 
-        s.cRX = lerp(s.cRX, s.tRX + s.gyroRX, CFG.ease);
-        s.cRY = lerp(s.cRY, s.tRY + s.gyroRY, CFG.ease);
+        s.cRX = lerp(s.cRX, s.tRX, CFG.ease);
+        s.cRY = lerp(s.cRY, s.tRY, CFG.ease);
         s.cTX = lerp(s.cTX, s.tTX, CFG.ease);
         s.cTY = lerp(s.cTY, s.tTY, CFG.ease);
         s.cMX = lerp(s.cMX, s.tMX, CFG.easeEdge);
