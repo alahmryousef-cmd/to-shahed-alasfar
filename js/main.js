@@ -1,459 +1,452 @@
-
+/* ============================================================
+   MAIN: renders the grids from js/data.js and wires the page.
+   No scroll listeners and no per-frame work here: IntersectionObserver
+   drives reveals and header state, native scroll timelines drive the
+   hero-to-About story, and the cursor trail owns its own (idle-aware) loop.
+   ============================================================ */
 (function () {
     'use strict';
 
-    /* ---------- Device detection ---------- */
-    const UA = navigator.userAgent;
-    const isMobile  = /iPhone|iPad|iPod|Android/i.test(UA);
+    const S = window.SITE;
+    if (!S) return;
 
-    /* ============================================================
-       📸 CONFIG
-       ============================================================ */
-    const GALLERY_IMAGES = [
-        'art1.png', 'art2.png', 'art3.png', 'art4.png',
-        'art5.png', 'art6.png', 'art7.png', 'art8.png',
-        'art9.png', 'art10.png', 'art11.png', 'art12.png',
-        'art13.png', 'art14.png', 'art15.png',
-    ];
+    const { Img, isArabic, INSTAGRAM, GALLERY, STORE, WORKSHOPS, TRAIL, TEASER, STORY, COUNTRY } = S;
+    const html = document.documentElement;
+    const $ = (sel, root) => (root || document).querySelector(sel);
+    const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+    const reduceMq = matchMedia('(prefers-reduced-motion: reduce)');
+    const icon = (id) => `<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-${id}"/></svg>`;
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const ratio = (key) => Img.dims(key).ratio.toFixed(4);
+    const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 
-    const SPECIAL_IMAGES = [
-        'special1.png', 'special2.png', 'special3.png',
-    ];
-
-    const STORE_PRODUCTS = [
-        {
-            title: 'مرآة الفنانين',
-            priceValue: '1300',
-            priceCurrency: '﷼',
-            region: 'sa',
-            regionLabel: 'متوفر بالسعودية',
-            size: '100 × 60',
-            description: 'عمل فني على مرآة يجمع ملامح وجوه فنية خالدة بالأبيض والأسود.',
-            images: ['img/store1.jpg'],
-        },
-        {
-            title: 'الأيدي والخيوط الحمراء',
-            priceValue: '770',
-            priceCurrency: '﷼',
-            region: 'sa',
-            regionLabel: 'متوفر بالسعودية',
-            size: '40 × 40 (×4 قطع)',
-            description: 'عمل فني من أربع لوحات تتشابك بينها الخيوط الحمراء.',
-            images: ['img/store3.jpg', 'img/store3-1.jpg'],
-        },
-        {
-            title: 'فيودور دوستويفسكي',
-            priceValue: '450',
-            priceCurrency: '﷼',
-            region: 'sa',
-            regionLabel: 'متوفر بالسعودية',
-            size: '60 × 40',
-            description: 'بورتريه عملاق الأدب الروسي: فيودور دوستويفسكي.',
-            images: ['img/store4.jpg', 'img/store4-1.jpg'],
-        },
-        {
-            title: 'Flamingo Night',
-            priceValue: '850',
-            priceCurrency: '﷼',
-            region: 'sa',
-            regionLabel: 'متوفر بالسعودية',
-            size: '90 × 70',
-            description: '',
-            images: ['img/store5.png'],
-        },
-        {
-            title: 'Rays of Light',
-            priceValue: '75',
-            priceCurrency: 'د.أ',
-            region: 'jo',
-            regionLabel: 'متوفر بالأردن',
-            size: '70 × 50',
-            description: '',
-            images: ['img/store6.png'],
-        },
-        {
-            title: 'Regret',
-            priceValue: '85',
-            priceCurrency: 'د.أ',
-            region: 'jo',
-            regionLabel: 'متوفر بالأردن',
-            size: '70 × 50',
-            description: '',
-            images: ['img/store7.png'],
-        },
-    ];
-
-    /* ---------- Build data ---------- */
-    const galleryItems = GALLERY_IMAGES.map((filename) => ({
-        title: 'Shahed',
-        description: 'Original hand-painted portrait by Shahed Alasfar.',
-        images: [`img/${filename}`],
-    }));
-
-    const specialItems = SPECIAL_IMAGES.map((filename) => ({
-        title: '',
-        description: '',
-        images: [`img/${filename}`],
-    }));
-
-    const storeProducts = STORE_PRODUCTS;
-
-    /* ============================================================
-       Preload الصور المهمة
-       ============================================================ */
-    function preloadCriticalImages() {
-        const critical = [
-            'img/sign.png',
-            'img/special1.png',
-            'img/special2.png',
-            'img/special3.png',
-            'img/store5.png',
-            'img/store6.png',
-            'img/store7.png',
-            'img/art1.png',
-            'img/art2.png',
-        ];
-        critical.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-        });
+    /* `deferred` images keep their address in data-* until the gallery is first opened,
+       because loading="lazy" keys off layout position and would still fetch a collapsed panel. */
+    function picture(key, alt, sizes, extra, deferred) {
+        const d = Img.dims(key);
+        const src = deferred ? `data-src="${Img.smallest(key)}" data-srcset="${Img.srcset(key)}"`
+                             : `src="${Img.smallest(key)}" srcset="${Img.srcset(key)}"`;
+        return `<img ${src} sizes="${sizes}"
+                     width="${d.w}" height="${d.h}" style="--ar:${ratio(key)}"
+                     alt="${esc(alt)}" loading="lazy" decoding="async" ${extra || ''}>`;
     }
 
-    /* ============================================================
-       INTRO
-       ============================================================ */
-    function runIntro() {
-        const screen  = document.getElementById('introScreen');
-        const name    = document.getElementById('introName');
-        const sig     = document.getElementById('introSignature');
-        const tagline = document.getElementById('introTagline');
-        if (!screen) return;
-
-        const speed = isMobile ? 0.75 : 1;
-
-        [
-            [200  * speed, () => name?.classList.add('visible')],
-            [1500 * speed, () => sig?.classList.add('visible')],
-            [2700 * speed, () => tagline?.classList.add('visible')],
-            [4200 * speed, () => screen.classList.add('fade-out')],
-            [5300 * speed, () => screen.classList.add('hidden')],
-        ].forEach(([t, fn]) => setTimeout(fn, t));
-    }
-
-    /* ---------- Header scroll ---------- */
-    function initScrollHeader() {
-        const header = document.getElementById('header');
-        if (!header) return;
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-                header.classList.toggle('scrolled', window.scrollY > 50);
-                ticking = false;
-            });
-        }, { passive: true });
-    }
-
-    /* ---------- Fade-in ---------- */
-    function initFadeIn() {
-        if (!('IntersectionObserver' in window)) {
-            document.querySelectorAll('.fade-in').forEach((el) => el.classList.add('visible'));
-            return;
-        }
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach((e) => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    obs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-        document.querySelectorAll('.fade-in').forEach((el) => obs.observe(el));
-    }
-
-    /* ---------- Mobile menu ---------- */
-    function initMobileMenu() {
-        const btn     = document.getElementById('mobileMenuBtn');
-        const menu    = document.getElementById('mobileMenu');
-        const close   = document.getElementById('mobileMenuClose');
-        const overlay = document.getElementById('overlay');
-        if (!btn || !menu || !close || !overlay) return;
-        const open  = () => {
-            menu.classList.add('active');
-            overlay.classList.add('active');
-            menu.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('no-scroll');
-        };
-        const closeFn = () => {
-            menu.classList.remove('active');
-            overlay.classList.remove('active');
-            menu.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('no-scroll');
-        };
-        btn.addEventListener('click', open);
-        close.addEventListener('click', closeFn);
-        overlay.addEventListener('click', closeFn);
-        menu.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', closeFn));
-    }
-
-    /* ---------- Smooth anchors ---------- */
-    function initSmoothAnchors() {
-        document.querySelectorAll('a[href^="#"]').forEach((a) => {
-            a.addEventListener('click', function (e) {
-                const id = this.getAttribute('href');
-                if (!id || id === '#' || id.length < 2) return;
-                const target = document.querySelector(id);
-                if (!target) return;
-                e.preventDefault();
-                const top = target.getBoundingClientRect().top + window.scrollY - 72;
-                window.scrollTo({ top, behavior: 'smooth' });
-            });
-        });
-        window.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    /* ---------- Build Gallery ---------- */
+    /* ---------- Gallery (collapsed until opened) ---------- */
     function buildGallery() {
-        const grid = document.getElementById('galleryGrid');
-        if (!grid) return;
-        const frag = document.createDocumentFragment();
-        galleryItems.forEach((item, i) => {
-            const el = document.createElement('div');
-            el.className = 'gallery-item fade-in';
-            el.style.setProperty('--i', i);
-
-            const eager    = i < 4 ? 'eager' : 'lazy';
-            const priority = i < 4 ? 'high' : 'low';
-
-            el.innerHTML = `
-                <div class="painting-frame">
-                    <div class="frame-mat">
-                        <img src="${item.images[0]}"
-                             class="gallery-img"
-                             alt="Artwork ${i + 1}"
-                             loading="${eager}"
-                             fetchpriority="${priority}"
-                             decoding="async">
-                    </div>
-                </div>
-                <div class="painting-label">shahed</div>
-            `;
-            el.addEventListener('click', () => openLightbox('gallery', i));
-            frag.appendChild(el);
-        });
-        grid.appendChild(frag);
+        const root = $('#galleryGrid');
+        if (!root) return;
+        root.innerHTML = GALLERY.map((g, i) => `
+            <li class="work reveal" style="--i:${(i % 5) + Math.floor(i / 5)}">
+                <button class="work__btn" type="button" data-open="gallery:${i}">
+                    <span class="work__img">${picture(g.images[0], g.alt, '(min-width: 1000px) 400px, (min-width: 620px) 46vw, 92vw', `data-thumb="gallery:${i}:0"`, true)}</span>
+                </button>
+                <p class="work__label">${esc(g.label)}</p>
+            </li>`).join('');
     }
 
-    /* ---------- Build Special (صور فقط، إطار ذهبي) ---------- */
-    function buildSpecial() {
-        const grid = document.getElementById('specialGrid');
-        if (!grid) return;
-        const frag = document.createDocumentFragment();
-        specialItems.forEach((item, i) => {
-            const el = document.createElement('div');
-            el.className = 'special-item fade-in';
-            el.style.setProperty('--i', i);
-            el.innerHTML = `
-                <div class="special-frame">
-                    <span class="special-badge">
-                        <i class="fas fa-star"></i>Special
-                    </span>
-                    <div class="special-mat">
-                        <img src="${item.images[0]}"
-                             class="special-img"
-                             alt="Special ${i + 1}"
-                             loading="eager"
-                             fetchpriority="high"
-                             decoding="async">
-                    </div>
-                </div>
-                <div class="special-label">shahed</div>
-            `;
-            el.addEventListener('click', () => openLightbox('special', i));
-            frag.appendChild(el);
-        });
-        grid.appendChild(frag);
+    function buildTeaser() {
+        const root = $('#galleryTeaser');
+        if (!root) return;
+        root.innerHTML = `<div class="teaser__row">${TEASER.map((key, i) => {
+            const d = Img.dims(key);
+            return `<span class="teaser__item" style="--i:${i};--ar:${ratio(key)}">
+                <img src="${Img.smallest(key)}" width="${d.w}" height="${d.h}" alt="" loading="lazy" decoding="async"></span>`;
+        }).join('')}</div>`;
     }
 
-    /* ---------- Build Store ---------- */
-    function buildStore() {
-        const grid = document.getElementById('storeGrid');
-        if (!grid) return;
-        const frag = document.createDocumentFragment();
-        storeProducts.forEach((p, i) => {
-            const el = document.createElement('div');
-            el.className = 'store-item fade-in';
-
-            const isNew = i >= 3;
-            const eager = isNew ? 'eager' : 'lazy';
-            const priority = isNew ? 'high' : 'low';
-
-            el.innerHTML = `
-                <div class="store-images">
-                    <img src="${p.images[0]}" class="store-img" alt="${p.title}"
-                         loading="${eager}" fetchpriority="${priority}"
-                         decoding="async">
-                    <span class="store-region-badge store-region-badge--${p.region}">
-                        <i class="fas fa-check-circle"></i>
-                        ${p.regionLabel}
-                    </span>
-                </div>
-                <div class="store-info">
-                    <div class="store-info-head">
-                        <h3 class="store-title">${p.title}</h3>
-                        <span class="store-size-badge">${p.size}</span>
-                    </div>
-                    <p class="store-price">
-                        <i class="fas fa-tag"></i>
-                        <bdi class="price-value">${p.priceValue}</bdi>
-                        <bdi class="price-currency">${p.priceCurrency}</bdi>
-                    </p>
-                    <p class="store-description">${p.description}</p>
-                    <div class="store-cta">
-                        <i class="fab fa-instagram"></i> Order via Instagram
-                    </div>
-                </div>
-            `;
-            el.addEventListener('click', () => openLightbox('store', i));
-            frag.appendChild(el);
-        });
-        grid.appendChild(frag);
-    }
-
-    /* ---------- Lightbox ---------- */
-    const lb = {
-        root: null, img: null, thumbs: null, info: null,
-        closeBtn: null, prevBtn: null, nextBtn: null,
-        mode: 'gallery', index: 0, images: [], lastFocus: null,
+    /* ---------- Store ---------- */
+    /* Flag-inspired marks: simple geometry only, no script or emblem. */
+    const FLAGS = {
+        sa: '<svg class="flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><rect width="30" height="20" fill="#0c7a43"/><rect x="7" y="13.4" width="16" height="1.4" fill="#fff"/><rect x="21.6" y="12.6" width="1.4" height="3" fill="#fff"/></svg>',
+        jo: '<svg class="flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><rect width="30" height="6.67" fill="#111"/><rect y="6.67" width="30" height="6.66" fill="#fff"/><rect y="13.33" width="30" height="6.67" fill="#0b7d3e"/><path d="M0 0 15 10 0 20Z" fill="#ce1126"/><polygon points="6.00,7.40 6.46,9.05 8.03,8.38 7.02,9.77 8.53,10.58 6.82,10.65 7.13,12.34 6.00,11.05 4.87,12.34 5.18,10.65 3.47,10.58 4.98,9.77 3.97,8.38 5.54,9.05" fill="#fff"/></svg>',
     };
 
-    function cacheLightbox() {
-        lb.root     = document.getElementById('fullscreenGallery');
-        lb.img      = document.getElementById('galleryMainImage');
-        lb.thumbs   = document.getElementById('galleryThumbnails');
-        lb.info     = document.getElementById('galleryInfo');
-        lb.closeBtn = document.getElementById('galleryClose');
-        lb.prevBtn  = document.getElementById('galleryPrev');
-        lb.nextBtn  = document.getElementById('galleryNext');
+    function sizeTag(size) {
+        const m = /^(.*?)\s*(\(.*\))$/.exec(size);
+        const inner = m ? `${esc(m[1])} <bdi dir="rtl" lang="ar">${esc(m[2])}</bdi>` : esc(size);
+        return `<span class="tag" dir="ltr">${inner}</span>`;
     }
 
-    function getArrForMode(mode) {
-        if (mode === 'store')   return storeProducts;
-        if (mode === 'special') return specialItems;
-        return galleryItems;
+    /* Details block shared by the store rows and the viewer. */
+    function productDetails(p) {
+        const country = COUNTRY[p.region];
+        return `
+            <h3 class="product__title" lang="${isArabic(p.title) ? 'ar' : 'en'}">${esc(p.title)}</h3>
+            <p class="price"><bdi class="price__v">${esc(p.priceValue)}</bdi><bdi class="price__c" lang="ar">${esc(p.priceCurrency)}</bdi></p>
+            <div class="tags">
+                ${country ? `<span class="country" lang="en" dir="ltr">${FLAGS[p.region] || ''}${esc(country.name)}</span>` : ''}
+                <span class="tag" lang="ar" dir="rtl">${esc(p.regionLabel)}</span>
+                ${sizeTag(p.size)}
+            </div>
+            ${p.description ? `<p class="product__desc" lang="ar">${esc(p.description)}</p>` : ''}`;
     }
 
-    function openLightbox(mode, index) {
-        cacheLightbox();
-        if (!lb.root) return;
-        lb.mode      = mode;
-        lb.index     = index;
-        lb.lastFocus = document.activeElement;
-        const arr    = getArrForMode(mode);
-        lb.images    = arr[index].images;
-        renderLightbox();
-        lb.root.classList.add('active');
-        lb.root.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('no-scroll');
-    }
+    const orderLink = (cls) => `<a class="btn ${cls}" lang="en" dir="ltr" href="${INSTAGRAM}" target="_blank" rel="noopener">Order via Instagram ${icon('arrow-up-right')}</a>`;
 
-    function closeLightbox() {
-        if (!lb.root) return;
-        lb.root.classList.remove('active');
-        lb.root.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('no-scroll');
-        if (lb.lastFocus && typeof lb.lastFocus.focus === 'function') lb.lastFocus.focus();
-    }
-
-    function navigateLightbox(dir) {
-        const arr = getArrForMode(lb.mode);
-        lb.index  = (lb.index + dir + arr.length) % arr.length;
-        lb.images = arr[lb.index].images;
-        renderLightbox();
-    }
-
-    function renderLightbox() {
-        lb.img.src = lb.images[0];
-        lb.thumbs.innerHTML = '';
-
-        if (lb.images.length > 1) {
-            lb.thumbs.style.display = 'flex';
-            lb.images.forEach((src, i) => {
-                const t = document.createElement('img');
-                t.src = src;
-                t.className = 'gallery-thumbnail' + (i === 0 ? ' active' : '');
-                t.alt = '';
-                t.loading = 'lazy';
-                t.addEventListener('click', () => {
-                    lb.img.src = src;
-                    lb.thumbs.querySelectorAll('.gallery-thumbnail').forEach((x) => x.classList.remove('active'));
-                    t.classList.add('active');
-                });
-                lb.thumbs.appendChild(t);
-            });
-        } else {
-            lb.thumbs.style.display = 'none';
-        }
-
-        // ✅ Special: صورة فقط بدون معلومات
-        if (lb.mode === 'store') {
-            const p = storeProducts[lb.index];
-            lb.info.innerHTML = `
-                <h3 class="gallery-product-title">${p.title}</h3>
-                <p class="gallery-product-price">
-                    <i class="fas fa-tag"></i>
-                    <bdi class="price-value">${p.priceValue}</bdi>
-                    <bdi class="price-currency">${p.priceCurrency}</bdi>
-                </p>
-                <div class="gallery-product-meta">
-                    <span class="gallery-meta-badge gallery-meta-badge--size">
-                        <i class="fas fa-ruler-combined"></i> ${p.size}
-                    </span>
-                    <span class="gallery-meta-badge gallery-meta-badge--${p.region}">
-                        <i class="fas fa-check-circle"></i> ${p.regionLabel}
-                    </span>
+    function buildStore() {
+        const root = $('#storeGrid');
+        if (!root) return;
+        root.innerHTML = STORE.map((p, i) => {
+            const rtl = isArabic(p.title);
+            const first = p.images[0];
+            const thumbs = p.images.length > 1 ? `
+                <div class="product__thumbs">
+                    ${p.images.map((k, j) => `
+                        <button class="thumb" type="button" data-open="store:${i}:${j}" aria-label="View image ${j + 1} of ${p.images.length}: ${esc(p.title)}">
+                            <img src="${Img.smallest(k)}" alt="" width="56" height="56" loading="lazy" decoding="async" ${j ? `data-thumb="store:${i}:${j}"` : ''}>
+                        </button>`).join('')}
+                </div>` : '';
+            return `
+            <li class="product reveal" data-region="${p.region}">
+                <div class="product__media">
+                    <div class="product__plate">
+                        <button class="product__open" type="button" data-open="store:${i}" style="--ar:${ratio(first)}" aria-label="Enlarge: ${esc(p.title)}">
+                            ${picture(first, p.title, '(min-width: 860px) 44vw, 92vw', `data-thumb="store:${i}:0"`)}
+                        </button>
+                    </div>
+                    ${thumbs}
                 </div>
-                <p class="gallery-product-description">${p.description}</p>
-                <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" class="store-btn">Order via Instagram</a>
-            `;
-        } else {
-            lb.info.innerHTML = '';
-        }
+                <div class="product__info" lang="${rtl ? 'ar' : 'en'}" dir="${rtl ? 'rtl' : 'ltr'}">
+                    ${productDetails(p)}
+                    ${orderLink('btn--line')}
+                </div>
+            </li>`;
+        }).join('');
     }
 
-    function initLightboxEvents() {
-        cacheLightbox();
-        if (!lb.root) return;
-        lb.closeBtn.addEventListener('click', closeLightbox);
-        lb.prevBtn.addEventListener('click',  () => navigateLightbox(-1));
-        lb.nextBtn.addEventListener('click',  () => navigateLightbox(1));
-        lb.root.addEventListener('click', (e) => { if (e.target === lb.root) closeLightbox(); });
-        document.addEventListener('keydown', (e) => {
-            if (!lb.root.classList.contains('active')) return;
-            if (e.key === 'Escape')     closeLightbox();
-            if (e.key === 'ArrowLeft')  navigateLightbox(-1);
-            if (e.key === 'ArrowRight') navigateLightbox(1);
+    /* The viewer asks for the same details plus a sticky order bar. */
+    function viewerInfo(p) {
+        const frag = document.createDocumentFragment();
+        const wrap = document.createElement('div');
+        const rtl = isArabic(p.title);
+        wrap.lang = rtl ? 'ar' : 'en';
+        wrap.dir = rtl ? 'rtl' : 'ltr';
+        wrap.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;gap:1rem;width:100%';
+        wrap.innerHTML = productDetails(p);
+        const cta = document.createElement('div');
+        cta.className = 'viewer__cta';
+        cta.innerHTML = orderLink('btn--solid');
+        frag.append(wrap, cta);
+        return frag;
+    }
+
+    /* ---------- Opening the viewer (event delegation) ---------- */
+    const viewerItems = (list) => list.map((x) => ({ images: [x.key], alt: x.alt, label: x.label || '' }));
+
+    function initOpeners() {
+        window.SiteViewer && window.SiteViewer.init({
+            collections: {
+                gallery: GALLERY,
+                store: STORE,
+                ws1: viewerItems(WORKSHOPS.ws1),
+                ws2: viewerItems(WORKSHOPS.ws2),
+                posters: viewerItems(WORKSHOPS.posters),
+            },
+            renderInfo: viewerInfo,
+        });
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-open]');
+            if (!btn || !window.SiteViewer) return;
+            const [mode, idx, img] = btn.dataset.open.split(':');
+            const srcImg = btn.querySelector('.work__img img, .product__open img, .ws-photo__btn img, .ws-poster__btn img') || btn.querySelector('img');
+            window.SiteViewer.open(mode, Number(idx), Number(img || 0), srcImg);
         });
     }
 
-    /* ---------- Boot ---------- */
-    function boot() {
-        preloadCriticalImages();
-        runIntro();
-        initScrollHeader();
-        initMobileMenu();
-        initSmoothAnchors();
-        buildGallery();
-        buildSpecial();
-        buildStore();
-        initFadeIn();
-        initLightboxEvents();
+    /* ---------- Reveals ---------- */
+    let revealIO = null;
+    function observeReveals(root) {
+        const items = $$('.reveal, .child', root);
+        if (!revealIO) { items.forEach((n) => n.classList.add('is-in')); return; }
+        items.forEach((n) => { if (!n.classList.contains('is-in')) revealIO.observe(n); });
+    }
+    function unobserveReveals(root) {
+        $$('.reveal', root).forEach((n) => { if (revealIO) revealIO.unobserve(n); });
+    }
+    function initReveal() {
+        if ('IntersectionObserver' in window) {
+            revealIO = new IntersectionObserver((entries) => {
+                entries.forEach((en) => {
+                    if (!en.isIntersecting) return;
+                    en.target.classList.add('is-in');
+                    revealIO.unobserve(en.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        }
+        observeReveals();
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', boot);
-    } else {
-        boot();
+    /* ---------- Header state and active section ---------- */
+    function initHeader() {
+        const header = $('#header');
+        const sentinel = $('#topSentinel');
+        if (header && sentinel && 'IntersectionObserver' in window) {
+            new IntersectionObserver(([en]) => header.classList.toggle('is-scrolled', !en.isIntersecting)).observe(sentinel);
+        }
+        if (!('IntersectionObserver' in window)) return;
+        /* Sections nest (About lives inside the story), so the last visible one in page order wins. */
+        const order = $$('.nav a[href^="#"]').map((a) => a.getAttribute('href').slice(1));
+        const links = new Map($$('.nav a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
+        const visible = new Set();
+        const spy = new IntersectionObserver((entries) => {
+            entries.forEach((en) => { if (en.isIntersecting) visible.add(en.target.id); else visible.delete(en.target.id); });
+            const current = order.filter((id) => visible.has(id)).pop();
+            links.forEach((a, id) => { if (id === current) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        order.forEach((id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
     }
+
+    /* ---------- Mobile menu (native dialog) ---------- */
+    function initMenu() {
+        const btn = $('#menuBtn'), menu = $('#menu'), closeBtn = $('#menuClose');
+        if (!btn || !menu || typeof menu.showModal !== 'function') return;
+        btn.addEventListener('click', () => { menu.showModal(); html.classList.add('is-locked'); });
+        closeBtn.addEventListener('click', () => menu.close());
+        menu.addEventListener('close', () => { html.classList.remove('is-locked'); btn.focus({ preventScroll: true }); });
+        $$('.menu__nav a', menu).forEach((a) => a.addEventListener('click', () => {
+            html.classList.remove('is-locked');
+            menu.close();
+        }));
+        matchMedia('(min-width: 861px)').addEventListener('change', (m) => { if (m.matches && menu.open) menu.close(); });
+    }
+
+    /* ---------- Hero to About story ----------
+       The portrait is laid out in the About "dock". Here we measure, once per
+       resize, how far it must be shifted back into the hero slot and how long the
+       hold and the glide are. CSS scroll timelines do the rest. */
+    function applyPortrait() {
+        const cfg = STORY.portrait;
+        const story = $('.story');
+        if (!cfg || !story || !Img.has(cfg.key)) return;
+        const d = Img.dims(cfg.key);
+        story.style.setProperty('--ar', d.ratio.toFixed(4));
+        $$('.slice img', $('#portrait')).forEach((im, i) => {
+            im.src = Img.largest(cfg.key);
+            im.srcset = Img.srcset(cfg.key);
+            im.width = d.w;
+            im.height = d.h;
+            im.alt = i === 0 ? (cfg.alt || '') : '';
+        });
+    }
+
+    function applyChild() {
+        const cfg = STORY.child;
+        const slot = $('#childSlot');
+        if (!cfg || !slot || !Img.has(cfg.key)) return;
+        const d = Img.dims(cfg.key);
+        const slices = [2, 1, 0, 1, 2].map((k, i) => `
+            <span class="slice" style="--i:${i};--k:${k}"${i ? ' aria-hidden="true"' : ''}>
+                <img src="${Img.largest(cfg.key)}" srcset="${Img.srcset(cfg.key)}" sizes="(min-width: 1024px) 36vw, 92vw"
+                     width="${d.w}" height="${d.h}" alt="${i ? '' : esc(cfg.alt || '')}" loading="lazy" decoding="async"></span>`).join('');
+        slot.innerHTML = `<figure class="child"><div class="child__frame" style="--car:${ratio(cfg.key)}">${slices}</div></figure>`;
+        slot.classList.add('has-child');
+    }
+
+    function initStory() {
+        const story = $('.story');
+        if (!story) return;
+        applyPortrait();
+        applyChild();
+        observeReveals($('#childSlot'));   /* the drawing is created after the reveal observer started */
+
+        const pinWrap = $('#portraitPin'), portrait = $('#portrait'), copy = $('#heroCopy'), text = $('.about__text');
+        const slot = $('#heroSlot'), frame = $('#dockFrame'), about = $('#about'), pin = $('.story__pin');
+        const canScrub = () => !reduceMq.matches && window.CSS && CSS.supports('animation-timeline: scroll()');
+        const sync = () => html.classList.toggle('no-st', !canScrub());
+        sync();
+        reduceMq.addEventListener('change', sync);
+
+        let lastW = 0, lastH = 0, raf = 0;
+        function measure() {
+            raf = 0;
+            const vh = window.innerHeight;
+            const sRect = slot.getBoundingClientRect();
+            const pRect = pin.getBoundingClientRect();
+            const fRect = frame.getBoundingClientRect();
+            const aRect = about.getBoundingClientRect();
+            /* Layout-only geometry, immune to scroll position, sticky and transforms. */
+            const slotX = sRect.left, slotY = sRect.top - pRect.top;
+            const dockX = fRect.left, dockY = about.offsetTop + (fRect.top - aRect.top);
+            const Sw = sRect.width, Dw = fRect.width;
+            const L = Math.max(Sw, Dw);
+            const headerH = parseFloat(getComputedStyle(html).getPropertyValue('--header-h')) * parseFloat(getComputedStyle(html).fontSize) || 64;
+            const land = Math.max(headerH + 24, vh * 0.16);
+            /* The glide must finish before the About anchor position, so jumping to About lands on a finished scene. */
+            const end = Math.max(Math.min(dockY - land, about.offsetTop - headerH - 8), vh * 0.6);
+            const hold = Math.min(vh * 0.42, end * 0.45);
+
+            pinWrap.style.setProperty('--pw', `${L}px`);
+            pinWrap.style.setProperty('--p-dx', `${slotX - dockX}px`);
+            pinWrap.style.setProperty('--p-dy', `${slotY - dockY}px`);
+            pinWrap.style.setProperty('--p-hold', `${hold}px`);
+            portrait.style.setProperty('--p-dx', `${slotX - dockX}px`);
+            portrait.style.setProperty('--p-dy', `${slotY - dockY}px`);
+            portrait.style.setProperty('--p-hold', `${hold}px`);
+            portrait.style.setProperty('--p-end', `${end}px`);
+            portrait.style.setProperty('--p-s0', (Sw / L).toFixed(4));
+            portrait.style.setProperty('--p-s1', (Dw / L).toFixed(4));
+            copy.style.setProperty('--p-hold', `${hold}px`);
+            text.style.setProperty('--p-hold', `${hold}px`);
+            text.style.setProperty('--p-end', `${end}px`);
+            /* The text should arrive when the portrait's right edge has cleared the text column.
+               Side by side: solve where that happens along the (linear) glide. Stacked: no clash, so a fixed point. */
+            const tRect = text.getBoundingClientRect();
+            let from = 0.55;
+            if (tRect.left > fRect.right - 1) {
+                const slotRight = slotX + Sw, dockRight = dockX + Dw;
+                const u = (tRect.left - 24 - slotRight) / (dockRight - slotRight);
+                from = clamp(u, 0.3, 0.92);
+            }
+            text.style.setProperty('--p-text-a', from.toFixed(3));
+            text.style.setProperty('--p-text-b', clamp(from + 0.28, 0.5, 1).toFixed(3));
+            html.classList.add('story-ready');
+        }
+        const schedule = () => { if (!raf) raf = requestAnimationFrame(measure); };
+        /* Ignore height-only changes from the mobile URL bar so the portrait never jumps. */
+        const onSize = () => {
+            const w = window.innerWidth, h = window.innerHeight;
+            if (w === lastW && Math.abs(h - lastH) < 120 && lastH) return;
+            lastW = w; lastH = h; schedule();
+        };
+        window.addEventListener('resize', onSize);
+        if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(story);
+        lastW = window.innerWidth; lastH = window.innerHeight;
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(schedule);
+        } else {
+            measure();
+        }
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+
+        /* Staged fallback: toggled once About is reached (only styled under .no-st). */
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([en]) => story.classList.toggle('is-about', en.isIntersecting),
+                { rootMargin: '0px 0px -42% 0px' }).observe(about);
+        }
+    }
+
+    /* ---------- Gallery: collapsed by default ---------- */
+    function initGallery() {
+        const section = $('#gallery'), toggle = $('#galleryToggle'), label = $('#galleryToggleLabel');
+        const panel = $('#galleryPanel'), closeBtn = $('#galleryClose'), teaser = $('#galleryTeaser');
+        const head = section && $('.gallery__head', section);
+        if (!section || !toggle || !panel) return;
+        let open = false, settle = 0, hydrated = false;
+        const hydrate = () => {
+            if (hydrated) return;
+            hydrated = true;
+            $$('img[data-src]', panel).forEach((im) => { im.srcset = im.dataset.srcset; im.src = im.dataset.src; });
+        };
+
+        function setOpen(next) {
+            if (next === open) return;
+            open = next;
+            clearTimeout(settle);
+            const behavior = reduceMq.matches ? 'auto' : 'smooth';
+            toggle.setAttribute('aria-expanded', String(open));
+            label.textContent = open ? 'Close the gallery' : 'Open the gallery';
+            if (open) {
+                hydrate();
+                panel.inert = false;
+                section.classList.remove('is-settled');
+                section.classList.add('is-open');
+                observeReveals(panel);
+                head.scrollIntoView({ behavior, block: 'start' });
+                settle = setTimeout(() => section.classList.add('is-settled'), reduceMq.matches ? 0 : 1500);
+            } else {
+                const top = head.getBoundingClientRect().top;
+                if (top < 0 || top > window.innerHeight * 0.5) head.scrollIntoView({ behavior, block: 'start' });
+                section.classList.remove('is-settled', 'is-open');
+                $$('.work', panel).forEach((w) => { if (revealIO) revealIO.unobserve(w); w.classList.remove('is-in'); });
+                if (panel.contains(document.activeElement)) toggle.focus({ preventScroll: true });
+                settle = setTimeout(() => { panel.inert = true; }, reduceMq.matches ? 0 : 1000);
+            }
+        }
+        toggle.addEventListener('click', () => setOpen(!open));
+        closeBtn.addEventListener('click', () => setOpen(false));
+        if (teaser) teaser.addEventListener('click', () => setOpen(true));
+    }
+
+    /* ---------- Cursor trail ---------- */
+    function initTrail() {
+        const layer = $('#trail');
+        if (!layer || !window.PixelatedImageTrail) return;
+        const fine = matchMedia('(hover: hover) and (pointer: fine)');
+        let trail = null;
+        const start = () => {
+            if (trail || reduceMq.matches) return;
+            /* Touch devices only get tap sparks, so load fewer images there. */
+            const keys = fine.matches ? TRAIL : TRAIL.slice(0, 6);
+            trail = new window.PixelatedImageTrail(layer, {
+                images: keys.map((k) => ({ src: Img.smallest(k), ratio: Img.dims(k).ratio })),
+                imageSize: clamp(window.innerWidth * 0.14, 130, 200),
+            });
+        };
+        const stop = () => { if (trail) { trail.destroy(); trail = null; } };
+        reduceMq.addEventListener('change', () => (reduceMq.matches ? stop() : start()));
+        const idle = window.requestIdleCallback ? (fn) => window.requestIdleCallback(fn, { timeout: 2500 }) : (fn) => setTimeout(fn, 800);
+        idle(start);
+    }
+
+    /* ---------- Ambient motes (the glows and beam are pure CSS) ---------- */
+    function initAmbient() {
+        const root = $('#ambientMotes');
+        if (!root || reduceMq.matches) return;
+        const count = window.innerWidth < 700 ? 9 : 16;
+        let seed = 7;
+        const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < count; i += 1) {
+            const m = document.createElement('i');
+            m.className = 'mote';
+            m.style.cssText = `--x:${(rnd() * 100).toFixed(1)}%;--s:${(1.5 + rnd() * 2).toFixed(1)}px;--o:${(0.18 + rnd() * 0.3).toFixed(2)};` +
+                `--d:${(28 + rnd() * 34).toFixed(1)}s;--w:${(-rnd() * 40).toFixed(1)}s;--dx:${((rnd() - 0.5) * 18).toFixed(1)}vw`;
+            frag.appendChild(m);
+        }
+        root.appendChild(frag);
+    }
+
+    /* ---------- Intro: brief, skippable, once per session ---------- */
+    function initIntro() {
+        const intro = $('#intro');
+        if (!intro || !html.classList.contains('intro-on')) return;
+        const t0 = performance.now();
+        let finished = false;
+        const events = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+        const finish = () => {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timer);
+            events.forEach((ev) => window.removeEventListener(ev, finish));
+            if (performance.now() - t0 < 1700) html.classList.add('intro-skip');
+            intro.classList.add('is-out');
+            setTimeout(() => {
+                html.classList.remove('intro-on', 'intro-skip');
+                try { sessionStorage.setItem('sa-intro', '1'); } catch (e) { /* storage unavailable */ }
+            }, 1050);
+        };
+        const timer = setTimeout(finish, 1900);
+        events.forEach((ev) => window.addEventListener(ev, finish, { passive: true }));
+    }
+
+    function boot() {
+        html.classList.add('js-ready');
+        /* Shared with js/workshops.js so the page keeps a single reveal observer. */
+        window.SiteUI = { observeReveals, unobserveReveals };
+        buildGallery();
+        buildTeaser();
+        buildStore();
+        initOpeners();
+        initReveal();
+        initHeader();
+        initMenu();
+        initStory();
+        initGallery();
+        initAmbient();
+        initTrail();
+        initIntro();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
 })();
