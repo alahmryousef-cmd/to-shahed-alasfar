@@ -1,304 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-    <meta name="theme-color" content="#0f1114">
-    <meta name="color-scheme" content="dark">
-
-    <title>Shahed Alasfar | Portrait Artist</title>
-    <meta name="description" content="Shahed Alasfar, Jordanian portrait artist. A collection of emotional and timeless artwork.">
-    <meta name="author" content="Shahed Alasfar">
-
-    <meta property="og:title" content="Shahed Alasfar | Portrait Artist">
-    <meta property="og:description" content="A collection of emotional and timeless artwork.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://alahmryousef-cmd.github.io/to-shahed-alasfar/img/og.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" type="image/png" href="img/sign.png">
-
-    <script>
-        (function (h) {
-            h.classList.add('js');
-            try {
-                if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('sa-intro')) {
-                    h.classList.add('intro-on');
-                }
-            } catch (e) {}
-            if (!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()')) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                h.classList.add('no-st');
-            }
-        })(document.documentElement);
-    </script>
-
-    <link rel="preload" href="fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" as="image" href="img/opt/shahed-674.webp" fetchpriority="high">
-
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>We’ve Moved! | انتقلنا إلى رابط جديد!</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://to-shahed-alasfar.alahmryousef.workers.dev/">
+<style>
+  :root {
+    --bg: #f3ece1;
+    --surface: #faf6ef;
+    --text: #3b2a20;
+    --muted: #7a6656;
+    --line: #e2d6c4;
+    --accent: #3b2a20;
+    --accent-text: #faf6ef;
+  }
+  * { box-sizing: border-box; }
+  html { height: 100%; } body { min-height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+  }
+  main {
+    width: 100%;
+    max-width: 560px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 1px 0 #fff8 inset, 0 18px 40px -24px rgba(59,42,32,.35);
+    position: relative;
+    animation: in .6s ease both;
+    padding: clamp(36px, 8vw, 64px) clamp(24px, 6vw, 48px);
+  }
+  @keyframes in { from { opacity: 0; transform: translateY(8px); } }
+  main::before { content: ""; position: absolute; inset: 8px; border: 1px solid var(--line); border-radius: 14px; opacity: .55; pointer-events: none; }
+  .sans { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  .ar { font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", Arial, sans-serif; }
+  .tag { display: flex; justify-content: space-between; align-items: center; margin: 0 0 clamp(28px, 6vw, 44px);
+    font-size: 12px; color: var(--muted); }
+  .tag span:first-child { letter-spacing: 0.22em; }
+  .tag span:last-child { font-size: 13px; }
+  .block { text-align: start; }
+  h1 { font-size: clamp(32px, 7.5vw, 46px); font-weight: 400; line-height: 1.15; margin: 0 0 14px; }
+  .ar h1 { font-weight: 600; line-height: 1.4; font-size: clamp(30px, 7vw, 42px); }
+  .lead { font-size: 18px; line-height: 1.6; margin: 0 0 6px; }
+  .ar .lead { line-height: 1.9; }
+  .sub { font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0; }
+  .rule { display: flex; align-items: center; gap: 10px; margin: 28px 0; color: var(--line); }
+  .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .rule i { width: 5px; height: 5px; background: #c9b79e; transform: rotate(45deg); }
+  .btn { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 36px;
+    background: var(--accent); color: var(--accent-text); text-decoration: none; font-size: 15px;
+    padding: 16px 28px; border-radius: 999px; box-shadow: 0 6px 16px -8px rgba(59,42,32,.5);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+  .btn .div { width: 1px; align-self: stretch; background: rgba(250,246,239,.28); }
+  .btn:hover { background: #52392c; transform: translateY(-2px); box-shadow: 0 12px 22px -10px rgba(59,42,32,.55); }
+  .btn:active { transform: translateY(0); }
+  .btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+  @media (max-width: 420px) { .btn { font-size: 14px; padding: 14px 20px; gap: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } main { animation: none; } }
+</style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-instagram-logo" viewBox="0 0 256 256"><path d="M128,82a46,46,0,1,0,46,46A46.06,46.06,0,0,0,128,82Zm0,80a34,34,0,1,1,34-34A34,34,0,0,1,128,162ZM176,26H80A54.06,54.06,0,0,0,26,80v96a54.06,54.06,0,0,0,54,54h96a54.06,54.06,0,0,0,54-54V80A54.06,54.06,0,0,0,176,26Zm42,150a42,42,0,0,1-42,42H80a42,42,0,0,1-42-42V80A42,42,0,0,1,80,38h96a42,42,0,0,1,42,42ZM190,76a10,10,0,1,1-10-10A10,10,0,0,1,190,76Z"/></symbol><symbol id="i-x" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></symbol><symbol id="i-list" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H40a6,6,0,0,1,0-12H216A6,6,0,0,1,222,128ZM40,70H216a6,6,0,0,0,0-12H40a6,6,0,0,0,0,12ZM216,186H40a6,6,0,0,0,0,12H216a6,6,0,0,0,0-12Z"/></symbol><symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"/></symbol><symbol id="i-caret-left" viewBox="0 0 256 256"><path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"/></symbol><symbol id="i-caret-right" viewBox="0 0 256 256"><path d="M180.24,132.24l-80,80a6,6,0,0,1-8.48-8.48L167.51,128,91.76,52.24a6,6,0,0,1,8.48-8.48l80,80A6,6,0,0,1,180.24,132.24Z"/></symbol><symbol id="i-star" viewBox="0 0 256 256"><path d="M237.28,97.87A14.18,14.18,0,0,0,224.76,88l-60.25-4.87-23.22-56.2a14.37,14.37,0,0,0-26.58,0L91.49,83.11,31.24,88a14.18,14.18,0,0,0-12.52,9.89A14.43,14.43,0,0,0,23,113.32L69,152.93l-14,59.25a14.4,14.4,0,0,0,5.59,15,14.1,14.1,0,0,0,15.91.6L128,196.12l51.58,31.71a14.1,14.1,0,0,0,15.91-.6,14.4,14.4,0,0,0,5.59-15l-14-59.25L233,113.32A14.43,14.43,0,0,0,237.28,97.87Zm-12.14,6.37-48.69,42a6,6,0,0,0-1.92,5.92l14.88,62.79a2.35,2.35,0,0,1-.95,2.57,2.24,2.24,0,0,1-2.6.1L131.14,184a6,6,0,0,0-6.28,0L70.14,217.61a2.24,2.24,0,0,1-2.6-.1,2.35,2.35,0,0,1-1-2.57l14.88-62.79a6,6,0,0,0-1.92-5.92l-48.69-42a2.37,2.37,0,0,1-.73-2.65,2.28,2.28,0,0,1,2.07-1.65l63.92-5.16a6,6,0,0,0,5.06-3.69l24.63-59.6a2.35,2.35,0,0,1,4.38,0l24.63,59.6a6,6,0,0,0,5.06,3.69l63.92,5.16a2.28,2.28,0,0,1,2.07,1.65A2.37,2.37,0,0,1,225.14,104.24Z"/></symbol><symbol id="i-heart" viewBox="0 0 256 256"><path d="M178,42c-21,0-39.26,9.47-50,25.34C117.26,51.47,99,42,78,42a60.07,60.07,0,0,0-60,60c0,29.2,18.2,59.59,54.1,90.31a334.68,334.68,0,0,0,53.06,37,6,6,0,0,0,5.68,0,334.68,334.68,0,0,0,53.06-37C219.8,161.59,238,131.2,238,102A60.07,60.07,0,0,0,178,42ZM128,217.11C111.59,207.64,30,157.72,30,102A48.05,48.05,0,0,1,78,54c20.28,0,37.31,10.83,44.45,28.27a6,6,0,0,0,11.1,0C140.69,64.83,157.72,54,178,54a48.05,48.05,0,0,1,48,48C226,157.72,144.41,207.64,128,217.11Z"/></symbol><symbol id="i-caret-down" viewBox="0 0 256 256"><path d="M212.24,100.24l-80,80a6,6,0,0,1-8.48,0l-80-80a6,6,0,0,1,8.48-8.48L128,167.51l75.76-75.75a6,6,0,0,1,8.48,8.48Z"/></symbol></defs></svg>
+  <main>
+    <p class="tag sans"><span>WEBSITE UPDATE</span><span class="ar" lang="ar" dir="rtl">تحديث الموقع</span></p>
 
-    <a class="skip-link" href="#main">Skip to content</a>
+    <section class="block" lang="en" dir="ltr">
+      <h1>We’ve Moved!</h1>
+      <p class="lead">Shahed Alasfar’s website has moved to a new link.</p>
+      <p class="sub sans">Visit the new website using the button below.</p>
+    </section>
 
-    <div class="ambient" id="ambient" aria-hidden="true">
-        <div class="ambient__layer ambient__layer--a"><span class="ambient__glow ambient__glow--lamp"></span></div>
-        <div class="ambient__layer ambient__layer--b"><span class="ambient__glow ambient__glow--slate"></span></div>
-        <div class="ambient__layer ambient__layer--c"><span class="ambient__beam"></span></div>
-        <div class="ambient__motes" id="ambientMotes"></div>
-    </div>
-    <div class="trail" id="trail" aria-hidden="true"></div>
+    <div class="rule" aria-hidden="true"><i></i></div>
 
-    <div class="intro" id="intro" aria-hidden="true">
-        <div class="intro__bands"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="intro__inner">
-            <div class="intro__sign">
-                <img src="img/opt/sign-1263.webp" width="1263" height="472" alt="">
-            </div>
-            <p class="intro__tagline">Portrait Artist &middot; Shahed
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg>
-            </p>
-        </div>
-    </div>
+    <section class="block ar" lang="ar" dir="rtl">
+      <h1>انتقلنا إلى رابط جديد!</h1>
+      <p class="lead">أصبح موقع شهد الأصفر متاحًا الآن عبر رابط جديد.</p>
+      <p class="sub">يمكنك زيارة الموقع الجديد من خلال الزر أدناه.</p>
+    </section>
 
-    <!-- HEADER -->
-    <div class="top-sentinel" id="topSentinel" aria-hidden="true"></div>
-    <header class="header" id="header">
-        <a class="brand" href="#landing">Shahed Alasfar</a>
-        <nav class="nav" aria-label="Primary">
-            <a href="#landing">Home</a>
-            <a href="#about">About</a>
-            <a href="#store">Store</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#workshops">Workshops</a>
-        </nav>
-        <div class="header__actions">
-            <a class="icon-btn" href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram-logo"/></svg>
-            </a>
-            <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="menu">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-list"/></svg>
-            </button>
-        </div>
-    </header>
-
-    <!-- MOBILE MENU -->
-    <dialog class="menu" id="menu" aria-label="Menu">
-        <div class="menu__head">
-            <span class="brand">Shahed Alasfar</span>
-            <button class="icon-btn" id="menuClose" type="button" aria-label="Close menu">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>
-            </button>
-        </div>
-        <nav class="menu__nav" aria-label="Mobile">
-            <a href="#landing">Home</a>
-            <a href="#about">About</a>
-            <a href="#store">Store</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#workshops">Workshops</a>
-        </nav>
-        <a class="menu__social" href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram-logo"/></svg>
-            Instagram
-        </a>
-    </dialog>
-
-    <main id="main">
-
-        <!-- STORY: hero, then the About reveal on the same pinned stage -->
-        <section class="story" id="landing" data-trail aria-labelledby="heroTitle">
-            <div class="story__pin">
-                <div class="hero__copy" id="heroCopy">
-                    <h1 class="hero__title" id="heroTitle">
-                        <span class="hero__line"><span class="hero__word" style="--d:0">Shahed</span></span>
-                        <span class="hero__line"><span class="hero__word" style="--d:1">Alasfar</span></span>
-                    </h1>
-                    <p class="hero__sub stage" style="--d:3">Professional Artist &amp; Portrait Specialist</p>
-                    <div class="hero__cta stage" style="--d:4">
-                        <a class="btn btn--solid" href="#gallery">View Gallery</a>
-                        <a class="btn btn--line" href="#store">Visit Store</a>
-                    </div>
-                    <a class="text-link hero__ig stage" style="--d:5" href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram-logo"/></svg>
-                        Instagram
-                    </a>
-                </div>
-                <div class="story__slot" id="heroSlot" aria-hidden="true"></div>
-            </div>
-
-            <div class="story__about" id="about">
-                <h2 class="sr-only" id="aboutTitle">About</h2>
-                <div class="story__grid">
-                    <div class="dock" id="portraitDock">
-                        <div class="dock__frame" id="dockFrame">
-                            <div class="portrait-pin" id="portraitPin"><figure class="portrait" id="portrait">
-                                <span class="slice" style="--i:0;--k:2"><img src="img/opt/shahed-674.webp" srcset="img/opt/shahed-674.webp 674w" sizes="(min-width: 1024px) 30vw, 72vw" width="674" height="1110" alt="Portrait of Shahed Alasfar, with short dark hair and bangs, smiling slightly with her arms crossed, in a denim shirt" fetchpriority="high" decoding="async"></span>
-                                <span class="slice" style="--i:1;--k:1" aria-hidden="true"><img src="img/opt/shahed-674.webp" srcset="img/opt/shahed-674.webp 674w" sizes="(min-width: 1024px) 30vw, 72vw" width="674" height="1110" alt="" decoding="async"></span>
-                                <span class="slice" style="--i:2;--k:0" aria-hidden="true"><img src="img/opt/shahed-674.webp" srcset="img/opt/shahed-674.webp 674w" sizes="(min-width: 1024px) 30vw, 72vw" width="674" height="1110" alt="" decoding="async"></span>
-                                <span class="slice" style="--i:3;--k:1" aria-hidden="true"><img src="img/opt/shahed-674.webp" srcset="img/opt/shahed-674.webp 674w" sizes="(min-width: 1024px) 30vw, 72vw" width="674" height="1110" alt="" decoding="async"></span>
-                                <span class="slice" style="--i:4;--k:2" aria-hidden="true"><img src="img/opt/shahed-674.webp" srcset="img/opt/shahed-674.webp 674w" sizes="(min-width: 1024px) 30vw, 72vw" width="674" height="1110" alt="" decoding="async"></span>
-                            </figure></div>
-                        </div>
-                        <div class="dock__child" id="childSlot"></div>
-                    </div>
-                    <div class="about__text" data-trail-ignore>
-                        <p class="about__p reveal" style="--i:0">Shahed Alasfar is a visionary <strong>Jordanian artist</strong> whose brush transforms emotions into timeless art. Her work is more than color and form: it's <strong>a language of soul, silence, and beauty</strong>. Every stroke she paints tells a story, capturing the delicate balance between realism and emotion.</p>
-                        <p class="about__p reveal" style="--i:1">With a golden palette and a heart full of imagination, Shahed creates portraits that breathe life, each piece glowing with depth, sensitivity, and quiet power. Her art is not meant to be seen only with the eyes, but <strong>felt with the heart</strong>.</p>
-                        <p class="about__p reveal" style="--i:2">Shahed's creations stand as a bridge between reality and dreams, reflecting the warmth of her Jordanian roots and the elegance of modern fine art. She doesn't just paint, <strong>she evokes, she speaks, she moves</strong> through every detail she creates.</p>
-                        <div class="about__sign reveal reveal--write">
-                            <img class="signature" src="img/opt/sign-1263.webp" width="1263" height="472" alt="Shahed Alasfar's signature" loading="lazy" decoding="async">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- STORE -->
-        <section class="store" id="store" aria-labelledby="storeTitle">
-            <div class="wrap">
-                <h2 class="section-title reveal reveal--mask" id="storeTitle"><span>Art Store</span></h2>
-                <aside class="notice reveal" aria-labelledby="noticeTitle">
-                    <h3 class="notice__title" id="noticeTitle">Order via Instagram DM</h3>
-                    <p>To purchase any artwork, please send a direct message on Instagram with the product name and your contact details.</p>
-                    <a class="btn btn--solid" href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener">
-                        Order via Instagram
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
-                    </a>
-                </aside>
-                <ol class="catalog" id="storeGrid" role="list"></ol>
-            </div>
-        </section>
-
-        <!-- GALLERY (collapsed until opened) -->
-        <section class="gallery" id="gallery" aria-labelledby="galleryTitle">
-            <div class="wrap">
-                <div class="gallery__head" data-trail>
-                    <h2 class="section-title reveal reveal--mask" id="galleryTitle"><span>Art Gallery</span></h2>
-                    <button class="gallery__toggle" id="galleryToggle" type="button" aria-expanded="false" aria-controls="galleryPanel">
-                        <span class="gallery__toggle-label" id="galleryToggleLabel">Open the gallery</span>
-                        <span class="gallery__chevron" aria-hidden="true">
-                            <svg class="icon" focusable="false"><use href="#i-caret-down"/></svg>
-                        </span>
-                    </button>
-                </div>
-                <div class="gallery__teaser" id="galleryTeaser" data-trail aria-hidden="true"></div>
-                <div class="gallery__panel" id="galleryPanel" inert>
-                    <div class="gallery__inner">
-                        <div class="gallery__shutter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-                        <ul class="wall" id="galleryGrid" role="list"></ul>
-                        <button class="btn btn--line gallery__close" id="galleryClose" type="button" aria-controls="galleryPanel">
-                            Close the gallery
-                            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-caret-down"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- WORKSHOPS -->
-        <section class="ws" id="workshops" aria-labelledby="wsTitle">
-            <div class="ws__line reveal" aria-hidden="true"></div>
-            <div class="wrap">
-                <div class="ws__stage" data-trail>
-                    <h2 class="ws__title reveal reveal--mask" id="wsTitle"><span>Workshops</span></h2>
-                <figure class="ws-poster ws-poster--1 reveal" style="--i:1">
-                    <div class="ws-poster__float"><div class="ws-poster__tilt">
-                        <button class="ws-poster__btn" type="button" data-open="posters:0" aria-label="Enlarge the poster for Workshop One">
-                            <img src="img/opt/poster1-720.webp" srcset="img/opt/poster1-720.webp 720w, img/opt/poster1-1024.webp 1024w" sizes="(min-width: 900px) 26vw, 44vw"
-                                 width="1024" height="1280" alt="Poster for the oil colours workshop at The Cultural House, Damam Public Library, Dammam: Saturday 16/8, 6:00 to 8:00 PM, for youth and adults, with an easel holding a portrait of a bearded man" loading="lazy" decoding="async" data-thumb="posters:0:0">
-                        </button>
-                    </div></div>
-                </figure>
-                <figure class="ws-poster ws-poster--2 reveal" style="--i:2">
-                    <div class="ws-poster__float"><div class="ws-poster__tilt">
-                        <button class="ws-poster__btn" type="button" data-open="posters:1" aria-label="Enlarge the poster for Workshop Two">
-                            <img src="img/opt/poster2-720.webp" srcset="img/opt/poster2-720.webp 720w, img/opt/poster2-1024.webp 1024w" sizes="(min-width: 900px) 26vw, 44vw"
-                                 width="1024" height="1280" alt="Poster for Pass the Palette with Shahed, a collaborative canvas painting experience guided by an artist, Saturday 29 Aug at 18:00, with a line drawing of an easel and a table" loading="lazy" decoding="async" data-thumb="posters:1:0">
-                        </button>
-                    </div></div>
-                </figure>
-                <div class="ws__ctl ws__ctl--1 reveal" style="--i:3">
-                    <h3 class="ws__name">PAINTING WITH OILS</h3>
-                    <button class="btn btn--line ws__toggle" type="button" data-ws-toggle="1" aria-expanded="false" aria-controls="wsPanel" aria-label="Explore workshop, Workshop One">Explore workshop</button>
-                </div>
-                <div class="ws__ctl ws__ctl--2 reveal" style="--i:4">
-                    <h3 class="ws__name">PASS THE PALETTE</h3>
-                    <button class="btn btn--line ws__toggle" type="button" data-ws-toggle="2" aria-expanded="false" aria-controls="wsPanel" aria-label="Explore workshop, Workshop Two">Explore workshop</button>
-                </div>
-                </div>
-
-                <div class="ws__panel" id="wsPanel" role="region" aria-labelledby="wsPanelTitle" inert>
-                    <div class="ws__inner">
-                        <div class="ws__panelhead">
-                            <h3 class="ws__paneltitle" id="wsPanelTitle">Workshop One</h3>
-                            <button class="btn btn--line" id="wsClose" type="button" aria-controls="wsPanel">Close gallery</button>
-                        </div>
-                        <div class="ws-gal" id="wsGal1" data-ws="1" role="list" hidden></div>
-                        <div class="ws-gal" id="wsGal2" data-ws="2" role="list" hidden></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- VIEWER (artworks and product details) -->
-    <dialog class="viewer" id="viewer" aria-labelledby="viewerTitle">
-        <h2 class="sr-only" id="viewerTitle">Artwork viewer</h2>
-        <div class="viewer__layout">
-            <div class="viewer__main">
-                <div class="viewer__stage" id="viewerStage">
-                    <figure class="viewer__figure">
-                        <img id="viewerImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async">
-                    </figure>
-                    <button class="viewer__nav viewer__nav--prev" id="viewerPrev" type="button" aria-label="Previous">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-caret-left"/></svg>
-                    </button>
-                    <button class="viewer__nav viewer__nav--next" id="viewerNext" type="button" aria-label="Next">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-caret-right"/></svg>
-                    </button>
-                </div>
-                <div class="viewer__thumbs" id="viewerThumbs" role="group" aria-label="Product images" hidden></div>
-                <p class="viewer__caption" id="viewerCaption"></p>
-            </div>
-            <aside class="viewer__info" id="viewerInfo" aria-label="Product details" hidden></aside>
-        </div>
-        <button class="icon-btn viewer__close" id="viewerClose" type="button" aria-label="Close" autofocus>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>
-        </button>
-        <p class="sr-only" id="viewerStatus" role="status" aria-live="polite"></p>
-    </dialog>
-
-    <!-- FOOTER -->
-    <footer class="footer" data-trail>
-        <div class="wrap footer__grid">
-            <div class="footer__brand reveal">
-                <img class="signature" src="img/opt/sign-1263.webp" width="1263" height="472" alt="" loading="lazy" decoding="async">
-                <p class="footer__name">Shahed Alasfar</p>
-            </div>
-            <nav class="footer__nav" aria-label="Footer">
-                <a href="#landing">Home</a>
-                <a href="#about">About</a>
-                <a href="#store">Store</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#workshops">Workshops</a>
-                <a href="https://www.instagram.com/s.hahed_alasfar" target="_blank" rel="noopener">Instagram</a>
-            </nav>
-            <div class="footer__legal">
-                <p>Website developed by <a href="https://alahmryousef-cmd.github.io/yousefalahmr-Bio/" target="_blank" rel="noopener">Yousef Alahmr</a></p>
-                <p>Version v4.0.0</p>
-                <p>&copy; 2026 Shahed Alasfar. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/manifest.js" defer></script>
-    <script src="js/data.js" defer></script>
-    <script src="js/viewer.js" defer></script>
-    <script src="js/trail.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/workshops.js" defer></script>
+    <a class="btn sans" href="https://to-shahed-alasfar.alahmryousef.workers.dev/">
+      <span lang="en" dir="ltr">Visit the New Website </span>
+      <span class="div" aria-hidden="true"></span>
+      <span class="ar" lang="ar" dir="rtl">زيارة الموقع الجديد </span>
+    </a>
+  </main>
 </body>
 </html>
